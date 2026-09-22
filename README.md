@@ -47,11 +47,11 @@ Everything is inline in `index.html`, in three blocks in order:
 
 ## Image & video policy
 
-Every *subject* photo and video on this site (dogs, cats, rabbits, people) is real, freely-licensed footage sourced from Pexels (Pexels License, free for commercial use) — never an illustration or AI-generated image/video. See credits below.
+Every *subject* photo and video on this site (dogs, cats, rabbits, people, and now the NuzzlePal device itself) is real, freely-licensed footage sourced from Pexels (Pexels License, free for commercial use) — never an illustration or AI-generated image/video. See credits below.
 
-**Two explicit exceptions**, both flat, single-color decorative/iconographic work rather than photorealistic subject illustration:
-1. The NuzzlePal device graphic in the "Meet NuzzlePal" section is an original SVG illustration, not a photo. Since NuzzlePal is a fictional proprietary product, no real photo of it can exist — the illustration is drawn flat-style in the brand palette and redraws its accessory (laser vs. treat launcher) and ring-light color based on the selected Cat/Dog mode. The small roaming robot mascot (`#roamBot`, near the end of `<body>`) reuses the same visual language at a smaller scale.
-2. The pet-themed background decoration — a repeating paw-print pattern (`body::before`) and the large dog/cat silhouette watermarks in the "Why Nuzzle" and testimonials sections (`.critter-deco`) — uses CC0-licensed flat SVG icons from SVG Repo (see credits below), recolored to the brand navy at low opacity. This is a deliberate, requested exception to the photo-only policy for site-wide decorative theming; it should stay confined to low-opacity background texture, not become new photo-replacement content elsewhere.
+The "Meet NuzzlePal" hero image (`images/nuzzlepal-device.jpg`) is a real photo of an actual small two-wheeled home companion robot — since NuzzlePal is fictional, no photo of it specifically can exist, so (as with the Dodo Burgers site's dodo mascot) a real photo of a close analog stands in for it, cropped and lightly color/contrast-adjusted from the original, not generated. It's meant to read as "pet sized" — roughly cat/small-dog scale, evoking consumer home robots like Roomba-style vacuums or small companion bots, not a human-sized machine.
+
+**One remaining exception**, flat single-color iconographic work rather than photorealistic subject illustration: a thin transparent SVG (`#deviceSvg`) sits directly on top of that photo to carry the *interactive* parts — the ring-light glow around the camera lens and the laser/treat-launcher callout graphics that swap with Cat/Dog mode — since those need to be real DOM elements JS can recolor and toggle, not baked into the photo. The roaming mascots (`#roamBot`, `#roamDog`, `#roamCat`) and the pet-themed background decoration (paw-print pattern + dog/cat silhouette watermarks, from CC0 SVG Repo icons — see credits below) are the site's other iconographic exceptions, both unrelated to this photo.
 
 ## Image credits
 
@@ -62,6 +62,7 @@ All photos via [Pexels](https://www.pexels.com), free to use under the [Pexels L
 - `images/dog-portrait.jpg` — Helena Lopes
 - `images/rabbit-portrait.jpg` — cottonbro studio
 - `images/lifestyle-phone.jpg` — Andrea Piacquadio
+- `images/nuzzlepal-device.jpg` — Kindel Media ("A White and Black Robot Toy"), cropped and lightly color/contrast-adjusted, used to represent NuzzlePal in the "Meet NuzzlePal" section
 - `video/nuzzlepal-cam-loop.mp4` — Erik Mclean ("A white dog walking through a kitchen"), used to simulate NuzzlePal's pet-height following camera on the hero's live-cam loop
 
 Decorative background icons via [SVG Repo](https://www.svgrepo.com), CC0 License (public domain, no attribution required, credited here anyway):

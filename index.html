@@ -191,7 +191,9 @@
     box-shadow:var(--shadow-lg);position:relative;overflow:visible;margin:6px;
   }
   .device-stage::after{content:none;}
-  .device-svg{width:100%;max-width:280px;position:relative;z-index:1;}
+  .device-photo-wrap{width:100%;max-width:300px;position:relative;z-index:1;}
+  .device-photo-wrap img{width:100%;display:block;border:var(--border-w) solid var(--ink-900);}
+  .device-overlay{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
   .mode-toggle{display:inline-flex;background:var(--card);border:var(--border-w) solid var(--ink-900);border-radius:0;padding:4px;margin-bottom:28px;}
   .mode-toggle button{
     font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.85rem;text-transform:uppercase;border:none;background:transparent;
@@ -280,10 +282,13 @@
     width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;
     border-top:26px solid var(--ink-900);filter:drop-shadow(0 3px 0 var(--bonus-500));
   }
+  .wheel-frame{
+    width:100%;height:100%;border-radius:50%;position:relative;overflow:hidden;
+    border:6px solid var(--ink-900);box-shadow:var(--shadow-lg);
+  }
   .wheel{
     width:100%;height:100%;border-radius:50%;position:relative;
     background:conic-gradient(var(--brand-500) 0deg 90deg, var(--dog-500) 90deg 180deg, var(--future-500) 180deg 270deg, var(--bonus-500) 270deg 360deg);
-    border:6px solid var(--ink-900);box-shadow:var(--shadow-lg);
     transition:transform 1.7s cubic-bezier(.13,.79,.23,1);
     cursor:pointer;
   }
@@ -620,33 +625,25 @@
   <section id="nuzzlepal" class="robot-section">
     <div class="wrap">
       <div class="device-stage">
-        <svg class="device-svg" id="deviceSvg" viewBox="0 0 260 340" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="130" cy="316" rx="70" ry="12" fill="rgba(0,0,0,.4)"/>
-          <rect x="70" y="250" width="120" height="52" rx="10" fill="#FFFFFF" stroke="#0B0B0B" stroke-width="5"/>
-          <rect x="50" y="90" width="160" height="180" rx="14" fill="#FFFFFF" stroke="#0B0B0B" stroke-width="5"/>
-          <circle id="ringLight" cx="130" cy="150" r="46" fill="none" stroke="#FF2E88" stroke-width="7" opacity="1"/>
-          <circle cx="130" cy="150" r="30" fill="#0B0B0B"/>
-          <circle cx="130" cy="150" r="14" fill="#7FD8FF" stroke="#0B0B0B" stroke-width="3"/>
-          <circle cx="134" cy="145" r="4" fill="#fff" opacity=".9"/>
-          <g id="speakerGrille" fill="#0B0B0B">
-            <circle cx="112" cy="210" r="3.4"/><circle cx="130" cy="210" r="3.4"/><circle cx="148" cy="210" r="3.4"/>
-            <circle cx="112" cy="222" r="3.4"/><circle cx="130" cy="222" r="3.4"/><circle cx="148" cy="222" r="3.4"/>
-            <circle cx="112" cy="234" r="3.4"/><circle cx="130" cy="234" r="3.4"/><circle cx="148" cy="234" r="3.4"/>
-          </g>
-          <!-- Cat accessory: laser -->
-          <g id="accCat">
-            <circle cx="200" cy="120" r="9" fill="#FF2E88" stroke="#0B0B0B" stroke-width="3"/>
-            <line x1="200" y1="120" x2="252" y2="60" stroke="#FF2E88" stroke-width="3" stroke-dasharray="4 6"/>
-            <circle cx="252" cy="60" r="4" fill="#FF2E88" stroke="#0B0B0B" stroke-width="2"/>
-          </g>
-          <!-- Dog accessory: treat launcher -->
-          <g id="accDog">
-            <rect x="176" y="180" width="34" height="22" rx="4" fill="#2653FF" stroke="#0B0B0B" stroke-width="3"/>
-            <circle cx="222" cy="168" r="6" fill="#FFD400" stroke="#0B0B0B" stroke-width="2"/>
-            <circle cx="236" cy="150" r="5" fill="#FFD400" stroke="#0B0B0B" stroke-width="2"/>
-            <circle cx="244" cy="128" r="4" fill="#FFD400" stroke="#0B0B0B" stroke-width="2"/>
-          </g>
-        </svg>
+        <div class="device-photo-wrap">
+          <img src="images/nuzzlepal-device.jpg" alt="NuzzlePal: a small, pet-sized two-wheeled companion robot with a round camera-lens head on a tilting neck, similar in scale and style to a home robot vacuum or delivery bot">
+          <svg class="device-overlay" id="deviceSvg" viewBox="0 0 640 815" xmlns="http://www.w3.org/2000/svg">
+            <circle id="ringLight" cx="300" cy="165" r="98" fill="none" stroke="#FF2E88" stroke-width="9" opacity=".95"/>
+            <!-- Cat mode: laser callout -->
+            <g id="accCat">
+              <circle cx="452" cy="110" r="15" fill="#FF2E88" stroke="#fff" stroke-width="3"/>
+              <line x1="452" y1="110" x2="600" y2="34" stroke="#FF2E88" stroke-width="4" stroke-dasharray="6 8"/>
+              <circle cx="600" cy="34" r="8" fill="#FF2E88" stroke="#fff" stroke-width="2"/>
+            </g>
+            <!-- Dog mode: treat-launcher callout -->
+            <g id="accDog">
+              <rect x="424" y="432" width="62" height="40" rx="6" fill="#2653FF" stroke="#fff" stroke-width="3"/>
+              <circle cx="504" cy="410" r="9" fill="#FFD400" stroke="#fff" stroke-width="2"/>
+              <circle cx="528" cy="378" r="7.5" fill="#FFD400" stroke="#fff" stroke-width="2"/>
+              <circle cx="548" cy="342" r="6.5" fill="#FFD400" stroke="#fff" stroke-width="2"/>
+            </g>
+          </svg>
+        </div>
       </div>
       <div class="robot-copy">
         <span class="eyebrow">Meet NuzzlePal</span>
@@ -750,11 +747,13 @@
       <div class="wheel-layout">
         <div class="wheel-stage">
           <div class="wheel-pointer" aria-hidden="true"></div>
-          <div class="wheel" id="wheel" role="img" aria-label="Spinning wheel with Cats, Dogs, Future Pets, and Bonus sections">
-            <span class="wheel-label" style="--ang:45deg">🐱</span>
-            <span class="wheel-label" style="--ang:135deg">🐶</span>
-            <span class="wheel-label" style="--ang:225deg">🐰</span>
-            <span class="wheel-label" style="--ang:315deg">🎁</span>
+          <div class="wheel-frame">
+            <div class="wheel" id="wheel" role="img" aria-label="Spinning wheel with Cats, Dogs, Future Pets, and Bonus sections">
+              <span class="wheel-label" style="--ang:45deg">🐱</span>
+              <span class="wheel-label" style="--ang:135deg">🐶</span>
+              <span class="wheel-label" style="--ang:225deg">🐰</span>
+              <span class="wheel-label" style="--ang:315deg">🎁</span>
+            </div>
           </div>
           <button class="wheel-hub" id="spinBtn" type="button">SPIN</button>
         </div>
