@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuzzle — AI-Powered Remote Pet Care</title>
+<meta name="description" content="Nuzzle pairs a live HD camera with NuzzlePal, an AI companion robot, so you can watch, talk to, and play with your cat or dog from anywhere.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF6EF;
+    --card:#FFFFFF;
+    --ink-900:#1B2431;
+    --ink-700:#3A4452;
+    --ink-500:#69727E;
+    --navy-700:#1B2A4A;
+    --navy-600:#28406C;
+    --navy-100:#E7ECF5;
+    --coral-500:#FF6F59;
+    --coral-600:#E8543E;
+    --coral-100:#FFE7E2;
+    --sage-500:#5E9C82;
+    --sage-100:#E3F1EA;
+    --amber-500:#EE9E4C;
+    --amber-100:#FBEBD8;
+    --violet-500:#8C7AC9;
+    --violet-100:#EAE5F7;
+    --line:#E9E1D2;
+    --shadow-md:0 16px 32px -20px rgba(27,36,49,.28);
+    --shadow-lg:0 28px 56px -24px rgba(27,36,49,.32);
+    --radius-lg:28px;
+    --radius-md:18px;
+    --radius-sm:12px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink-900);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  h1,h2,h3,h4{
+    font-family:'Fredoka',sans-serif;
+    font-weight:600;
+    line-height:1.15;
+    margin:0 0 .5em;
+    color:var(--navy-700);
+  }
+  p{margin:0 0 1em;}
+  a{color:inherit;}
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:.72rem;
+    font-weight:700;
+    color:var(--coral-600);
+    display:inline-flex;
+    align-items:center;
+    gap:.5em;
+    margin-bottom:.9em;
+  }
+  .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--coral-500);display:inline-block;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  section{padding:100px 0;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5em;
+    font-family:'Inter',sans-serif;font-weight:700;font-size:.98rem;
+    padding:14px 26px;border-radius:999px;border:2px solid transparent;
+    cursor:pointer;text-decoration:none;transition:transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:translateY(1px) scale(.98);}
+  .btn-primary{background:var(--coral-500);color:#fff;box-shadow:var(--shadow-md);}
+  .btn-primary:hover{background:var(--coral-600);box-shadow:var(--shadow-lg);}
+  .btn-outline{background:transparent;border-color:var(--navy-700);color:var(--navy-700);}
+  .btn-outline:hover{background:var(--navy-700);color:#fff;}
+  .btn-ghost{background:var(--navy-100);color:var(--navy-700);}
+  .btn-ghost:hover{background:var(--navy-700);color:#fff;}
+  .btn-sm{padding:10px 18px;font-size:.85rem;}
+  .pill{
+    font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;
+    padding:5px 12px;border-radius:999px;display:inline-block;
+  }
+  .pill-cat{background:var(--violet-100);color:var(--violet-500);}
+  .pill-dog{background:var(--amber-100);color:#B4732A;}
+  .pill-future{background:var(--sage-100);color:var(--sage-500);}
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(250,246,239,.88);backdrop-filter:blur(10px);
+    border-bottom:1px solid transparent;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  header.is-scrolled{border-color:var(--line);box-shadow:0 8px 24px -18px rgba(27,36,49,.3);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1180px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .logo-mark{width:38px;height:38px;flex-shrink:0;}
+  .logo-word{font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.35rem;color:var(--navy-700);}
+  .nav-links{display:flex;align-items:center;gap:30px;list-style:none;margin:0;padding:0;}
+  .nav-links a{text-decoration:none;font-weight:600;font-size:.94rem;color:var(--ink-700);transition:color .15s ease;}
+  .nav-links a:hover{color:var(--coral-600);}
+  .nav-actions{display:flex;align-items:center;gap:14px;}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .nav-toggle span{display:block;width:24px;height:2.5px;background:var(--navy-700);margin:5px 0;border-radius:2px;transition:transform .2s ease, opacity .2s ease;}
+
+  /* Hero */
+  .hero{padding:64px 0 90px;}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+  .hero h1{font-size:3.1rem;letter-spacing:-.01em;}
+  .hero .lead{font-size:1.15rem;color:var(--ink-700);max-width:46ch;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+  .hero-figure{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);}
+  .hero-figure img{width:100%;height:520px;object-fit:cover;}
+  .hero-badge{
+    position:absolute;top:20px;left:20px;background:rgba(27,36,49,.72);color:#fff;
+    font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.08em;
+    padding:8px 14px;border-radius:999px;display:flex;align-items:center;gap:8px;backdrop-filter:blur(6px);
+  }
+  .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:#FF5C5C;animation:pulse 1.6s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+  .hero-card{
+    position:absolute;bottom:20px;left:20px;right:20px;background:rgba(255,255,255,.94);
+    backdrop-filter:blur(6px);border-radius:var(--radius-md);padding:14px 16px;
+    display:flex;align-items:center;gap:12px;box-shadow:var(--shadow-md);
+  }
+  .hero-card .avatar{width:38px;height:38px;border-radius:50%;background:var(--coral-100);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+  .hero-card strong{display:block;font-size:.88rem;color:var(--navy-700);}
+  .hero-card span{font-size:.8rem;color:var(--ink-500);}
+
+  /* Stats bar */
+  .stats{padding:40px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;}
+  .stats strong{display:block;font-family:'Fredoka',sans-serif;font-size:1.9rem;color:var(--navy-700);}
+  .stats span{font-size:.85rem;color:var(--ink-500);}
+
+  /* Section heading */
+  .section-head{max-width:620px;margin:0 0 48px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head h2{font-size:2.2rem;}
+  .section-head p{color:var(--ink-700);font-size:1.05rem;}
+
+  /* Feature grid */
+  .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .feature-card{background:var(--card);border-radius:var(--radius-md);padding:28px 24px;border:1px solid var(--line);}
+  .feature-card .icon{width:44px;height:44px;border-radius:12px;background:var(--navy-100);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--navy-700);}
+  .feature-card h3{font-size:1.08rem;margin-bottom:.4em;}
+  .feature-card p{font-size:.92rem;color:var(--ink-500);margin:0;}
+
+  /* Services */
+  .services{background:var(--card);}
+  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .service-card{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);background:var(--paper);display:flex;flex-direction:column;}
+  .service-photo{height:220px;overflow:hidden;position:relative;}
+  .service-photo img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
+  .service-card:hover .service-photo img{transform:scale(1.05);}
+  .service-body{padding:24px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .service-body h3{font-size:1.25rem;margin:0;}
+  .service-body p{color:var(--ink-700);font-size:.94rem;margin:0;}
+  .service-list{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:7px;}
+  .service-list li{font-size:.86rem;color:var(--ink-700);display:flex;gap:8px;align-items:flex-start;}
+  .service-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral-500);margin-top:7px;flex-shrink:0;}
+  .service-card.future{opacity:.96;}
+  .waitlist-note{font-size:.8rem;color:var(--ink-500);margin-top:auto;padding-top:8px;}
+
+  /* NuzzlePal */
+  .robot-section .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center;}
+  .device-stage{
+    background:linear-gradient(180deg,var(--navy-700),var(--navy-600));
+    border-radius:var(--radius-lg);padding:40px;display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--shadow-lg);position:relative;overflow:hidden;
+  }
+  .device-stage::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 20%, rgba(255,255,255,.14), transparent 60%);
+  }
+  .device-svg{width:100%;max-width:280px;position:relative;z-index:1;}
+  .mode-toggle{display:inline-flex;background:var(--navy-100);border-radius:999px;padding:4px;margin-bottom:28px;}
+  .mode-toggle button{
+    font-family:'Inter',sans-serif;font-weight:700;font-size:.88rem;border:none;background:transparent;
+    color:var(--ink-700);padding:9px 20px;border-radius:999px;cursor:pointer;transition:background .15s ease,color .15s ease;
+  }
+  .mode-toggle button.is-active{background:var(--navy-700);color:#fff;}
+  .spec-list{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-direction:column;gap:16px;}
+  .spec-list li{display:flex;gap:14px;align-items:flex-start;}
+  .spec-list .spec-icon{width:34px;height:34px;border-radius:10px;background:var(--coral-100);color:var(--coral-600);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .spec-list strong{display:block;font-size:.98rem;color:var(--navy-700);}
+  .spec-list span{font-size:.87rem;color:var(--ink-500);}
+  .mode-caption{
+    font-size:.92rem;color:var(--ink-700);background:var(--card);border:1px dashed var(--line);
+    border-radius:var(--radius-sm);padding:14px 16px;
+  }
+  .mode-caption strong{color:var(--navy-700);}
+
+  /* How it works */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:step;}
+  .step{position:relative;padding-top:8px;}
+  .step .num{
+    font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.6rem;color:var(--coral-500);
+    display:block;margin-bottom:10px;
+  }
+  .step h3{font-size:1.05rem;margin-bottom:.4em;}
+  .step p{font-size:.88rem;color:var(--ink-500);}
+
+  /* App mockup */
+  .app-section{background:var(--card);}
+  .app-section .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  .app-tabs{display:flex;gap:10px;margin-bottom:22px;}
+  .app-tabs button{
+    font-family:'Inter',sans-serif;font-weight:700;font-size:.85rem;padding:9px 16px;border-radius:999px;
+    border:1px solid var(--line);background:var(--paper);color:var(--ink-700);cursor:pointer;transition:all .15s ease;
+  }
+  .app-tabs button.is-active{background:var(--navy-700);border-color:var(--navy-700);color:#fff;}
+  .phone{
+    width:280px;margin:0 auto;background:var(--navy-700);border-radius:36px;padding:14px;box-shadow:var(--shadow-lg);
+  }
+  .phone-screen{background:var(--card);border-radius:24px;overflow:hidden;min-height:480px;display:flex;flex-direction:column;}
+  .phone-feed{height:220px;position:relative;background-size:cover;background-position:center;}
+  .phone-feed .tag{
+    position:absolute;top:12px;left:12px;background:rgba(27,36,49,.7);color:#fff;font-family:'Space Mono',monospace;
+    font-size:.65rem;font-weight:700;padding:5px 10px;border-radius:999px;letter-spacing:.06em;
+  }
+  .phone-body{padding:18px;display:flex;flex-direction:column;gap:14px;flex:1;}
+  .phone-body h4{margin:0;font-size:1rem;color:var(--navy-700);}
+  .phone-actions{display:flex;gap:10px;}
+  .phone-actions button{
+    flex:1;border:none;border-radius:14px;padding:12px 6px;font-family:'Inter',sans-serif;font-weight:700;
+    font-size:.78rem;background:var(--navy-100);color:var(--navy-700);cursor:pointer;
+  }
+  .phone-actions button.accent{background:var(--coral-500);color:#fff;}
+  .insight-bubble{
+    background:var(--sage-100);color:#2E5744;border-radius:14px;padding:12px 14px;font-size:.82rem;
+  }
+  .stat-row{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--ink-500);}
+  .stat-row strong{display:block;font-family:'Fredoka',sans-serif;font-size:1.1rem;color:var(--navy-700);}
+  .app-copy .lifestyle-photo{border-radius:var(--radius-md);overflow:hidden;margin-top:26px;box-shadow:var(--shadow-md);}
+  .app-copy .lifestyle-photo img{height:220px;object-fit:cover;width:100%;}
+
+  /* Plans */
+  .plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .plan-card{
+    background:var(--card);border-radius:var(--radius-lg);border:1px solid var(--line);padding:32px 28px;
+    display:flex;flex-direction:column;gap:16px;position:relative;
+  }
+  .plan-card.featured{border-color:var(--coral-500);box-shadow:var(--shadow-lg);}
+  .plan-card .badge{
+    position:absolute;top:-13px;right:28px;background:var(--coral-500);color:#fff;font-family:'Space Mono',monospace;
+    font-size:.68rem;font-weight:700;padding:5px 12px;border-radius:999px;letter-spacing:.05em;
+  }
+  .plan-card h3{font-size:1.2rem;margin-bottom:0;}
+  .plan-card .price{font-family:'Fredoka',sans-serif;font-size:2.1rem;color:var(--navy-700);}
+  .plan-card .price span{font-family:'Inter',sans-serif;font-size:.9rem;font-weight:600;color:var(--ink-500);}
+  .plan-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .plan-card li{font-size:.88rem;color:var(--ink-700);display:flex;gap:8px;}
+  .plan-card li::before{content:"✓";color:var(--sage-500);font-weight:700;}
+
+  /* Testimonials */
+  .testimonials{background:var(--card);}
+  .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .testimonial-card{background:var(--paper);border-radius:var(--radius-md);padding:26px;border:1px solid var(--line);}
+  .testimonial-card p{font-size:.95rem;color:var(--ink-700);font-style:italic;}
+  .testimonial-who{display:flex;align-items:center;gap:12px;margin-top:14px;}
+  .testimonial-who .avatar{width:40px;height:40px;border-radius:50%;background:var(--violet-100);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+  .testimonial-who strong{display:block;font-size:.88rem;color:var(--navy-700);}
+  .testimonial-who span{font-size:.78rem;color:var(--ink-500);}
+
+  /* FAQ */
+  .faq-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+  .faq-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);overflow:hidden;}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;padding:20px 22px;font-family:'Inter',sans-serif;
+    font-weight:700;font-size:.98rem;color:var(--navy-700);cursor:pointer;display:flex;justify-content:space-between;
+    align-items:center;gap:16px;
+  }
+  .faq-q .plus{font-size:1.3rem;color:var(--coral-500);transition:transform .2s ease;flex-shrink:0;}
+  .faq-item.is-open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .faq-a p{padding:0 22px 20px;font-size:.92rem;color:var(--ink-700);margin:0;}
+
+  /* Final CTA */
+  .cta-band{
+    background:linear-gradient(135deg,var(--navy-700),var(--navy-600));color:#fff;border-radius:var(--radius-lg);
+    padding:60px;display:flex;justify-content:space-between;align-items:center;gap:32px;margin:0 24px;
+  }
+  .cta-band h2{color:#fff;margin-bottom:.3em;}
+  .cta-band p{color:rgba(255,255,255,.78);margin:0;max-width:46ch;}
+
+  /* Footer */
+  footer{padding:70px 0 30px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:48px;}
+  .footer-brand p{color:var(--ink-500);font-size:.88rem;max-width:32ch;}
+  .footer-col h4{font-family:'Inter',sans-serif;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-500);margin-bottom:14px;}
+  .footer-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .footer-col a{text-decoration:none;font-size:.9rem;color:var(--ink-700);}
+  .footer-col a:hover{color:var(--coral-600);}
+  .footer-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.78rem;color:var(--ink-500);}
+  .footer-bottom .credits{max-width:60ch;}
+
+  /* Toast */
+  #toast{
+    position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--navy-700);color:#fff;padding:14px 22px;border-radius:999px;font-size:.88rem;font-weight:600;
+    box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;z-index:1000;
+  }
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  @media (max-width: 980px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-figure img{height:380px;}
+    .feature-grid{grid-template-columns:repeat(2,1fr);}
+    .service-grid{grid-template-columns:1fr;}
+    .robot-section .wrap{grid-template-columns:1fr;}
+    .steps{grid-template-columns:repeat(2,1fr);}
+    .app-section .wrap{grid-template-columns:1fr;}
+    .plan-grid{grid-template-columns:1fr;}
+    .testimonial-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .stats .wrap{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width: 720px){
+    .nav-links,.nav-actions .btn-outline{display:none;}
+    .nav-toggle{display:block;}
+    header.nav-open .nav-links{
+      display:flex;position:absolute;top:100%;left:0;right:0;background:var(--paper);
+      flex-direction:column;padding:20px 24px;border-bottom:1px solid var(--line);gap:18px;
+    }
+    .hero h1{font-size:2.2rem;}
+    section{padding:64px 0;}
+    .cta-band{flex-direction:column;text-align:center;margin:0 16px;padding:40px 28px;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="nav">
+    <a href="#top" class="logo">
+      <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="24" fill="#1B2A4A"/>
+        <circle cx="24" cy="22" r="9" fill="#FF6F59"/>
+        <circle cx="18" cy="14" r="3.4" fill="#FF6F59"/>
+        <circle cx="30" cy="14" r="3.4" fill="#FF6F59"/>
+        <circle cx="21" cy="21" r="1.6" fill="#1B2A4A"/>
+        <circle cx="27" cy="21" r="1.6" fill="#1B2A4A"/>
+        <path d="M21 25.5c1 1 5 1 6 0" stroke="#1B2A4A" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-word">Nuzzle</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#nuzzlepal">Meet NuzzlePal</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#plans">Plans</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#plans" class="btn btn-outline btn-sm">Get started</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">AI-powered remote pet care</span>
+        <h1>Away from home.<br>Never away from them.</h1>
+        <p class="lead">Nuzzle pairs a live HD camera with NuzzlePal — our AI companion robot — so you can watch, talk to, and play with your cat or dog from anywhere. Between check-ins, the AI keeps them company.</p>
+        <div class="hero-ctas">
+          <a href="#plans" class="btn btn-primary">See plans for your pet</a>
+          <a href="#nuzzlepal" class="btn btn-outline">Meet NuzzlePal</a>
+        </div>
+      </div>
+      <div class="hero-figure">
+        <img src="images/hero-dog.jpg" alt="A dog looking up attentively at the camera, as if watching its owner check in through the Nuzzle app">
+        <div class="hero-badge"><span class="dot"></span>LIVE · NUZZLEPAL CAM</div>
+        <div class="hero-card">
+          <div class="avatar">🐾</div>
+          <div>
+            <strong>Milo is playing fetch</strong>
+            <span>NuzzlePal · treat launcher active</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="wrap">
+      <div><strong>11,400+</strong><span>homes with a NuzzlePal</span></div>
+      <div><strong>2</strong><span>species supported today — cats & dogs</span></div>
+      <div><strong>24/7</strong><span>live monitoring &amp; AI companionship</span></div>
+      <div><strong>4.9 / 5</strong><span>average owner rating</span></div>
+    </div>
+  </section>
+
+  <!-- WHY NUZZLE -->
+  <section id="why">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Why Nuzzle</span>
+        <h2>One device. Total peace of mind.</h2>
+        <p>Nuzzle isn't just a camera — it's a companion that watches, listens, and responds while you're out.</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 8a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z" stroke="currentColor" stroke-width="1.7"/><path d="m15 10 5-3v10l-5-3" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Live HD monitoring</h3>
+          <p>1080p pan-tilt-zoom video with night vision, plus motion and sound alerts sent straight to your phone.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3a4 4 0 0 0-4 4v4a4 4 0 0 0 8 0V7a4 4 0 0 0-4-4Z" stroke="currentColor" stroke-width="1.7"/><path d="M6 11a6 6 0 0 0 12 0M12 19v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Talk &amp; play</h3>
+          <p>Two-way audio and video so you can call out to your pet, plus a laser-play mode for cats and a treat launcher for dogs.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/></svg>
+          </div>
+          <h3>NuzzlePal, the AI</h3>
+          <p>Between your visits, NuzzlePal keeps pets engaged — responding to barks and meows and running short play sessions on its own.</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 8a6 6 0 0 1 12 0c0 4 1.5 5.5 2 6.5H4c.5-1 2-2.5 2-6.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 18a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Alerts &amp; daily recaps</h3>
+          <p>A nudge if barking spikes or the food bowl's untouched, plus an end-of-day highlight reel of naps, zoomies, and treats.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Services by species</span>
+        <h2>Built around how your pet actually behaves.</h2>
+        <p>NuzzlePal's hardware and AI routines are tuned per species — not a one-size-fits-all camera on a shelf.</p>
+      </div>
+      <div class="service-grid" id="serviceGrid"></div>
+    </div>
+  </section>
+
+  <!-- MEET NUZZLEPAL -->
+  <section id="nuzzlepal" class="robot-section">
+    <div class="wrap">
+      <div class="device-stage">
+        <svg class="device-svg" id="deviceSvg" viewBox="0 0 260 340" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="130" cy="316" rx="70" ry="12" fill="rgba(0,0,0,.25)"/>
+          <rect x="70" y="250" width="120" height="52" rx="26" fill="#0F1B33"/>
+          <rect x="50" y="90" width="160" height="180" rx="60" fill="#F4F1EA"/>
+          <rect x="50" y="90" width="160" height="180" rx="60" fill="url(#bodyGrad)" opacity=".5"/>
+          <circle id="ringLight" cx="130" cy="150" r="46" fill="none" stroke="#FF6F59" stroke-width="6" opacity=".9"/>
+          <circle cx="130" cy="150" r="30" fill="#1B2A4A"/>
+          <circle cx="130" cy="150" r="14" fill="#7FD8FF"/>
+          <circle cx="134" cy="145" r="4" fill="#fff" opacity=".8"/>
+          <g id="speakerGrille" fill="#C9C2AE">
+            <circle cx="112" cy="210" r="3.2"/><circle cx="130" cy="210" r="3.2"/><circle cx="148" cy="210" r="3.2"/>
+            <circle cx="112" cy="222" r="3.2"/><circle cx="130" cy="222" r="3.2"/><circle cx="148" cy="222" r="3.2"/>
+            <circle cx="112" cy="234" r="3.2"/><circle cx="130" cy="234" r="3.2"/><circle cx="148" cy="234" r="3.2"/>
+          </g>
+          <!-- Cat accessory: laser -->
+          <g id="accCat">
+            <circle cx="200" cy="120" r="9" fill="#8C7AC9"/>
+            <line x1="200" y1="120" x2="252" y2="60" stroke="#FF6F59" stroke-width="2" stroke-dasharray="3 5"/>
+            <circle cx="252" cy="60" r="4" fill="#FF6F59"/>
+          </g>
+          <!-- Dog accessory: treat launcher -->
+          <g id="accDog">
+            <rect x="176" y="180" width="34" height="22" rx="8" fill="#EE9E4C"/>
+            <circle cx="222" cy="168" r="6" fill="#C97A2B"/>
+            <circle cx="236" cy="150" r="5" fill="#C97A2B"/>
+            <circle cx="244" cy="128" r="4" fill="#C97A2B"/>
+          </g>
+          <defs>
+            <linearGradient id="bodyGrad" x1="50" y1="90" x2="210" y2="270" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#fff"/><stop offset="1" stop-color="#E9E1D2"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="robot-copy">
+        <span class="eyebrow">Meet NuzzlePal</span>
+        <h2>Your pet's favorite robot, made for one job.</h2>
+        <div class="mode-toggle" id="modeToggle">
+          <button data-mode="cat" class="is-active">Cat mode</button>
+          <button data-mode="dog">Dog mode</button>
+        </div>
+        <ul class="spec-list">
+          <li>
+            <div class="spec-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 8a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z" stroke="currentColor" stroke-width="1.7"/><path d="m15 10 5-3v10l-5-3" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </div>
+            <div><strong>Pan-tilt-zoom camera</strong><span>1080p with night vision and a 130° field of view.</span></div>
+          </li>
+          <li>
+            <div class="spec-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3a4 4 0 0 0-4 4v4a4 4 0 0 0 8 0V7a4 4 0 0 0-4-4Z" stroke="currentColor" stroke-width="1.7"/><path d="M6 11a6 6 0 0 0 12 0M12 19v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </div>
+            <div><strong>Two-way speaker &amp; mic</strong><span>Noise-cancelled audio so your voice comes through clearly.</span></div>
+          </li>
+          <li>
+            <div class="spec-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </div>
+            <div><strong>Treat &amp; kibble dispenser</strong><span>Portion-controlled, so playtime treats don't turn into overfeeding.</span></div>
+          </li>
+          <li>
+            <div class="spec-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/></svg>
+            </div>
+            <div><strong>On-device AI</strong><span>Play routines run locally, so responses feel instant even between your visits.</span></div>
+          </li>
+        </ul>
+        <p class="mode-caption" id="modeCaption"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">How it works</span>
+        <h2>Set up in about ten minutes.</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="num">01</span><h3>Pick a plan</h3><p>Choose Cat, Dog, or the multi-pet bundle — you can switch anytime.</p></div>
+        <div class="step"><span class="num">02</span><h3>We ship NuzzlePal</h3><p>Plug-and-play setup, no drilling or wiring, ready in about ten minutes.</p></div>
+        <div class="step"><span class="num">03</span><h3>Meet on camera</h3><p>Open the Nuzzle app anytime to watch, talk, and play from wherever you are.</p></div>
+        <div class="step"><span class="num">04</span><h3>Let the AI take over</h3><p>Between check-ins, NuzzlePal keeps your pet company with talk, play, and treats.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP MOCKUP -->
+  <section class="app-section">
+    <div class="wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-feed" id="phoneFeed" style="background-image:url('images/cat-portrait.jpg')">
+            <span class="tag" id="phoneTag">● LIVE</span>
+          </div>
+          <div class="phone-body">
+            <h4 id="phoneTitle">Milo · living room</h4>
+            <div class="phone-actions">
+              <button class="accent" data-tab="live">Live</button>
+              <button data-tab="talk">Talk</button>
+              <button data-tab="insights">Insights</button>
+            </div>
+            <div id="phonePanel">
+              <div class="insight-bubble">Tap "Talk" to call out to Milo, or "Toss a treat" to reward good napping form.</div>
+            </div>
+            <div class="stat-row">
+              <div><strong>3</strong>naps</div>
+              <div><strong>14</strong>min active</div>
+              <div><strong>2</strong>treats</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="app-copy">
+        <span class="eyebrow">The Nuzzle app</span>
+        <h2>Check in for ten seconds, or ten minutes.</h2>
+        <p class="lead" style="max-width:44ch;color:var(--ink-700);font-size:1.02rem;">Glance at a live feed between meetings, or settle in for a full video call with your pet. NuzzlePal fills the gaps in between with its own AI-driven play sessions, and logs everything into a simple daily recap.</p>
+        <div class="lifestyle-photo">
+          <img src="images/lifestyle-phone.jpg" alt="A woman relaxing at home and checking the Nuzzle app on her phone">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section id="plans">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Plans</span>
+        <h2>Simple pricing, per pet.</h2>
+        <p>Every plan includes a NuzzlePal unit, the app, and unlimited live viewing. Cancel or switch anytime.</p>
+      </div>
+      <div class="plan-grid" id="planGrid"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">From Nuzzle homes</span>
+        <h2>Owners (and their pets) weigh in.</h2>
+      </div>
+      <div class="testimonial-grid" id="testimonialGrid"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Questions</span>
+        <h2>Good to know before you order.</h2>
+      </div>
+      <div class="faq-list" id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="padding-bottom:100px;">
+    <div class="cta-band">
+      <div>
+        <h2>Your pet's next favorite check-in.</h2>
+        <p>Join the homes already using NuzzlePal to stay close to their cats and dogs — with more species on the way.</p>
+      </div>
+      <a href="#plans" class="btn btn-primary">See plans for your pet</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo" style="margin-bottom:14px;display:inline-flex;">
+          <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="24" fill="#1B2A4A"/>
+            <circle cx="24" cy="22" r="9" fill="#FF6F59"/>
+            <circle cx="18" cy="14" r="3.4" fill="#FF6F59"/>
+            <circle cx="30" cy="14" r="3.4" fill="#FF6F59"/>
+            <circle cx="21" cy="21" r="1.6" fill="#1B2A4A"/>
+            <circle cx="27" cy="21" r="1.6" fill="#1B2A4A"/>
+            <path d="M21 25.5c1 1 5 1 6 0" stroke="#1B2A4A" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span class="logo-word">Nuzzle</span>
+        </a>
+        <p>AI-powered remote pet care. Live monitoring and interactive play for cats and dogs today — more companions on the way.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#nuzzlepal">Meet NuzzlePal</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#plans">Plans</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Species</h4>
+        <ul>
+          <li><a href="#services">Cats</a></li>
+          <li><a href="#services">Dogs</a></li>
+          <li><a href="#services">Small pets (coming soon)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#faq">Privacy &amp; footage</a></li>
+          <li><a href="#top">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nuzzle. A fictional demo brand built for a coding project.</span>
+      <span class="credits">Photos via Pexels (free license): dog by Marcelo Chagas, cat by Vũ Nguyễn, dog portrait by Helena Lopes, rabbit by cottonbro studio, lifestyle photo by Andrea Piacquadio. NuzzlePal illustration is an original graphic, generated for this project.</span>
+    </div>
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+(function(){
+
+  var SERVICES = [
+    {
+      id: 'cats',
+      title: 'Nuzzle for Cats',
+      pill: 'pill-cat',
+      pillLabel: 'Available now',
+      img: 'images/cat-portrait.jpg',
+      alt: 'A tabby cat looking directly at the camera',
+      desc: 'A quieter, perch-height companion tuned to how cats actually move through a home.',
+      features: [
+        'Laser-pointer play mode with adjustable speed',
+        'Low-vibration treat dispenser sized for kibble',
+        'Calming voice presets for thunderstorms or fireworks',
+        'Feeding & litter-box activity nudges'
+      ]
+    },
+    {
+      id: 'dogs',
+      title: 'Nuzzle for Dogs',
+      pill: 'pill-dog',
+      pillLabel: 'Available now',
+      img: 'images/dog-portrait.jpg',
+      alt: 'A curious dog with pointed ears looking at the camera',
+      desc: 'Wide floor coverage and a sturdier build for bigger rooms and bigger energy.',
+      features: [
+        'Bark-responsive AI that checks in automatically',
+        'Treat launcher for fetch-and-reward play',
+        'Separation-anxiety soothing routines',
+        'Walk-reminder alerts if you book a sitter through us'
+      ]
+    },
+    {
+      id: 'future',
+      title: 'More friends, coming soon',
+      pill: 'pill-future',
+      pillLabel: 'In development',
+      img: 'images/rabbit-portrait.jpg',
+      alt: 'A small white rabbit sitting alert on a blanket',
+      desc: "We're teaching NuzzlePal new tricks for smaller companions — starting with rabbits and birds.",
+      features: [
+        'Hutch- and cage-safe camera mounts',
+        'Quieter, smaller-portion dispensing',
+        'Species-specific play & sound profiles',
+        'Early access for waitlist members'
+      ],
+      waitlist: true
+    }
+  ];
+
+  var PLANS = [
+    {
+      name: 'Cat Plan',
+      price: '$29',
+      period: '/mo',
+      features: [
+        'One NuzzlePal unit, cat configuration',
+        'Unlimited live viewing & two-way talk',
+        'Laser play mode + treat dispenser',
+        'Daily activity recap'
+      ]
+    },
+    {
+      name: 'Dog Plan',
+      price: '$39',
+      period: '/mo',
+      featured: true,
+      badge: 'Most popular',
+      features: [
+        'One NuzzlePal unit, dog configuration',
+        'Unlimited live viewing & two-way talk',
+        'Treat launcher + bark-responsive AI',
+        'Daily activity recap + bark alerts'
+      ]
+    },
+    {
+      name: 'Multi-Pet Bundle',
+      price: '$59',
+      period: '/mo',
+      features: [
+        'Up to 3 NuzzlePal units, any mix of pets',
+        'Priority AI processing across all units',
+        'Shared household app with multiple logins',
+        'One monthly recap for the whole household'
+      ]
+    }
+  ];
+
+  var TESTIMONIALS = [
+    { quote: "I check in on Miso between meetings more than I check my email. The laser mode is her favorite part of the day.", name: 'Priya R.', pet: 'Owner of Miso, cat', emoji: '🐱' },
+    { quote: "Buster used to bark the whole time we were out. NuzzlePal noticed the pattern in week one and now he mostly naps.", name: 'Daniel K.', pet: 'Owner of Buster, dog', emoji: '🐶' },
+    { quote: "I work night shifts, so 'daytime companion' is exactly what my two cats needed. The daily recap is oddly addictive.", name: 'Adaeze O.', pet: 'Owner of Juno & Pepper, cats', emoji: '🐾' }
+  ];
+
+  var FAQ = [
+    { q: 'Is NuzzlePal safe to have around my pet?', a: "Yes — NuzzlePal is weighted and rounded with no exposed cords, moves slowly, and the treat dispenser is portion-locked. It's built to be a calm presence in the room, not a toy that chases your pet." },
+    { q: 'How smart is the AI, really?', a: "NuzzlePal's behavior models are trained on publicly available pet-behavior footage, veterinary research, and other public data from across the internet, then fine-tuned on your own pet's habits over time (with your consent). It's genuinely good at spotting patterns — a favorite nap spot, an anxious bark — but it's a companion, not a substitute for veterinary care or an in-person sitter for anything urgent." },
+    { q: 'What if my pet is nervous around it at first?', a: "Totally normal for the first day or two. NuzzlePal starts in a low-key 'observe only' mode with no sounds or movement until your pet approaches on its own, then gradually introduces play." },
+    { q: 'Do you support pets other than cats and dogs?', a: "Not yet — cats and dogs are fully supported today. We're actively developing hutch- and cage-safe configurations for rabbits and birds; join the waitlist in the Services section to help us test it early." },
+    { q: 'Is a real person ever involved, or is it fully automated?', a: 'Both. Day to day, NuzzlePal and the AI handle monitoring and play on their own. You can also book a human check-in visit or dog walk through the app for anything the robot can\'t do, like refilling a water bowl.' },
+    { q: 'What happens to my video footage?', a: 'Footage streams to your app and is stored encrypted for 30 days by default, viewable only by accounts you approve. You can download or delete clips anytime from Settings.' },
+    { q: 'Can I cancel anytime?', a: "Yes, plans are month-to-month with no lock-in contract. If you cancel, we'll send you a prepaid box to return the NuzzlePal unit." }
+  ];
+
+  var PET_MODES = {
+    cat: {
+      caption: '<strong>Cat mode:</strong> the laser lens activates for unpredictable, chase-friendly movement, and the dispenser switches to smaller, quieter portions.',
+      ring: '#8C7AC9'
+    },
+    dog: {
+      caption: '<strong>Dog mode:</strong> the treat launcher arms for fetch-and-reward play, and the camera widens its patrol angle to cover more floor space.',
+      ring: '#EE9E4C'
+    }
+  };
+
+  function el(html){
+    var t = document.createElement('template');
+    t.innerHTML = html.trim();
+    return t.content.firstElementChild;
+  }
+
+  function renderServices(){
+    var grid = document.getElementById('serviceGrid');
+    grid.innerHTML = '';
+    SERVICES.forEach(function(s){
+      var featuresHtml = s.features.map(function(f){ return '<li>'+f+'</li>'; }).join('');
+      var card = el(
+        '<div class="service-card'+(s.waitlist ? ' future' : '')+'">' +
+          '<div class="service-photo"><img src="'+s.img+'" alt="'+s.alt+'"></div>' +
+          '<div class="service-body">' +
+            '<span class="pill '+s.pill+'">'+s.pillLabel+'</span>' +
+            '<h3>'+s.title+'</h3>' +
+            '<p>'+s.desc+'</p>' +
+            '<ul class="service-list">'+featuresHtml+'</ul>' +
+            (s.waitlist ? '<button class="btn btn-ghost btn-sm waitlist-note" style="align-self:flex-start;">Join the waitlist</button>' : '') +
+          '</div>' +
+        '</div>'
+      );
+      if (s.waitlist){
+        card.querySelector('button').addEventListener('click', function(){
+          showToast("You're on the list! We'll email you when small-pet support launches.");
+        });
+      }
+      grid.appendChild(card);
+    });
+  }
+
+  function renderPlans(){
+    var grid = document.getElementById('planGrid');
+    grid.innerHTML = '';
+    PLANS.forEach(function(p){
+      var featuresHtml = p.features.map(function(f){ return '<li>'+f+'</li>'; }).join('');
+      var card = el(
+        '<div class="plan-card'+(p.featured ? ' featured' : '')+'">' +
+          (p.badge ? '<span class="badge">'+p.badge+'</span>' : '') +
+          '<h3>'+p.name+'</h3>' +
+          '<div class="price">'+p.price+'<span>'+p.period+'</span></div>' +
+          '<ul>'+featuresHtml+'</ul>' +
+          '<button class="btn '+(p.featured ? 'btn-primary' : 'btn-outline')+'">Choose '+p.name+'</button>' +
+        '</div>'
+      );
+      card.querySelector('button').addEventListener('click', function(){
+        showToast("You're on the list for the "+p.name+" — check your email to finish setup.");
+      });
+      grid.appendChild(card);
+    });
+  }
+
+  function renderTestimonials(){
+    var grid = document.getElementById('testimonialGrid');
+    grid.innerHTML = '';
+    TESTIMONIALS.forEach(function(t){
+      grid.appendChild(el(
+        '<div class="testimonial-card">' +
+          '<p>“'+t.quote+'”</p>' +
+          '<div class="testimonial-who">' +
+            '<div class="avatar">'+t.emoji+'</div>' +
+            '<div><strong>'+t.name+'</strong><span>'+t.pet+'</span></div>' +
+          '</div>' +
+        '</div>'
+      ));
+    });
+  }
+
+  function renderFaq(){
+    var list = document.getElementById('faqList');
+    list.innerHTML = '';
+    FAQ.forEach(function(item, i){
+      var node = el(
+        '<div class="faq-item'+(i === 0 ? ' is-open' : '')+'">' +
+          '<button class="faq-q"><span>'+item.q+'</span><span class="plus">+</span></button>' +
+          '<div class="faq-a"><p>'+item.a+'</p></div>' +
+        '</div>'
+      );
+      var btn = node.querySelector('.faq-q');
+      var ans = node.querySelector('.faq-a');
+      if (i === 0){ ans.style.maxHeight = '240px'; }
+      btn.addEventListener('click', function(){
+        var isOpen = node.classList.contains('is-open');
+        list.querySelectorAll('.faq-item').forEach(function(other){
+          other.classList.remove('is-open');
+          other.querySelector('.faq-a').style.maxHeight = null;
+        });
+        if (!isOpen){
+          node.classList.add('is-open');
+          ans.style.maxHeight = ans.scrollHeight + 'px';
+        }
+      });
+      list.appendChild(node);
+    });
+  }
+
+  function setPetMode(mode){
+    var toggleBtns = document.querySelectorAll('#modeToggle button');
+    toggleBtns.forEach(function(b){ b.classList.toggle('is-active', b.dataset.mode === mode); });
+
+    var accCat = document.getElementById('accCat');
+    var accDog = document.getElementById('accDog');
+    accCat.style.transition = accDog.style.transition = 'opacity .25s ease, transform .25s ease';
+    if (mode === 'cat'){
+      accCat.style.opacity = '1'; accCat.style.transform = 'scale(1)';
+      accDog.style.opacity = '0'; accDog.style.transform = 'scale(.8)';
+    } else {
+      accDog.style.opacity = '1'; accDog.style.transform = 'scale(1)';
+      accCat.style.opacity = '0'; accCat.style.transform = 'scale(.8)';
+    }
+
+    document.getElementById('ringLight').setAttribute('stroke', PET_MODES[mode].ring);
+    document.getElementById('modeCaption').innerHTML = PET_MODES[mode].caption;
+  }
+
+  function setPhoneTab(tab){
+    var buttons = document.querySelectorAll('.phone-actions button');
+    buttons.forEach(function(b){ b.classList.toggle('accent', b.dataset.tab === tab); });
+    var panel = document.getElementById('phonePanel');
+    var feed = document.getElementById('phoneFeed');
+    var tag = document.getElementById('phoneTag');
+    var title = document.getElementById('phoneTitle');
+    if (tab === 'live'){
+      feed.style.backgroundImage = "url('images/cat-portrait.jpg')";
+      tag.textContent = '● LIVE';
+      title.textContent = 'Milo · living room';
+      panel.innerHTML = '<div class="insight-bubble">Tap "Talk" to call out to Milo, or "Toss a treat" to reward good napping form.</div>';
+    } else if (tab === 'talk'){
+      feed.style.backgroundImage = "url('images/dog-portrait.jpg')";
+      tag.textContent = '● ON CALL';
+      title.textContent = 'Talking to Buster';
+      panel.innerHTML = '<div class="insight-bubble">Mic is live — Buster\'s tail is wagging. Say hi, or send a treat while you talk.</div>';
+    } else {
+      feed.style.backgroundImage = "url('images/lifestyle-phone.jpg')";
+      tag.textContent = 'TODAY';
+      title.textContent = "Today's insights";
+      panel.innerHTML = '<div class="insight-bubble">NuzzlePal noticed Milo has been extra playful today — 3 spontaneous play sessions, up from 1 yesterday.</div>';
+    }
+  }
+
+  function showToast(msg){
+    var toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function(){ toast.classList.remove('show'); }, 3200);
+  }
+
+  function initHeader(){
+    var header = document.getElementById('site-header');
+    window.addEventListener('scroll', function(){
+      header.classList.toggle('is-scrolled', window.scrollY > 8);
+    });
+    document.getElementById('navToggle').addEventListener('click', function(){
+      header.classList.toggle('nav-open');
+    });
+    header.querySelectorAll('.nav-links a').forEach(function(a){
+      a.addEventListener('click', function(){ header.classList.remove('nav-open'); });
+    });
+  }
+
+  function init(){
+    renderServices();
+    renderPlans();
+    renderTestimonials();
+    renderFaq();
+    setPetMode('cat');
+    initHeader();
+
+    document.getElementById('modeToggle').addEventListener('click', function(e){
+      var btn = e.target.closest('button');
+      if (btn) setPetMode(btn.dataset.mode);
+    });
+    document.querySelectorAll('.phone-actions button').forEach(function(b){
+      b.addEventListener('click', function(){ setPhoneTab(b.dataset.tab); });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})();
+</script>
+
+</body>
+</html>
