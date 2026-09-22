@@ -8,7 +8,7 @@ A single self-contained static website for "Nuzzle," a fictional remote pet-sitt
 
 ## Running it
 
-Open `index.html` directly in a browser, or serve the folder (`python3 -m http.server`) to sanity-check relative image paths. There is no dev server, bundler, linter, or test suite configured in this repo.
+Open `index.html` directly in a browser, or serve the folder (`python3 -m http.server`) to sanity-check relative image paths. There is no dev server, bundler, linter, or test suite configured in this repo. The repo is also public on GitHub (`ElroyQQ/nuzzle_pet_care_POC`) with GitHub Pages enabled, live at https://elroyqq.github.io/nuzzle_pet_care_POC/ — Pages serves whatever is on `main`, so a push there updates the live site with no separate deploy step.
 
 ## Architecture
 
@@ -46,3 +46,14 @@ Don't treat either exception as license to introduce photorealistic illustration
 - Pricing, stats (e.g. "11,400+ homes"), and testimonials are illustrative placeholder content for a demo site, not real figures.
 - All three roaming mascots (`#roamBot`, `#roamDog`, `#roamCat`) are `position:fixed` and move within the viewport only (not the full scrollable document) — this was a deliberate simplification so none of them can wander somewhere the visitor has to scroll to find, which read as broken rather than playful during testing.
 - Pricing/stats/testimonial placeholder-content note above also covers the voucher: the promo code and dates are real, freshly computed values (not hardcoded strings), but the "10% off" discount itself isn't wired to anything — there's no cart or checkout on this site for it to apply to.
+
+## Session history
+
+Chronological summary of the session that built and shipped this site, for context on why things are the way they are:
+
+1. **Initial build** — Nuzzle was created from a one-line brief (a remote pet-sitting business with live monitoring and an AI companion robot, cats/dogs now, more species later) as a sibling project to the "Dodo Burgers" site, in its own directory and git repo (not nested inside Dodo Burgers' repo, even though both live under the same parent folder on disk). Same single-file `index.html` + `images/` convention as Dodo Burgers. Built out the hero, stats bar, feature grid, services (cats/dogs/future pets), the NuzzlePal device section, how-it-works, an app-preview phone mockup, an initial static plan grid, testimonials, and FAQ — sourcing real photos from Pexels and writing an honest FAQ answer about the AI being trained on public internet data, per the original brief.
+2. **Hero video** — on request, replaced the static hero photo with a real, freely-licensed Pexels video (a floor-level shot of a dog walking through a home) set to loop, muted, and autoplay, to simulate NuzzlePal's pet-height following camera. When autoplay proved inconsistent depending on how the page was opened, hardened it with `preload="auto"`, `webkit-playsinline`, `disablepictureinpicture`, a fixed mobile-breakpoint CSS rule that had been missed, and a JS `play()` retry on `loadeddata`/`canplay`/visibility-change.
+3. **Wheel, roaming mascots, background art** — on request, replaced the static plan cards with the spinnable Cats/Dogs/Future Pets/Bonus wheel, added the roaming-and-chasing mascot icons, and added the pet-themed paw-print/silhouette background decoration (see the dedicated sections above for how each works and why).
+4. **Pushed to GitHub** — created `ElroyQQ/nuzzle_pet_care_POC` (public) and pushed all commits, matching the existing `dodo_burgers_POC` repo's setup.
+5. **Account security review** — at the owner's request, scanned all 8 repos on the account (full commit history, not just current files) for leaked secrets, credentials, and risky filenames. Found none. Did find that this repo's commits are authored with the owner's real work email (`elroy.quek@redalphacyber.com`), publicly visible in this *public* repo's history — unlike every other repo on the account, which uses GitHub's private noreply email. This was introduced by a `git config user.email` set when the repo was first initialized in this session, using a value read from the coding session's local context. **If asked to make further commits here, set `git config user.email` to the account's noreply address first** (`95409776+ElroyQQ@users.noreply.github.com`, matching the rest of the account) unless told otherwise — fixing it going forward is a one-line config change, but scrubbing the already-pushed commits would mean rewriting history and force-pushing, which needs the owner's explicit sign-off before doing.
+6. **GitHub Pages** — enabled (no cost — GitHub Pages is free on public repos) at the URL noted in "Running it" above.
