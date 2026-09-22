@@ -284,7 +284,7 @@
   }
   .wheel-frame{
     width:100%;height:100%;border-radius:50%;position:relative;overflow:hidden;
-    border:6px solid var(--ink-900);box-shadow:var(--shadow-lg);
+    border:6px solid var(--ink-900);
   }
   .wheel{
     width:100%;height:100%;border-radius:50%;position:relative;
@@ -900,8 +900,9 @@
 <button type="button" class="roam-critter" id="roamDog" aria-label="Nuzzle mini dog — tap to send it scurrying; NuzzlePal will come find it">
   <svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="40" cy="83" rx="22" ry="5" fill="rgba(0,0,0,.3)"/>
-    <ellipse cx="14" cy="33" rx="10" ry="16" fill="#2653FF" stroke="#0B0B0B" stroke-width="3" transform="rotate(-18 14 33)"/>
-    <ellipse cx="66" cy="33" rx="10" ry="16" fill="#2653FF" stroke="#0B0B0B" stroke-width="3" transform="rotate(18 66 33)"/>
+    <!-- big floppy ears hanging past the sides of the head -->
+    <ellipse cx="8" cy="44" rx="11" ry="21" fill="#2653FF" stroke="#0B0B0B" stroke-width="3.5" transform="rotate(-24 8 44)"/>
+    <ellipse cx="72" cy="44" rx="11" ry="21" fill="#2653FF" stroke="#0B0B0B" stroke-width="3.5" transform="rotate(24 72 44)"/>
     <circle cx="40" cy="38" r="26" fill="#2653FF" stroke="#0B0B0B" stroke-width="4"/>
     <circle cx="31" cy="36" r="4" fill="#0B0B0B"/>
     <circle cx="49" cy="36" r="4" fill="#0B0B0B"/>
@@ -909,24 +910,38 @@
     <path d="M40 50 q0 7 -7 9" stroke="#FF2E88" stroke-width="4" fill="none" stroke-linecap="round"/>
     <ellipse cx="24" cy="75" rx="9" ry="11" fill="#2653FF" stroke="#0B0B0B" stroke-width="3"/>
     <ellipse cx="56" cy="75" rx="9" ry="11" fill="#2653FF" stroke="#0B0B0B" stroke-width="3"/>
+    <!-- collar -->
+    <path d="M21 59 Q40 67 59 59" fill="none" stroke="#0B0B0B" stroke-width="7" stroke-linecap="round"/>
+    <path d="M21 59 Q40 67 59 59" fill="none" stroke="#FFD400" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="40" cy="66" r="4.5" fill="#FFD400" stroke="#0B0B0B" stroke-width="2"/>
+    <!-- wagging tail, drawn last so it sits in front of the ear -->
+    <path d="M24 70 Q6 66 12 52" fill="none" stroke="#0B0B0B" stroke-width="13" stroke-linecap="round"/>
+    <path d="M24 70 Q6 66 12 52" fill="none" stroke="#2653FF" stroke-width="8" stroke-linecap="round"/>
   </svg>
 </button>
 
 <button type="button" class="roam-critter" id="roamCat" aria-label="Nuzzle mini cat — tap to send it scurrying; NuzzlePal will come find it">
   <svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="40" cy="83" rx="22" ry="5" fill="rgba(0,0,0,.3)"/>
-    <path d="M18 12 L28 30 L12 32 Z" fill="#FF2E88" stroke="#0B0B0B" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M62 12 L52 30 L68 32 Z" fill="#FF2E88" stroke="#0B0B0B" stroke-width="3" stroke-linejoin="round"/>
+    <!-- tall pointed ears -->
+    <path d="M12 9 L27 31 L4 34 Z" fill="#FF2E88" stroke="#0B0B0B" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M68 9 L53 31 L76 34 Z" fill="#FF2E88" stroke="#0B0B0B" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M16 17 L24 30 L11 32 Z" fill="#FFDCEE"/>
+    <path d="M64 17 L56 30 L69 32 Z" fill="#FFDCEE"/>
     <circle cx="40" cy="36" r="26" fill="#FF2E88" stroke="#0B0B0B" stroke-width="4"/>
-    <circle cx="31" cy="34" r="4" fill="#0B0B0B"/>
-    <circle cx="49" cy="34" r="4" fill="#0B0B0B"/>
-    <path d="M37 43 q3 3 6 0" stroke="#0B0B0B" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <ellipse cx="31" cy="34" rx="3.4" ry="4.6" fill="#0B0B0B"/>
+    <ellipse cx="49" cy="34" rx="3.4" ry="4.6" fill="#0B0B0B"/>
+    <path d="M37 41 L43 41 L40 44.5 Z" fill="#0B0B0B"/>
+    <path d="M37 44 q3 3 6 0" stroke="#0B0B0B" stroke-width="2" fill="none" stroke-linecap="round"/>
     <line x1="14" y1="40" x2="2" y2="38" stroke="#0B0B0B" stroke-width="1.5" stroke-linecap="round"/>
     <line x1="14" y1="45" x2="2" y2="47" stroke="#0B0B0B" stroke-width="1.5" stroke-linecap="round"/>
     <line x1="66" y1="40" x2="78" y2="38" stroke="#0B0B0B" stroke-width="1.5" stroke-linecap="round"/>
     <line x1="66" y1="45" x2="78" y2="47" stroke="#0B0B0B" stroke-width="1.5" stroke-linecap="round"/>
     <ellipse cx="24" cy="75" rx="9" ry="11" fill="#FF2E88" stroke="#0B0B0B" stroke-width="3"/>
     <ellipse cx="56" cy="75" rx="9" ry="11" fill="#FF2E88" stroke="#0B0B0B" stroke-width="3"/>
+    <!-- curled tail, drawn last so it sits in front of the ear -->
+    <path d="M56 74 Q77 72 74 46 Q72 32 60 34" fill="none" stroke="#0B0B0B" stroke-width="13" stroke-linecap="round"/>
+    <path d="M56 74 Q77 72 74 46 Q72 32 60 34" fill="none" stroke="#FF2E88" stroke-width="8" stroke-linecap="round"/>
   </svg>
 </button>
 
