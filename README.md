@@ -19,13 +19,21 @@ Open `index.html` directly in a browser, or serve the folder (`python3 -m http.s
 - **Roaming mascots** — a small fixed NuzzlePal-style robot in the corner of the page, plus a dog and a cat mascot elsewhere on screen. Click the robot and it hops to a new random spot with a bounce animation and a speech-bubble line. Click the dog or cat and *it* hops away — the robot then "notices" and hops over near wherever it landed a beat later, like it's chasing them.
 - Pet-themed decorative background: a faint site-wide paw-print pattern plus a large dog silhouette watermark in "Why Nuzzle" and a cat silhouette watermark in the testimonials section (see Image & video policy below).
 - **Testimonials** and an **FAQ accordion**, including an explicit, honest FAQ entry on how the AI is trained (see below).
-- Responsive layout with a mobile hamburger nav; sticky, blurred header.
+- Responsive layout with a mobile hamburger nav; sticky header with a thick bottom border.
+
+## Design
+
+The site uses a **neo-brutalist** visual language, a deliberate departure from the soft, rounded, pastel look most AI-generated sites default to: pure flat colors instead of gradients, thick black (`var(--ink-900)`) borders on almost everything, hard offset drop shadows (`box-shadow: Npx Npx 0 var(--ink-900)` — no blur) instead of soft ones, `border-radius: 0` everywhere except genuinely circular things (the wheel, avatars, status dots), and oversized uppercase display type. Headings use **Archivo Black**; body copy uses **Space Grotesk**; labels, stats, and the wheel's hub/eyebrow tags use **Space Mono** — all three loaded from Google Fonts, replacing the original Fredoka/Inter pairing.
+
+Palette: `--paper` (a bold butter-cream, not pale) and `--ink-900` (near-black) carry the base; `--brand-500` (magenta/pink) is the general CTA and cat color; `--dog-500` (blue), `--future-500` (lime), and `--bonus-500` (yellow) are the other three wheel-wedge/tag colors — the same four categories as before, just recolored from the original violet/amber/sage/coral pastel set. Buttons "press into" their own hard shadow on click (`transform:translate(3px,3px)` while the shadow shrinks to match) for a tactile, physical feel. A few cards (service cards, testimonials) carry a slight fixed rotation for a hand-placed, cut-and-paste energy rather than a perfectly aligned grid.
+
+This was a pure visual pass — every element ID, class name, and `data-*` attribute JS depends on is unchanged; see [CLAUDE.md](CLAUDE.md#design-system) for the mapping from old to new custom-property names if you're editing colors again.
 
 ## Architecture
 
 Everything is inline in `index.html`, in three blocks in order:
 
-1. **`<style>`** — all CSS, using custom properties on `:root` (`--paper`, `--navy-700`, `--coral-500`, `--sage-500`, `--amber-500`, `--violet-500`, etc.) for a warm cream background with navy as the brand/trust color and coral as the CTA color. Cats, dogs, and "future pets" each get their own accent tag color (violet / amber / sage).
+1. **`<style>`** — all CSS, using custom properties on `:root` (`--paper`, `--ink-900`, `--brand-500`, `--dog-500`, `--future-500`, `--bonus-500`, etc. — see [Design](#design)) for a bold cream background with near-black ink for text/borders and magenta as the primary CTA color. Cats, dogs, future pets, and the wheel's bonus wedge each get their own accent color.
 2. **Markup** — header/nav, hero, stats bar, feature grid, services grid, the NuzzlePal device section, how-it-works steps, an app-preview phone mockup, plans, testimonials, FAQ, a closing CTA band, and the footer.
 3. **`<script>`** — a single IIFE containing all interactivity, no external JS libraries:
    - `SERVICES`, `PET_PLANS` (keyed `cat`/`dog`/`future`), `WHEEL_ORDER` (now `['cat','dog','future','bonus']`), `TESTIMONIALS`, `FAQ`, `PET_MODES`, `ROAM_LINES`, and `CHASE_LINES` are static data near the top — edit these to change copy, pricing, wheel order, or FAQ content. `bonus` is deliberately *not* a key in `PET_PLANS`; it's handled separately (see below) since a voucher isn't a pet plan.
