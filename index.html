@@ -314,7 +314,7 @@
 
   @media (max-width: 980px){
     .hero .wrap{grid-template-columns:1fr;}
-    .hero-figure img{height:380px;}
+    .hero-figure img,.hero-figure video{height:380px;}
     .feature-grid{grid-template-columns:repeat(2,1fr);}
     .service-grid{grid-template-columns:1fr;}
     .robot-section .wrap{grid-template-columns:1fr;}
@@ -386,7 +386,7 @@
         </div>
       </div>
       <div class="hero-figure">
-        <video autoplay muted loop playsinline poster="images/hero-dog.jpg" aria-label="Looping floor-level footage of a dog walking through a home, simulating NuzzlePal's pet-height following camera">
+        <video autoplay muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" poster="images/hero-dog.jpg" aria-label="Looping floor-level footage of a dog walking through a home, simulating NuzzlePal's pet-height following camera">
           <source src="video/nuzzlepal-cam-loop.mp4" type="video/mp4">
         </video>
         <div class="hero-badge"><span class="dot"></span>LIVE · NUZZLEPAL CAM</div>
@@ -972,6 +972,18 @@
     });
   }
 
+  function initHeroVideo(){
+    var video = document.querySelector('.hero-figure video');
+    if (!video) return;
+    var tryPlay = function(){ video.play().catch(function(){ /* will retry on next trigger */ }); };
+    tryPlay();
+    video.addEventListener('loadeddata', tryPlay);
+    video.addEventListener('canplay', tryPlay);
+    document.addEventListener('visibilitychange', function(){
+      if (!document.hidden && video.paused) tryPlay();
+    });
+  }
+
   function init(){
     renderServices();
     renderPlans();
@@ -979,6 +991,7 @@
     renderFaq();
     setPetMode('cat');
     initHeader();
+    initHeroVideo();
 
     document.getElementById('modeToggle').addEventListener('click', function(e){
       var btn = e.target.closest('button');
