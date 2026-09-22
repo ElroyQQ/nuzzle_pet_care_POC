@@ -272,7 +272,7 @@
   }
   .wheel{
     width:100%;height:100%;border-radius:50%;position:relative;
-    background:conic-gradient(var(--violet-500) 0deg 120deg, var(--amber-500) 120deg 240deg, var(--sage-500) 240deg 360deg);
+    background:conic-gradient(var(--violet-500) 0deg 90deg, var(--amber-500) 90deg 180deg, var(--sage-500) 180deg 270deg, var(--coral-500) 270deg 360deg);
     border:7px solid var(--card);box-shadow:var(--shadow-lg);
     transition:transform 1.7s cubic-bezier(.13,.79,.23,1);
     cursor:pointer;
@@ -299,12 +299,20 @@
   .plan-tabs button[data-pet="cat"].is-active{background:var(--violet-500);border-color:var(--violet-500);color:#fff;}
   .plan-tabs button[data-pet="dog"].is-active{background:var(--amber-500);border-color:var(--amber-500);color:#fff;}
   .plan-tabs button[data-pet="future"].is-active{background:var(--sage-500);border-color:var(--sage-500);color:#fff;}
+  .plan-tabs button[data-pet="bonus"].is-active{background:var(--coral-500);border-color:var(--coral-500);color:#fff;}
   .plan-panel{transition:opacity .3s ease, transform .3s ease;}
   .plan-panel.is-swapping{opacity:0;transform:translateY(8px);}
   .bundle-note{
     margin-top:16px;font-size:.85rem;color:var(--ink-500);background:none;border:none;padding:0;
     text-decoration:underline;text-decoration-style:dotted;cursor:pointer;font-family:'Inter',sans-serif;
   }
+  .voucher-card{border:2px dashed var(--coral-500);background:linear-gradient(180deg,var(--card),var(--coral-100));}
+  .voucher-code{
+    font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;letter-spacing:.06em;color:var(--navy-700);
+    background:var(--card);border:1px dashed var(--coral-500);border-radius:var(--radius-sm);
+    padding:14px 16px;text-align:center;word-break:break-all;
+  }
+  .voucher-meta{font-size:.84rem;color:var(--ink-500);margin:0;}
 
   /* Testimonials */
   .testimonials{background:var(--card);}
@@ -383,6 +391,17 @@
   }
   .roam-bubble.show{opacity:1;transform:translateX(-50%) scale(1);}
 
+  /* Roaming dog & cat mascots — same hop mechanics as the robot, smaller and unlabeled */
+  .roam-critter{
+    position:fixed;z-index:590;width:52px;height:52px;padding:0;border:none;background:none;cursor:pointer;
+    transition:left .7s cubic-bezier(.22,1.12,.4,1), top .7s cubic-bezier(.22,1.12,.4,1);
+    filter:drop-shadow(0 8px 14px rgba(27,36,49,.3));
+  }
+  .roam-critter svg{width:100%;height:100%;display:block;}
+  .roam-critter.is-hopping{animation:bot-hop .6s ease;}
+  #roamDog{left:26px;bottom:26px;}
+  #roamCat{right:26px;bottom:104px;}
+
   /* Pet-themed decorative background */
   body{position:relative;}
   body::before{
@@ -428,6 +447,9 @@
     .wheel-stage{width:220px;height:220px;}
     .wheel-label{font-size:1.7rem;}
     .roam-bot{width:52px;height:52px;right:16px;bottom:16px;}
+    .roam-critter{width:40px;height:40px;}
+    #roamDog{left:14px;bottom:16px;}
+    #roamCat{right:14px;bottom:76px;}
   }
 </style>
 </head>
@@ -722,10 +744,11 @@
       <div class="wheel-layout">
         <div class="wheel-stage">
           <div class="wheel-pointer" aria-hidden="true"></div>
-          <div class="wheel" id="wheel" role="img" aria-label="Spinning wheel with Cats, Dogs, and Future Pets sections">
-            <span class="wheel-label" style="--ang:60deg">🐱</span>
-            <span class="wheel-label" style="--ang:180deg">🐶</span>
-            <span class="wheel-label" style="--ang:300deg">🐰</span>
+          <div class="wheel" id="wheel" role="img" aria-label="Spinning wheel with Cats, Dogs, Future Pets, and Bonus sections">
+            <span class="wheel-label" style="--ang:45deg">🐱</span>
+            <span class="wheel-label" style="--ang:135deg">🐶</span>
+            <span class="wheel-label" style="--ang:225deg">🐰</span>
+            <span class="wheel-label" style="--ang:315deg">🎁</span>
           </div>
           <button class="wheel-hub" id="spinBtn" type="button">SPIN</button>
         </div>
@@ -734,6 +757,7 @@
             <button type="button" data-pet="cat" class="is-active">🐱 Cats</button>
             <button type="button" data-pet="dog">🐶 Dogs</button>
             <button type="button" data-pet="future">🐰 Future Pets</button>
+            <button type="button" data-pet="bonus">🎁 Bonus</button>
           </div>
           <div class="plan-panel" id="planPanel"></div>
         </div>
@@ -868,6 +892,39 @@
   </svg>
 </button>
 
+<button type="button" class="roam-critter" id="roamDog" aria-label="Nuzzle mini dog — tap to send it scurrying; NuzzlePal will come find it">
+  <svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="40" cy="83" rx="22" ry="5" fill="rgba(0,0,0,.2)"/>
+    <ellipse cx="14" cy="33" rx="10" ry="16" fill="#EE9E4C" transform="rotate(-18 14 33)"/>
+    <ellipse cx="66" cy="33" rx="10" ry="16" fill="#EE9E4C" transform="rotate(18 66 33)"/>
+    <circle cx="40" cy="38" r="26" fill="#EE9E4C"/>
+    <circle cx="31" cy="36" r="4" fill="#1B2A4A"/>
+    <circle cx="49" cy="36" r="4" fill="#1B2A4A"/>
+    <ellipse cx="40" cy="46" rx="5" ry="4" fill="#1B2A4A"/>
+    <path d="M40 50 q0 7 -7 9" stroke="#FF6F59" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="24" cy="75" rx="9" ry="11" fill="#EE9E4C"/>
+    <ellipse cx="56" cy="75" rx="9" ry="11" fill="#EE9E4C"/>
+  </svg>
+</button>
+
+<button type="button" class="roam-critter" id="roamCat" aria-label="Nuzzle mini cat — tap to send it scurrying; NuzzlePal will come find it">
+  <svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="40" cy="83" rx="22" ry="5" fill="rgba(0,0,0,.2)"/>
+    <path d="M18 12 L28 30 L12 32 Z" fill="#8C7AC9"/>
+    <path d="M62 12 L52 30 L68 32 Z" fill="#8C7AC9"/>
+    <circle cx="40" cy="36" r="26" fill="#8C7AC9"/>
+    <circle cx="31" cy="34" r="4" fill="#1B2A4A"/>
+    <circle cx="49" cy="34" r="4" fill="#1B2A4A"/>
+    <path d="M37 43 q3 3 6 0" stroke="#1B2A4A" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <line x1="14" y1="40" x2="2" y2="38" stroke="#1B2A4A" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="14" y1="45" x2="2" y2="47" stroke="#1B2A4A" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="66" y1="40" x2="78" y2="38" stroke="#1B2A4A" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="66" y1="45" x2="78" y2="47" stroke="#1B2A4A" stroke-width="1.5" stroke-linecap="round"/>
+    <ellipse cx="24" cy="75" rx="9" ry="11" fill="#8C7AC9"/>
+    <ellipse cx="56" cy="75" rx="9" ry="11" fill="#8C7AC9"/>
+  </svg>
+</button>
+
 <script>
 (function(){
 
@@ -920,7 +977,7 @@
     }
   ];
 
-  var WHEEL_ORDER = ['cat', 'dog', 'future'];
+  var WHEEL_ORDER = ['cat', 'dog', 'future', 'bonus'];
 
   var PET_PLANS = {
     cat: {
@@ -1053,6 +1110,64 @@
     });
   }
 
+  var bonusVoucher = null;
+
+  function generatePromoCode(){
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var code = 'NUZZLE10-';
+    for (var i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
+    return code;
+  }
+
+  function addOneMonth(date){
+    var d = new Date(date.getTime());
+    d.setMonth(d.getMonth() + 1);
+    return d;
+  }
+
+  function formatDate(d){
+    return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function renderBonusPanel(){
+    if (!bonusVoucher){
+      var issued = new Date();
+      bonusVoucher = { code: generatePromoCode(), issued: issued, expires: addOneMonth(issued) };
+    }
+    var v = bonusVoucher;
+    var panel = document.getElementById('planPanel');
+    panel.innerHTML =
+      '<div class="plan-card voucher-card">' +
+        '<span class="badge">Bonus</span>' +
+        '<h3>🎁 10% Off Voucher</h3>' +
+        '<p class="tagline">You landed on the bonus wedge — here\'s a one-time code good for 10% off any plan.</p>' +
+        '<div class="voucher-code">' + v.code + '</div>' +
+        '<p class="voucher-meta">Issued ' + formatDate(v.issued) + ' · Valid through <strong>' + formatDate(v.expires) + '</strong> (1 month from issue)</p>' +
+        '<button type="button" class="btn btn-primary">Copy code</button>' +
+      '</div>' +
+      '<button type="button" class="bundle-note">🐾 Have more than one pet? Ask about the Multi-Pet Bundle</button>';
+    panel.querySelector('.btn').addEventListener('click', function(){
+      var code = v.code;
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(code).then(function(){
+          showToast('Code ' + code + ' copied — 10% off any plan through ' + formatDate(v.expires) + '.');
+        }).catch(function(){
+          showToast('Your code: ' + code + ' — 10% off any plan through ' + formatDate(v.expires) + '.');
+        });
+      } else {
+        showToast('Your code: ' + code + ' — 10% off any plan through ' + formatDate(v.expires) + '.');
+      }
+    });
+    panel.querySelector('.bundle-note').addEventListener('click', function(){
+      showToast('Multi-Pet Bundle: mix any 3 NuzzlePal units for $59/mo total — contact support to set it up.');
+    });
+  }
+
+  function renderActivePanel(petKey){
+    if (petKey === 'bonus') renderBonusPanel();
+    else renderPlanPanel(petKey);
+  }
+
   var wheelRotation = 0;
   var activePet = 'cat';
 
@@ -1063,7 +1178,7 @@
   }
 
   function selectPet(petKey, extraTurns){
-    if (!PET_PLANS[petKey]) return;
+    if (WHEEL_ORDER.indexOf(petKey) === -1) return;
     activePet = petKey;
     var wheelEl = document.getElementById('wheel');
     var segAngle = 360 / WHEEL_ORDER.length;
@@ -1080,7 +1195,7 @@
     panel.classList.add('is-swapping');
     clearTimeout(selectPet._t);
     selectPet._t = setTimeout(function(){
-      renderPlanPanel(petKey);
+      renderActivePanel(petKey);
       panel.classList.remove('is-swapping');
     }, 1500);
   }
@@ -1125,29 +1240,69 @@
     'Patrol relocated!', 'Sniffing out a new spot.', 'On my way, hooman!',
     'Recalculating best nap spot.', 'Tail-wag intensifies.'
   ];
+  var CHASE_LINES = { dog: 'Found the pup!', cat: 'Caught up with kitty!' };
+
+  function randomViewportSpot(el){
+    var size = el.offsetWidth || 64;
+    var margin = 16;
+    var maxX = Math.max(margin, window.innerWidth - size - margin);
+    var maxY = Math.max(margin, window.innerHeight - size - margin);
+    return { x: margin + Math.random() * (maxX - margin), y: margin + Math.random() * (maxY - margin), size: size };
+  }
+
+  function hopMascotTo(el, x, y){
+    el.style.right = 'auto';
+    el.style.bottom = 'auto';
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.classList.remove('is-hopping');
+    void el.offsetWidth;
+    el.classList.add('is-hopping');
+  }
+
+  function showBubble(bubble, text){
+    if (!bubble) return;
+    bubble.textContent = text;
+    bubble.classList.add('show');
+    clearTimeout(bubble._hideTimer);
+    bubble._hideTimer = setTimeout(function(){ bubble.classList.remove('show'); }, 1800);
+  }
+
+  function chaseWithBot(targetSpot, kind){
+    var bot = document.getElementById('roamBot');
+    var bubble = document.getElementById('roamBubble');
+    if (!bot) return;
+    clearTimeout(chaseWithBot._t);
+    chaseWithBot._t = setTimeout(function(){
+      var size = bot.offsetWidth || 64;
+      var margin = 16;
+      var angle = Math.random() * Math.PI * 2;
+      var offset = 80;
+      var x = Math.min(Math.max(targetSpot.x + Math.cos(angle) * offset, margin), window.innerWidth - size - margin);
+      var y = Math.min(Math.max(targetSpot.y + Math.sin(angle) * offset, margin), window.innerHeight - size - margin);
+      hopMascotTo(bot, x, y);
+      showBubble(bubble, CHASE_LINES[kind] || 'Found it!');
+    }, 450);
+  }
 
   function initRoamBot(){
     var bot = document.getElementById('roamBot');
     var bubble = document.getElementById('roamBubble');
     if (!bot) return;
     bot.addEventListener('click', function(){
-      var size = bot.offsetWidth || 64;
-      var margin = 16;
-      var maxX = Math.max(margin, window.innerWidth - size - margin);
-      var maxY = Math.max(margin, window.innerHeight - size - margin);
-      var x = margin + Math.random() * (maxX - margin);
-      var y = margin + Math.random() * (maxY - margin);
-      bot.style.right = 'auto';
-      bot.style.bottom = 'auto';
-      bot.style.left = x + 'px';
-      bot.style.top = y + 'px';
-      bot.classList.remove('is-hopping');
-      void bot.offsetWidth;
-      bot.classList.add('is-hopping');
-      bubble.textContent = ROAM_LINES[Math.floor(Math.random() * ROAM_LINES.length)];
-      bubble.classList.add('show');
-      clearTimeout(initRoamBot._t);
-      initRoamBot._t = setTimeout(function(){ bubble.classList.remove('show'); }, 1800);
+      var spot = randomViewportSpot(bot);
+      hopMascotTo(bot, spot.x, spot.y);
+      showBubble(bubble, ROAM_LINES[Math.floor(Math.random() * ROAM_LINES.length)]);
+    });
+  }
+
+  function initRoamCritter(id, kind){
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('click', function(){
+      var spot = randomViewportSpot(el);
+      hopMascotTo(el, spot.x, spot.y);
+      chaseWithBot(spot, kind);
     });
   }
 
@@ -1282,6 +1437,8 @@
     initHeroVideo();
     initWheel();
     initRoamBot();
+    initRoamCritter('roamDog', 'dog');
+    initRoamCritter('roamCat', 'cat');
 
     document.getElementById('modeToggle').addEventListener('click', function(e){
       var btn = e.target.closest('button');
