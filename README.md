@@ -2,7 +2,7 @@
 
 A single self-contained static website for **Nuzzle**, a fictional remote pet-sitting company. Nuzzle's pitch: a live HD camera paired with **NuzzlePal**, a proprietary AI companion robot, so owners can watch, talk to, and play with their cat or dog from anywhere — with the AI keeping pets company in between check-ins.
 
-The whole site — markup, CSS, and JavaScript — lives in one file: `index.html`, plus a flat `images/` folder of photos it references by relative path. There is no build step, no package manager, and no dependencies to install.
+The whole site — markup, CSS, and JavaScript — lives in one file: `index.html`, plus a flat `images/` folder of photos and a `video/` folder holding one looping clip, both referenced by relative path. There is no build step, no package manager, and no dependencies to install.
 
 ## Running it
 
@@ -10,7 +10,7 @@ Open `index.html` directly in a browser, or serve the folder (`python3 -m http.s
 
 ## Features
 
-- **Hero** with a live-camera-style photo treatment and a floating "now playing" status card.
+- **Hero** with a looping floor-level video ("LIVE · NUZZLEPAL CAM") showing a dog walking through a home from a pet-height, following-camera POV, plus a floating "now playing" status card.
 - **Services by species** — separate Cats and Dogs offerings with species-specific hardware/AI behavior, plus a "More friends, coming soon" card (rabbits, birds) with a waitlist button.
 - **Meet NuzzlePal** — an original SVG illustration of the robot device with a live Cat/Dog mode toggle that swaps the visible accessory (laser vs. treat launcher), the status-ring color, and the caption text.
 - **How it works** — a 4-step onboarding explainer.
@@ -33,9 +33,9 @@ Everything is inline in `index.html`, in three blocks in order:
    - The FAQ accordion, mobile nav toggle, sticky-header scroll state, and the toast helper (used by "Choose plan" and "Join the waitlist" buttons) round out the interactivity.
    - Nothing here submits anywhere or persists — plan/waitlist buttons just show a toast, matching the site's status as a demo/portfolio project.
 
-## Image policy
+## Image & video policy
 
-Every photo on this site is a real, freely-licensed photograph sourced from Pexels (Pexels License, free for commercial use) — never an illustration or AI-generated image. See credits below.
+Every photo and video on this site is real, freely-licensed footage sourced from Pexels (Pexels License, free for commercial use) — never an illustration or AI-generated image/video. See credits below.
 
 **One exception**: the NuzzlePal device graphic in the "Meet NuzzlePal" section is an original SVG illustration, not a photo. Since NuzzlePal is a fictional proprietary product, no real photo of it can exist — the illustration is drawn flat-style in the brand palette and redraws its accessory (laser vs. treat launcher) and ring-light color based on the selected Cat/Dog mode.
 
@@ -48,6 +48,7 @@ All photos via [Pexels](https://www.pexels.com), free to use under the [Pexels L
 - `images/dog-portrait.jpg` — Helena Lopes
 - `images/rabbit-portrait.jpg` — cottonbro studio
 - `images/lifestyle-phone.jpg` — Andrea Piacquadio
+- `video/nuzzlepal-cam-loop.mp4` — Erik Mclean ("A white dog walking through a kitchen"), used to simulate NuzzlePal's pet-height following camera on the hero's live-cam loop
 
 ## A note on the AI
 

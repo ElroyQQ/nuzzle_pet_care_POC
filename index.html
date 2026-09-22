@@ -119,7 +119,7 @@
   .hero .lead{font-size:1.15rem;color:var(--ink-700);max-width:46ch;}
   .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
   .hero-figure{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);}
-  .hero-figure img{width:100%;height:520px;object-fit:cover;}
+  .hero-figure img,.hero-figure video{width:100%;height:520px;object-fit:cover;display:block;}
   .hero-badge{
     position:absolute;top:20px;left:20px;background:rgba(27,36,49,.72);color:#fff;
     font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.08em;
@@ -386,13 +386,15 @@
         </div>
       </div>
       <div class="hero-figure">
-        <img src="images/hero-dog.jpg" alt="A dog looking up attentively at the camera, as if watching its owner check in through the Nuzzle app">
+        <video autoplay muted loop playsinline poster="images/hero-dog.jpg" aria-label="Looping floor-level footage of a dog walking through a home, simulating NuzzlePal's pet-height following camera">
+          <source src="video/nuzzlepal-cam-loop.mp4" type="video/mp4">
+        </video>
         <div class="hero-badge"><span class="dot"></span>LIVE · NUZZLEPAL CAM</div>
         <div class="hero-card">
           <div class="avatar">🐾</div>
           <div>
-            <strong>Milo is playing fetch</strong>
-            <span>NuzzlePal · treat launcher active</span>
+            <strong>Milo is exploring the kitchen</strong>
+            <span>NuzzlePal · following at floor level</span>
           </div>
         </div>
       </div>
@@ -684,7 +686,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Nuzzle. A fictional demo brand built for a coding project.</span>
-      <span class="credits">Photos via Pexels (free license): dog by Marcelo Chagas, cat by Vũ Nguyễn, dog portrait by Helena Lopes, rabbit by cottonbro studio, lifestyle photo by Andrea Piacquadio. NuzzlePal illustration is an original graphic, generated for this project.</span>
+      <span class="credits">Photos &amp; video via Pexels (free license): dog by Marcelo Chagas, cat by Vũ Nguyễn, dog portrait by Helena Lopes, rabbit by cottonbro studio, lifestyle photo by Andrea Piacquadio, hero "live cam" video by Erik Mclean. NuzzlePal illustration is an original graphic, generated for this project.</span>
     </div>
   </div>
 </footer>

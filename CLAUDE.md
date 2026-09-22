@@ -18,9 +18,11 @@ Everything is inline in `index.html`:
 2. **Markup** — header/nav, hero, stats bar, feature grid, services grid (cats/dogs/future pets), the NuzzlePal device section, how-it-works steps, an app-preview phone mockup, plans, testimonials, FAQ, closing CTA, footer.
 3. **`<script>`** — a single IIFE, no external JS libraries. `SERVICES`, `PLANS`, `TESTIMONIALS`, `FAQ`, and `PET_MODES` are the data arrays/objects to edit for copy changes. `renderServices`/`renderPlans`/`renderTestimonials`/`renderFaq` build their sections from that data on load. `setPetMode()` drives the Cat/Dog toggle on the NuzzlePal illustration (swaps accessory, ring-light color, caption). `setPhoneTab()` drives the Live/Talk/Insights app mockup. Nothing submits anywhere — "Choose plan" and "Join the waitlist" just show a toast, consistent with this being a demo/portfolio site with no backend.
 
-## Image policy
+## Image & video policy
 
-Every photo on this site must be a real, freely-licensed photograph — never an illustration, drawing, or AI-generated image. Source from Pexels (Pexels License) or another clearly free/CC0 source, and record credits in the footer of `index.html` and in [README.md](README.md#image-credits) when adding new sourced images.
+Every photo and video on this site must be real, freely-licensed footage — never an illustration, drawing, or AI-generated image/video. Source from Pexels (Pexels License) or another clearly free/CC0 source, and record credits in the footer of `index.html` and in [README.md](README.md#image-credits) when adding new sourced images or video.
+
+The hero's "LIVE · NUZZLEPAL CAM" background (`video/nuzzlepal-cam-loop.mp4`) is real Pexels footage of a dog walking through a home at floor level, chosen specifically to read as a pet-height camera following the animal around — not a generated or staged "robot POV" shot. If this is swapped, keep sourcing from real footage with a similar low, following angle rather than a generic dog video, or the "NuzzlePal is watching" framing stops making sense.
 
 **One explicit exception**: the NuzzlePal device graphic in the "Meet NuzzlePal" section (`#deviceSvg`) is an original, hand-built SVG illustration, not a photo. NuzzlePal is a fictional proprietary product, so no real photo of it can exist — this is the site's one intentional carve-out from the photo-only policy, the same way a fictional-product mockup would be illustrated on any real SaaS marketing site. Don't treat this as license to introduce illustrations elsewhere (hero, service cards, testimonials, etc. should stay real photos).
 
