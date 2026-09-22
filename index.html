@@ -245,7 +245,6 @@
   .app-copy .lifestyle-photo img{height:220px;object-fit:cover;width:100%;}
 
   /* Plans */
-  .plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   .plan-card{
     background:var(--card);border-radius:var(--radius-lg);border:1px solid var(--line);padding:32px 28px;
     display:flex;flex-direction:column;gap:16px;position:relative;
@@ -256,11 +255,56 @@
     font-size:.68rem;font-weight:700;padding:5px 12px;border-radius:999px;letter-spacing:.05em;
   }
   .plan-card h3{font-size:1.2rem;margin-bottom:0;}
+  .plan-card .tagline{font-size:.9rem;color:var(--ink-500);margin:-10px 0 0;}
   .plan-card .price{font-family:'Fredoka',sans-serif;font-size:2.1rem;color:var(--navy-700);}
   .plan-card .price span{font-family:'Inter',sans-serif;font-size:.9rem;font-weight:600;color:var(--ink-500);}
   .plan-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;flex:1;}
   .plan-card li{font-size:.88rem;color:var(--ink-700);display:flex;gap:8px;}
   .plan-card li::before{content:"✓";color:var(--sage-500);font-weight:700;}
+
+  /* Wheel of fortune plan picker */
+  .wheel-layout{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;}
+  .wheel-stage{position:relative;width:280px;height:280px;flex-shrink:0;margin:0 auto;}
+  .wheel-pointer{
+    position:absolute;top:-6px;left:50%;transform:translateX(-50%);z-index:3;
+    width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;
+    border-top:22px solid var(--navy-700);filter:drop-shadow(0 3px 3px rgba(0,0,0,.25));
+  }
+  .wheel{
+    width:100%;height:100%;border-radius:50%;position:relative;
+    background:conic-gradient(var(--violet-500) 0deg 120deg, var(--amber-500) 120deg 240deg, var(--sage-500) 240deg 360deg);
+    border:7px solid var(--card);box-shadow:var(--shadow-lg);
+    transition:transform 1.7s cubic-bezier(.13,.79,.23,1);
+    cursor:pointer;
+  }
+  .wheel-label{
+    position:absolute;top:50%;left:50%;font-size:2.1rem;line-height:1;
+    transform:translate(-50%,-50%) rotate(var(--ang)) translateY(-98px) rotate(calc(-1 * var(--ang)));
+    filter:drop-shadow(0 2px 2px rgba(0,0,0,.2));
+  }
+  .wheel-hub{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
+    width:74px;height:74px;border-radius:50%;background:var(--navy-700);color:#fff;border:4px solid var(--card);
+    font-family:'Fredoka',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.02em;cursor:pointer;
+    box-shadow:var(--shadow-md);transition:transform .15s ease;
+  }
+  .wheel-hub:hover{transform:translate(-50%,-50%) scale(1.06);}
+  .wheel-hub:active{transform:translate(-50%,-50%) scale(.95);}
+  .plan-tabs{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap;}
+  .plan-tabs button{
+    font-family:'Inter',sans-serif;font-weight:700;font-size:.88rem;padding:10px 18px;border-radius:999px;
+    border:2px solid var(--line);background:var(--card);color:var(--ink-700);cursor:pointer;transition:all .15s ease;
+    display:inline-flex;align-items:center;gap:7px;
+  }
+  .plan-tabs button[data-pet="cat"].is-active{background:var(--violet-500);border-color:var(--violet-500);color:#fff;}
+  .plan-tabs button[data-pet="dog"].is-active{background:var(--amber-500);border-color:var(--amber-500);color:#fff;}
+  .plan-tabs button[data-pet="future"].is-active{background:var(--sage-500);border-color:var(--sage-500);color:#fff;}
+  .plan-panel{transition:opacity .3s ease, transform .3s ease;}
+  .plan-panel.is-swapping{opacity:0;transform:translateY(8px);}
+  .bundle-note{
+    margin-top:16px;font-size:.85rem;color:var(--ink-500);background:none;border:none;padding:0;
+    text-decoration:underline;text-decoration-style:dotted;cursor:pointer;font-family:'Inter',sans-serif;
+  }
 
   /* Testimonials */
   .testimonials{background:var(--card);}
@@ -312,6 +356,50 @@
   }
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
+  /* Roaming robot mascot */
+  .roam-bot{
+    position:fixed;right:26px;bottom:26px;z-index:600;width:64px;height:64px;padding:0;border:none;
+    background:none;cursor:pointer;transition:left .7s cubic-bezier(.22,1.12,.4,1), top .7s cubic-bezier(.22,1.12,.4,1);
+    filter:drop-shadow(0 10px 16px rgba(27,36,49,.35));
+  }
+  .roam-bot svg{width:100%;height:100%;display:block;}
+  .roam-bot.is-hopping{animation:bot-hop .6s ease;}
+  @keyframes bot-hop{
+    0%{transform:scale(1,1) rotate(0deg);}
+    28%{transform:scale(.82,1.18) rotate(-7deg);}
+    58%{transform:scale(1.1,.9) rotate(5deg);}
+    80%{transform:scale(.96,1.05) rotate(-2deg);}
+    100%{transform:scale(1,1) rotate(0deg);}
+  }
+  .roam-bubble{
+    position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) scale(.85);
+    background:var(--navy-700);color:#fff;padding:8px 13px;border-radius:12px;
+    font-family:'Inter',sans-serif;font-size:.78rem;font-weight:700;white-space:nowrap;
+    opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;
+  }
+  .roam-bubble::after{
+    content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);
+    border:6px solid transparent;border-top-color:var(--navy-700);
+  }
+  .roam-bubble.show{opacity:1;transform:translateX(-50%) scale(1);}
+
+  /* Pet-themed decorative background */
+  body{position:relative;}
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg transform='translate(110,110) rotate(18) translate(-128,-128) scale(0.42)' fill='%231B2A4A' fill-opacity='0.032'%3E%3Cpath d='M136,60a28,28,0,1,1,28,28A28.03146,28.03146,0,0,1,136,60ZM72,108a28,28,0,1,0-28,28A28.03146,28.03146,0,0,0,72,108ZM92,88A28,28,0,1,0,64,60,28.03146,28.03146,0,0,0,92,88Zm95.0918,60.84473a35.3317,35.3317,0,0,1-16.8418-21.124,43.99839,43.99839,0,0,0-84.5-.00439,35.2806,35.2806,0,0,1-16.7998,21.105,40.00718,40.00718,0,0,0,34.57226,72.05176,64.08634,64.08634,0,0,1,48.86524-.03711,40.0067,40.0067,0,0,0,34.7041-71.99121ZM212,80a28,28,0,1,0,28,28A28.03146,28.03146,0,0,0,212,80Z'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat:repeat;
+  }
+  header, main, footer{position:relative;z-index:1;}
+  .critter-deco{position:absolute;pointer-events:none;z-index:0;opacity:.07;}
+  .critter-deco svg{width:100%;height:100%;display:block;}
+  #why{position:relative;overflow:hidden;}
+  #why .wrap{position:relative;z-index:1;}
+  #why .critter-deco{left:-56px;bottom:-40px;width:280px;height:280px;}
+  .testimonials{position:relative;overflow:hidden;}
+  .testimonials .wrap{position:relative;z-index:1;}
+  .testimonials .critter-deco{right:-50px;top:-30px;width:260px;height:260px;}
+
   @media (max-width: 980px){
     .hero .wrap{grid-template-columns:1fr;}
     .hero-figure img,.hero-figure video{height:380px;}
@@ -320,10 +408,11 @@
     .robot-section .wrap{grid-template-columns:1fr;}
     .steps{grid-template-columns:repeat(2,1fr);}
     .app-section .wrap{grid-template-columns:1fr;}
-    .plan-grid{grid-template-columns:1fr;}
     .testimonial-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
     .stats .wrap{grid-template-columns:repeat(2,1fr);}
+    .wheel-layout{grid-template-columns:1fr;justify-items:center;text-align:center;}
+    .plan-tabs{justify-content:center;}
   }
   @media (max-width: 720px){
     .nav-links,.nav-actions .btn-outline{display:none;}
@@ -336,6 +425,9 @@
     section{padding:64px 0;}
     .cta-band{flex-direction:column;text-align:center;margin:0 16px;padding:40px 28px;}
     .footer-grid{grid-template-columns:1fr;}
+    .wheel-stage{width:220px;height:220px;}
+    .wheel-label{font-size:1.7rem;}
+    .roam-bot{width:52px;height:52px;right:16px;bottom:16px;}
   }
 </style>
 </head>
@@ -413,6 +505,32 @@
 
   <!-- WHY NUZZLE -->
   <section id="why">
+    <div class="critter-deco" aria-hidden="true">
+      <svg fill="#1B2A4A" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 217.08 217.08">
+        <g><g>
+          <path d="M119.52,147.708c-4.003,0-12.158,21.664-12.158,46.803c0,22.569,7.324,22.569,12.158,22.569
+            c4.846,0,12.167,0,12.167-22.569C131.687,169.372,123.527,147.708,119.52,147.708z"/>
+          <path d="M62.807,147.708c-4.001,0-12.15,21.664-12.15,46.803c0,22.569,7.317,22.569,12.15,22.569c4.845,0,12.163,0,12.163-22.569
+            C74.969,169.372,66.82,147.708,62.807,147.708z"/>
+          <path d="M182.145,132.339c-9.062-4.416-17.385,20.807-34.191,36.66c0.553-3.795,0.905-7.826,0.905-12.206
+            c0-28.693-12.695-58.311-31.236-73.475c-7.317,9.568-16.472,15.936-26.449,15.936c-9.979,0-19.139-6.376-26.443-15.928
+            C46.198,98.511,33.495,128.1,33.495,156.793c0,17.957,4.979,30.957,13.229,39.926c-0.016-0.773-0.104-1.395-0.104-2.208
+            c0-22.662,7.271-50.858,16.196-50.858c8.958,0,16.206,28.196,16.206,50.858c0,7.83-0.904,13.297-2.426,17.279
+            c4.67,0.806,9.529,1.242,14.562,1.242c5.056,0,9.875-0.521,14.547-1.334c-1.475-3.983-2.396-9.413-2.396-17.188
+            c0-22.662,7.269-50.858,16.204-50.858c8.953,0,16.19,28.196,16.19,50.858c0,4.172-0.305,7.538-0.773,10.535
+            c2.063-0.521,4.448-1.282,7.354-2.316C173.023,191.753,188.6,135.465,182.145,132.339z"/>
+          <path d="M38.624,70.404c3.985,1.074,10.211-7.96,15.689-19.22C59.741,73.851,74.168,95.21,91.166,95.21
+            c17.003,0,31.428-21.368,36.846-44.026c5.49,11.267,11.701,20.294,15.689,19.22c6.944-1.859,4.468-33.544-0.325-51.467
+            c-4.789-17.925-10.118-15.284-17.048-13.433c-1.435,0.385-2.785,0.729-4.055,1.154C115.108,0.058,103.841,0,91.149,0
+            C78.454,0,67.197,0.058,60.028,6.658c-1.252-0.433-2.607-0.777-4.047-1.154c-6.927-1.851-12.255-4.492-17.054,13.433
+            C34.138,36.853,31.697,68.535,38.624,70.404z M103.316,32.743c2.899,0,5.236,3.114,5.236,6.921c0,3.821-2.336,6.929-5.236,6.929
+            c-2.889,0-5.236-3.108-5.236-6.929C98.08,35.84,100.427,32.743,103.316,32.743z M103.316,76.794
+            c0,4.735-5.424,10.646-12.15,10.646c-6.712,0-12.155-5.919-12.155-10.646c0-4.741,5.428-5.559,12.155-5.559
+            C97.892,71.236,103.316,72.062,103.316,76.794z M78.995,32.743c2.897,0,5.251,3.114,5.251,6.921c0,3.821-2.354,6.929-5.251,6.929
+            c-2.879,0-5.222-3.108-5.222-6.929C73.773,35.84,76.116,32.743,78.995,32.743z"/>
+        </g></g>
+      </svg>
+    </div>
     <div class="wrap">
       <div class="section-head center">
         <span class="eyebrow">Why Nuzzle</span>
@@ -598,15 +716,56 @@
     <div class="wrap">
       <div class="section-head center">
         <span class="eyebrow">Plans</span>
-        <h2>Simple pricing, per pet.</h2>
-        <p>Every plan includes a NuzzlePal unit, the app, and unlimited live viewing. Cancel or switch anytime.</p>
+        <h2>Spin to find your pet's plan.</h2>
+        <p>Give it a spin, or just tap a tab — every plan includes a NuzzlePal unit, the app, and unlimited live viewing.</p>
       </div>
-      <div class="plan-grid" id="planGrid"></div>
+      <div class="wheel-layout">
+        <div class="wheel-stage">
+          <div class="wheel-pointer" aria-hidden="true"></div>
+          <div class="wheel" id="wheel" role="img" aria-label="Spinning wheel with Cats, Dogs, and Future Pets sections">
+            <span class="wheel-label" style="--ang:60deg">🐱</span>
+            <span class="wheel-label" style="--ang:180deg">🐶</span>
+            <span class="wheel-label" style="--ang:300deg">🐰</span>
+          </div>
+          <button class="wheel-hub" id="spinBtn" type="button">SPIN</button>
+        </div>
+        <div class="plan-detail">
+          <div class="plan-tabs" id="planTabs">
+            <button type="button" data-pet="cat" class="is-active">🐱 Cats</button>
+            <button type="button" data-pet="dog">🐶 Dogs</button>
+            <button type="button" data-pet="future">🐰 Future Pets</button>
+          </div>
+          <div class="plan-panel" id="planPanel"></div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- TESTIMONIALS -->
   <section class="testimonials">
+    <div class="critter-deco" aria-hidden="true">
+      <svg fill="#1B2A4A" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 413.928 413.928">
+        <g><g>
+          <path d="M244.873,161.937c6.655,0,12.045,5.392,12.045,12.044c0,6.65-5.39,12.04-12.045,12.04c-6.649,0-12.044-5.389-12.044-12.04
+            C232.829,167.328,238.223,161.937,244.873,161.937z"/>
+          <path d="M371.029,339.641c-8.379-15.763-17.871-33.634-17.871-61.678c0-46.918,26.024-63.424,27.084-64.072
+            c3.85-2.278,5.115-7.246,2.837-11.096c-2.283-3.857-7.256-5.121-11.101-2.843c-1.429,0.85-35.021,21.39-35.021,78.011
+            c0,32.083,10.958,52.708,19.76,69.282c6.312,11.865,11.29,21.246,11.29,31.968c0,7.683-1.672,13.23-4.83,16.062
+            c-3.217,2.879-7.42,2.452-7.499,2.452c-0.385-0.058-0.78-0.084-1.171-0.084h-29.815c3.47-5.432,5.516-11.855,5.516-18.769V13.703
+            c0-3.636-2.426-6.827-5.933-7.805c-3.496-0.986-7.225,0.503-9.107,3.615l-39.562,65.485c-12.139-0.231-47.809-0.509-154.588-0.509
+            c-22.673,0-33.895,0.016-39.564,0.056L45.009,4.371c-1.724-3.317-5.508-5.028-9.109-4.137c-3.631,0.886-6.184,4.137-6.184,7.868
+            v370.762c0,19.28,15.681,34.969,34.966,34.969H188.46h106.784h58.82c0.532,0.047,1.286,0.095,2.225,0.095
+            c3.961,0,11.085-0.881,17.36-6.297c7.003-6.054,10.558-15.614,10.558-28.429C384.208,364.452,377.811,352.397,371.029,339.641z
+            M115.041,202.22c-15.572,0-28.242-12.667-28.242-28.239c0-15.575,12.675-28.244,28.242-28.244
+            c15.57,0,28.242,12.669,28.242,28.244C143.283,189.553,130.616,202.22,115.041,202.22z M194.134,234.763h-5.982l-0.654,11.253
+            c-0.248,4.304-3.818,7.631-8.079,7.631c-0.156,0-0.316-0.005-0.475-0.011c-4.464-0.264-7.878-4.097-7.612-8.554l0.599-10.314
+            h-6.146c-4.47,0-8.101-3.623-8.101-8.1c0-4.478,3.631-8.101,8.101-8.101h28.35c4.472,0,8.1,3.623,8.1,8.101
+            C202.234,231.145,198.606,234.763,194.134,234.763z M244.873,202.22c-15.572,0-28.244-12.667-28.244-28.239
+            c0-15.575,12.677-28.244,28.244-28.244c15.578,0,28.255,12.669,28.255,28.244C273.127,189.553,260.451,202.22,244.873,202.22z"/>
+          <circle cx="115.041" cy="173.978" r="12.042"/>
+        </g></g>
+      </svg>
+    </div>
     <div class="wrap">
       <div class="section-head center">
         <span class="eyebrow">From Nuzzle homes</span>
@@ -693,6 +852,22 @@
 
 <div id="toast"></div>
 
+<button type="button" class="roam-bot" id="roamBot" aria-label="NuzzlePal mini — tap to send it scurrying somewhere new on the page">
+  <span class="roam-bubble" id="roamBubble"></span>
+  <svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="40" cy="83" rx="23" ry="5" fill="rgba(0,0,0,.2)"/>
+    <line x1="40" y1="4" x2="40" y2="11" stroke="#FF6F59" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="40" cy="4" r="4" fill="#FF6F59"/>
+    <rect x="13" y="8" width="54" height="58" rx="27" fill="#F4F1EA"/>
+    <circle cx="40" cy="35" r="17" fill="#1B2A4A"/>
+    <circle cx="40" cy="35" r="7.5" fill="#7FD8FF"/>
+    <circle cx="43.5" cy="31" r="2.2" fill="#fff" opacity=".85"/>
+    <rect x="29" y="55" width="22" height="6" rx="3" fill="#C9C2AE"/>
+    <ellipse cx="23" cy="73" rx="9" ry="11" fill="#1B2A4A"/>
+    <ellipse cx="57" cy="73" rx="9" ry="11" fill="#1B2A4A"/>
+  </svg>
+</button>
+
 <script>
 (function(){
 
@@ -745,9 +920,13 @@
     }
   ];
 
-  var PLANS = [
-    {
+  var WHEEL_ORDER = ['cat', 'dog', 'future'];
+
+  var PET_PLANS = {
+    cat: {
+      emoji: '🐱',
       name: 'Cat Plan',
+      tagline: 'Perch-height monitoring with laser play built right in.',
       price: '$29',
       period: '/mo',
       features: [
@@ -755,10 +934,13 @@
         'Unlimited live viewing & two-way talk',
         'Laser play mode + treat dispenser',
         'Daily activity recap'
-      ]
+      ],
+      cta: 'Choose Cat Plan'
     },
-    {
+    dog: {
+      emoji: '🐶',
       name: 'Dog Plan',
+      tagline: 'Wider floor coverage and a treat launcher for big energy.',
       price: '$39',
       period: '/mo',
       featured: true,
@@ -768,20 +950,25 @@
         'Unlimited live viewing & two-way talk',
         'Treat launcher + bark-responsive AI',
         'Daily activity recap + bark alerts'
-      ]
+      ],
+      cta: 'Choose Dog Plan'
     },
-    {
-      name: 'Multi-Pet Bundle',
-      price: '$59',
-      period: '/mo',
+    future: {
+      emoji: '🐰',
+      name: 'Future Pets Plan',
+      tagline: 'Early access for rabbits, birds, and whatever we build next.',
+      price: 'Free',
+      period: 'to join',
+      badge: 'Waitlist',
       features: [
-        'Up to 3 NuzzlePal units, any mix of pets',
-        'Priority AI processing across all units',
-        'Shared household app with multiple logins',
-        'One monthly recap for the whole household'
-      ]
+        'Founding-member pricing locked in at launch',
+        'Priority shipping for your species',
+        'A vote on which pet we support next',
+        'Early beta access before public launch'
+      ],
+      cta: 'Join the Waitlist'
     }
-  ];
+  };
 
   var TESTIMONIALS = [
     { quote: "I check in on Miso between meetings more than I check my email. The laser mode is her favorite part of the day.", name: 'Priya R.', pet: 'Owner of Miso, cat', emoji: '🐱' },
@@ -842,24 +1029,125 @@
     });
   }
 
-  function renderPlans(){
-    var grid = document.getElementById('planGrid');
-    grid.innerHTML = '';
-    PLANS.forEach(function(p){
-      var featuresHtml = p.features.map(function(f){ return '<li>'+f+'</li>'; }).join('');
-      var card = el(
-        '<div class="plan-card'+(p.featured ? ' featured' : '')+'">' +
-          (p.badge ? '<span class="badge">'+p.badge+'</span>' : '') +
-          '<h3>'+p.name+'</h3>' +
-          '<div class="price">'+p.price+'<span>'+p.period+'</span></div>' +
-          '<ul>'+featuresHtml+'</ul>' +
-          '<button class="btn '+(p.featured ? 'btn-primary' : 'btn-outline')+'">Choose '+p.name+'</button>' +
-        '</div>'
-      );
-      card.querySelector('button').addEventListener('click', function(){
-        showToast("You're on the list for the "+p.name+" — check your email to finish setup.");
-      });
-      grid.appendChild(card);
+  function renderPlanPanel(petKey){
+    var p = PET_PLANS[petKey];
+    var panel = document.getElementById('planPanel');
+    var featuresHtml = p.features.map(function(f){ return '<li>'+f+'</li>'; }).join('');
+    panel.innerHTML =
+      '<div class="plan-card'+(p.featured ? ' featured' : '')+'">' +
+        (p.badge ? '<span class="badge">'+p.badge+'</span>' : '') +
+        '<h3>'+p.emoji+' '+p.name+'</h3>' +
+        '<p class="tagline">'+p.tagline+'</p>' +
+        '<div class="price">'+p.price+'<span>'+p.period+'</span></div>' +
+        '<ul>'+featuresHtml+'</ul>' +
+        '<button type="button" class="btn '+(p.featured ? 'btn-primary' : 'btn-outline')+'">'+p.cta+'</button>' +
+      '</div>' +
+      '<button type="button" class="bundle-note">🐾 Have more than one pet? Ask about the Multi-Pet Bundle</button>';
+    panel.querySelector('.btn').addEventListener('click', function(){
+      showToast(petKey === 'future'
+        ? "You're on the Future Pets waitlist — we'll email you when it's ready."
+        : "You're on the list for the "+p.name+" — check your email to finish setup.");
+    });
+    panel.querySelector('.bundle-note').addEventListener('click', function(){
+      showToast('Multi-Pet Bundle: mix any 3 NuzzlePal units for $59/mo total — contact support to set it up.');
+    });
+  }
+
+  var wheelRotation = 0;
+  var activePet = 'cat';
+
+  function updateTabsUI(petKey){
+    document.querySelectorAll('#planTabs button').forEach(function(b){
+      b.classList.toggle('is-active', b.dataset.pet === petKey);
+    });
+  }
+
+  function selectPet(petKey, extraTurns){
+    if (!PET_PLANS[petKey]) return;
+    activePet = petKey;
+    var wheelEl = document.getElementById('wheel');
+    var segAngle = 360 / WHEEL_ORDER.length;
+    var idx = WHEEL_ORDER.indexOf(petKey);
+    var center = idx * segAngle + segAngle / 2;
+    var requiredMod = (360 - center) % 360;
+    var currentMod = ((wheelRotation % 360) + 360) % 360;
+    var delta = (requiredMod - currentMod + 360) % 360;
+    wheelRotation += delta + (extraTurns || 0) * 360;
+    wheelEl.style.transform = 'rotate(' + wheelRotation + 'deg)';
+    updateTabsUI(petKey);
+
+    var panel = document.getElementById('planPanel');
+    panel.classList.add('is-swapping');
+    clearTimeout(selectPet._t);
+    selectPet._t = setTimeout(function(){
+      renderPlanPanel(petKey);
+      panel.classList.remove('is-swapping');
+    }, 1500);
+  }
+
+  function initWheel(){
+    var wheelEl = document.getElementById('wheel');
+    var segAngle0 = 360 / WHEEL_ORDER.length;
+    var idx0 = WHEEL_ORDER.indexOf(activePet);
+    wheelRotation = (360 - (idx0 * segAngle0 + segAngle0 / 2)) % 360;
+    wheelEl.style.transition = 'none';
+    wheelEl.style.transform = 'rotate(' + wheelRotation + 'deg)';
+    void wheelEl.offsetWidth;
+    wheelEl.style.transition = '';
+
+    wheelEl.addEventListener('click', function(e){
+      var rect = wheelEl.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+      var raw = Math.atan2(e.clientY - cy, e.clientX - cx) * 180 / Math.PI;
+      var compass = (raw + 90 + 360) % 360;
+      var currentMod = ((wheelRotation % 360) + 360) % 360;
+      var segAngle = 360 / WHEEL_ORDER.length;
+      var effective = ((compass - currentMod) % 360 + 360) % 360;
+      var idx = Math.floor(effective / segAngle) % WHEEL_ORDER.length;
+      selectPet(WHEEL_ORDER[idx], 1);
+    });
+
+    document.getElementById('spinBtn').addEventListener('click', function(){
+      var choices = WHEEL_ORDER.filter(function(k){ return k !== activePet; });
+      var pick = choices[Math.floor(Math.random() * choices.length)];
+      selectPet(pick, 3 + Math.floor(Math.random() * 2));
+    });
+
+    document.getElementById('planTabs').addEventListener('click', function(e){
+      var btn = e.target.closest('button');
+      if (btn) selectPet(btn.dataset.pet, 1);
+    });
+  }
+
+  var ROAM_LINES = [
+    'Beep boop, fetching treats!', 'Zoomies engaged!', 'Purr-fect landing.',
+    'Patrol relocated!', 'Sniffing out a new spot.', 'On my way, hooman!',
+    'Recalculating best nap spot.', 'Tail-wag intensifies.'
+  ];
+
+  function initRoamBot(){
+    var bot = document.getElementById('roamBot');
+    var bubble = document.getElementById('roamBubble');
+    if (!bot) return;
+    bot.addEventListener('click', function(){
+      var size = bot.offsetWidth || 64;
+      var margin = 16;
+      var maxX = Math.max(margin, window.innerWidth - size - margin);
+      var maxY = Math.max(margin, window.innerHeight - size - margin);
+      var x = margin + Math.random() * (maxX - margin);
+      var y = margin + Math.random() * (maxY - margin);
+      bot.style.right = 'auto';
+      bot.style.bottom = 'auto';
+      bot.style.left = x + 'px';
+      bot.style.top = y + 'px';
+      bot.classList.remove('is-hopping');
+      void bot.offsetWidth;
+      bot.classList.add('is-hopping');
+      bubble.textContent = ROAM_LINES[Math.floor(Math.random() * ROAM_LINES.length)];
+      bubble.classList.add('show');
+      clearTimeout(initRoamBot._t);
+      initRoamBot._t = setTimeout(function(){ bubble.classList.remove('show'); }, 1800);
     });
   }
 
@@ -986,12 +1274,14 @@
 
   function init(){
     renderServices();
-    renderPlans();
+    renderPlanPanel('cat');
     renderTestimonials();
     renderFaq();
     setPetMode('cat');
     initHeader();
     initHeroVideo();
+    initWheel();
+    initRoamBot();
 
     document.getElementById('modeToggle').addEventListener('click', function(e){
       var btn = e.target.closest('button');

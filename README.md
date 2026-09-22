@@ -15,7 +15,9 @@ Open `index.html` directly in a browser, or serve the folder (`python3 -m http.s
 - **Meet NuzzlePal** — an original SVG illustration of the robot device with a live Cat/Dog mode toggle that swaps the visible accessory (laser vs. treat launcher), the status-ring color, and the caption text.
 - **How it works** — a 4-step onboarding explainer.
 - **App mockup** — a CSS-built phone frame with working Live / Talk / Insights tabs that swap the feed photo, badge, and copy.
-- **Plans** — Cat, Dog, and Multi-Pet Bundle pricing cards; "Choose plan" triggers a toast (no real checkout, this is a demo).
+- **Plans wheel** — a spinnable, carnival-style wheel (Cats / Dogs / Future Pets) built with a CSS `conic-gradient`. Spin it, click a wedge directly, or use the plain-text tabs — all three stay in sync and swap a single plan-detail panel below. Includes a Future Pets waitlist plan alongside Cat and Dog pricing, plus a small link to the Multi-Pet Bundle.
+- **Roaming robot mascot** — a small fixed NuzzlePal-style bot in the corner of the page; clicking it hops to a new random spot in the viewport with a bounce animation and a random speech-bubble line.
+- Pet-themed decorative background: a faint site-wide paw-print pattern plus a large dog silhouette watermark in "Why Nuzzle" and a cat silhouette watermark in the testimonials section (see Image & video policy below).
 - **Testimonials** and an **FAQ accordion**, including an explicit, honest FAQ entry on how the AI is trained (see below).
 - Responsive layout with a mobile hamburger nav; sticky, blurred header.
 
@@ -26,18 +28,22 @@ Everything is inline in `index.html`, in three blocks in order:
 1. **`<style>`** — all CSS, using custom properties on `:root` (`--paper`, `--navy-700`, `--coral-500`, `--sage-500`, `--amber-500`, `--violet-500`, etc.) for a warm cream background with navy as the brand/trust color and coral as the CTA color. Cats, dogs, and "future pets" each get their own accent tag color (violet / amber / sage).
 2. **Markup** — header/nav, hero, stats bar, feature grid, services grid, the NuzzlePal device section, how-it-works steps, an app-preview phone mockup, plans, testimonials, FAQ, a closing CTA band, and the footer.
 3. **`<script>`** — a single IIFE containing all interactivity, no external JS libraries:
-   - `SERVICES`, `PLANS`, `TESTIMONIALS`, `FAQ`, and `PET_MODES` are static data arrays/objects near the top — edit these to change copy, pricing, or FAQ content.
-   - `renderServices`, `renderPlans`, `renderTestimonials`, `renderFaq` build their DOM section from the data above; there's no framework, so these fully render their target element once on load.
+   - `SERVICES`, `PET_PLANS` (keyed `cat`/`dog`/`future`), `WHEEL_ORDER`, `TESTIMONIALS`, `FAQ`, `PET_MODES`, and `ROAM_LINES` are static data near the top — edit these to change copy, pricing, wheel order, or FAQ content.
+   - `renderServices`, `renderPlanPanel`, `renderTestimonials`, `renderFaq` build their DOM section from the data above; there's no framework, so these fully render their target element once on load (`renderPlanPanel` re-renders on every wheel/tab selection instead).
+   - `selectPet(petKey, extraTurns)` is the single source of truth for the plans wheel: it computes the rotation needed to land the wheel on `petKey` (adding `extraTurns` full spins for flourish), updates the tab buttons, and swaps the plan panel after the CSS transition finishes. `initWheel()` wires the wheel's own click (using `Math.atan2` on the click point to figure out which wedge was clicked, compensated for the wheel's current rotation), the SPIN button (random pet, 3–4 extra turns), and the tab buttons to all call `selectPet`.
+   - `initRoamBot()` wires the corner robot's click handler: picks a random in-viewport position, moves the button there via a CSS `left`/`top` transition, replays the `bot-hop` keyframe animation, and shows a random line from `ROAM_LINES` in a speech bubble.
    - `setPetMode('cat' | 'dog')` toggles the NuzzlePal illustration's visible accessory, ring-light color, and caption.
    - `setPhoneTab('live' | 'talk' | 'insights')` swaps the phone mockup's feed image, badge, and copy.
-   - The FAQ accordion, mobile nav toggle, sticky-header scroll state, and the toast helper (used by "Choose plan" and "Join the waitlist" buttons) round out the interactivity.
+   - The FAQ accordion, mobile nav toggle, sticky-header scroll state, and the toast helper (used by "Choose plan," "Join the Waitlist," and the bundle note) round out the interactivity.
    - Nothing here submits anywhere or persists — plan/waitlist buttons just show a toast, matching the site's status as a demo/portfolio project.
 
 ## Image & video policy
 
-Every photo and video on this site is real, freely-licensed footage sourced from Pexels (Pexels License, free for commercial use) — never an illustration or AI-generated image/video. See credits below.
+Every *subject* photo and video on this site (dogs, cats, rabbits, people) is real, freely-licensed footage sourced from Pexels (Pexels License, free for commercial use) — never an illustration or AI-generated image/video. See credits below.
 
-**One exception**: the NuzzlePal device graphic in the "Meet NuzzlePal" section is an original SVG illustration, not a photo. Since NuzzlePal is a fictional proprietary product, no real photo of it can exist — the illustration is drawn flat-style in the brand palette and redraws its accessory (laser vs. treat launcher) and ring-light color based on the selected Cat/Dog mode.
+**Two explicit exceptions**, both flat, single-color decorative/iconographic work rather than photorealistic subject illustration:
+1. The NuzzlePal device graphic in the "Meet NuzzlePal" section is an original SVG illustration, not a photo. Since NuzzlePal is a fictional proprietary product, no real photo of it can exist — the illustration is drawn flat-style in the brand palette and redraws its accessory (laser vs. treat launcher) and ring-light color based on the selected Cat/Dog mode. The small roaming robot mascot (`#roamBot`, near the end of `<body>`) reuses the same visual language at a smaller scale.
+2. The pet-themed background decoration — a repeating paw-print pattern (`body::before`) and the large dog/cat silhouette watermarks in the "Why Nuzzle" and testimonials sections (`.critter-deco`) — uses CC0-licensed flat SVG icons from SVG Repo (see credits below), recolored to the brand navy at low opacity. This is a deliberate, requested exception to the photo-only policy for site-wide decorative theming; it should stay confined to low-opacity background texture, not become new photo-replacement content elsewhere.
 
 ## Image credits
 
@@ -49,6 +55,13 @@ All photos via [Pexels](https://www.pexels.com), free to use under the [Pexels L
 - `images/rabbit-portrait.jpg` — cottonbro studio
 - `images/lifestyle-phone.jpg` — Andrea Piacquadio
 - `video/nuzzlepal-cam-loop.mp4` — Erik Mclean ("A white dog walking through a kitchen"), used to simulate NuzzlePal's pet-height following camera on the hero's live-cam loop
+
+Decorative background icons via [SVG Repo](https://www.svgrepo.com), CC0 License (public domain, no attribution required, credited here anyway):
+- Paw-print pattern (`body::before`) — "Paw Print Fill," SVG Repo
+- Dog silhouette watermark (`#why .critter-deco`) — "Dog Silhouette In A Sitting Position," SVG Repo
+- Cat silhouette watermark (`.testimonials .critter-deco`) — "Cat In Black Silhouette," SVG Repo
+
+Source files for these three are also kept at `images/deco/*.svg` for reference, even though the page embeds them inline (recolored) rather than loading the files directly.
 
 ## A note on the AI
 
