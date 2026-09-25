@@ -1,0 +1,108 @@
+{
+  "title": "Compare plans: choose the layout",
+  "question": "Nuzzle's dark violet look stays the same on every card. What you're choosing is how the page is laid out. Keep the lead card, pick another one, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Coverage Map",
+      "kicker": "THE ROLL",
+      "lineage": "A home floor plan seen from above, like a robot vacuum's map",
+      "thesis": "Draw what each option actually covers: a treat-cam's fixed view cone next to NuzzlePal's patrol path through the same flat.",
+      "palette": ["#06040F", "#120F2E", "#8B5CF6", "#FF4FD8", "#4F8CFF", "#4FFFB0"],
+      "materials": ["glowing floor-plan linework", "violet hairlines", "patrol paths in each species' color"],
+      "viewport": "A large top-down plan of a one-bedroom flat fills the first screen. Switch between Treat-cam, Cat and Dog above it: the treat-cam lights up one cone, the Cat plan traces perch-height loops, the Dog plan sweeps the floor. Price and a Choose button sit beside the map.",
+      "risk": "If the plan is drawn too literally it reads as an architecture tool, so the linework has to stay light and part of the brand.",
+      "raised": [
+        {"from": "Sticker album spread", "raise": "Below the map, the comparison grid shows every feature the treat-cam lacks as a ghosted, dashed empty slot, so what's missing is visible instead of an ✕."}
+      ],
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "nav", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "headline + switch", "x": 0, "y": 1, "w": 4, "h": 3},
+        {"label": "floor-plan coverage map", "x": 4, "y": 1, "w": 8, "h": 5, "accent": true},
+        {"label": "price + CTA", "x": 0, "y": 4, "w": 4, "h": 2},
+        {"label": "grid with empty-slot gaps", "x": 0, "y": 6, "w": 12, "h": 3},
+        {"label": "billing FAQ + close", "x": 0, "y": 9, "w": 12, "h": 1}
+      ]}
+    },
+    {
+      "id": "scenarios",
+      "label": "The 2 p.m. Moments",
+      "lineage": "Incident cards from a pet owner's day",
+      "thesis": "Compare through the moments that make owners worry: a thunderstorm, a bark streak, zoomies at 2 a.m. Each shows what a treat-cam does and what NuzzlePal does.",
+      "palette": ["#06040F", "#120F2E", "#8B5CF6", "#FF4FD8", "#4F8CFF", "#FFD24F"],
+      "materials": ["timestamped camera-feed frames", "a LIVE chip", "glass cards"],
+      "viewport": "A row of large timestamped cards, each a real pet photo framed like a camera feed. Tap one to flip it from 'Treat-cam: records it' to 'NuzzlePal: responds'. Plans and prices sit in a sticky bar below.",
+      "risk": "Scenario copy can drift into claims, so every response has to match features already on the site.",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "nav", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "headline", "x": 0, "y": 1, "w": 12, "h": 2},
+        {"label": "moment card", "x": 0, "y": 3, "w": 4, "h": 4, "accent": true},
+        {"label": "moment card", "x": 4, "y": 3, "w": 4, "h": 4, "accent": true},
+        {"label": "moment card", "x": 8, "y": 3, "w": 4, "h": 4, "accent": true},
+        {"label": "sticky plan bar", "x": 0, "y": 7, "w": 12, "h": 1},
+        {"label": "full matrix", "x": 0, "y": 8, "w": 12, "h": 2}
+      ]}
+    },
+    {
+      "id": "splitfeed",
+      "label": "Twin Feeds",
+      "lineage": "Two camera monitors side by side",
+      "thesis": "Two feeds of the same afternoon, one passive and one NuzzlePal. As you scroll, both play through the same events and only one of them reacts.",
+      "palette": ["#06040F", "#0A0818", "#8B5CF6", "#FF4FD8", "#4F8CFF"],
+      "materials": ["hero cam video", "REC and timecode overlays", "event log ticker"],
+      "viewport": "Two monitor frames split the screen. The left is a static wide shot tagged TREAT-CAM, the right uses the hero cam video tagged NUZZLEPAL. A shared timecode runs above, and each feed logs its own events below.",
+      "risk": "Uses the hero video a second time, and scrolling that controls playback needs careful fallbacks on mobile.",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "nav", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "shared timecode", "x": 0, "y": 1, "w": 12, "h": 1},
+        {"label": "treat-cam feed", "x": 0, "y": 2, "w": 6, "h": 4},
+        {"label": "NuzzlePal feed", "x": 6, "y": 2, "w": 6, "h": 4, "accent": true},
+        {"label": "event log", "x": 0, "y": 6, "w": 6, "h": 1},
+        {"label": "event log", "x": 6, "y": 6, "w": 6, "h": 1},
+        {"label": "plan columns + CTA", "x": 0, "y": 7, "w": 12, "h": 3}
+      ]}
+    },
+    {
+      "id": "challenger-album",
+      "label": "Sticker album spread",
+      "verdict": "declined",
+      "lineage": "Collector sticker albums",
+      "thesis": "Every feature is a numbered slot, and an empty slot shows its ghosted outline.",
+      "palette": ["#F2EDE0", "#1B1B1B", "#E8452C"],
+      "materials": ["matte album paper", "glossy stickers"],
+      "viewport": "A grid of numbered slots on an album spread.",
+      "case": "Loses both tests: the paper-and-gloss look would replace Nuzzle's settled identity, and slots hide prices.",
+      "risk": "A costume that fights the dark cosmic world.",
+      "kept": "Empty ghost slots that show what's missing, now in the lead card's grid."
+    },
+    {
+      "id": "challenger-brick",
+      "label": "Brick build instructions",
+      "verdict": "declined",
+      "lineage": "Toy-brick instruction booklets",
+      "thesis": "Numbered exploded steps with wordless arrows.",
+      "palette": ["#7FB8E6", "#111111", "#D0312D", "#F5C518"],
+      "materials": ["sky-blue pages", "keyline ink"],
+      "viewport": "Step numbers building up a plan.",
+      "case": "Loses both tests: comparison isn't assembly, and owners wouldn't recognize themselves in it.",
+      "risk": "Reads like a toy.",
+      "kept": "One strict spacing grid aligns the map, grid and plan columns."
+    },
+    {
+      "id": "challenger-nixie",
+      "label": "Nixie-tube counter",
+      "verdict": "declined",
+      "lineage": "Laboratory counters",
+      "thesis": "Numbers glowing inside glass tubes.",
+      "palette": ["#0B0B0B", "#FF7A1A", "#8A8F96"],
+      "materials": ["glass envelopes", "steel chassis"],
+      "viewport": "Prices shown in tube banks.",
+      "case": "Loses both tests: a warm orange world clashes with the violet brand, and prices are too few to carry it.",
+      "risk": "Nostalgia gimmick.",
+      "kept": "Prices change as a single cross-fade when you switch plans, with no count-up."
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code", "toggle": false},
+  "steer": true
+}

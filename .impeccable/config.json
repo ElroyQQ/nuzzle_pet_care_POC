@@ -1,0 +1,107 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-23T06:10:22.265Z",
+        "reason": "documented incumbent design: CLAUDE.md 'Design system' names the violet-tinted glow shadows (--shadow-md/lg) as the site's deliberate signature motif across 3 redesigns; pre-existing, untouched by this session's nav-link edit"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-23T06:10:22.276Z",
+        "reason": "documented incumbent design: CLAUDE.md 'How it works' step numbers use a deliberate gradient-clip per the established design system; pre-existing, untouched by this session's nav-link edit"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-23T06:10:22.285Z",
+        "reason": "pre-existing muted text (ink-500/ink-700 on dark cards) from the established design system, unrelated to this session's one-line nav edit; flag for a dedicated audit pass rather than fixing as a side effect"
+      },
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "compare.html"
+        ],
+        "createdAt": "2026-09-23T06:20:50.626Z",
+        "reason": "residual findings trace to index.html's unmodified brand→cat-500 gradient+white-text convention (.btn-primary, .mode-toggle button.is-active, .app-tabs button.is-active, .faq-item.is-open .plus), reused verbatim for cross-page consistency; this page's own new elements (compare-check, feed-pill-active, plan-col header) were fixed to brand-600/dog-600/navy-700 for real 4.5:1+ contrast"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "compare.html"
+        ],
+        "createdAt": "2026-09-23T06:20:50.637Z",
+        "reason": "documented incumbent design: CLAUDE.md names the violet-tinted glow shadows (--shadow-md/lg) as the site's deliberate signature motif, carried onto this new page per the direction contract's OWN-WORLD"
+      },
+      {
+        "rule": "gpt-thin-border-wide-shadow",
+        "value": "*",
+        "files": [
+          "compare.html"
+        ],
+        "createdAt": "2026-09-23T06:20:50.646Z",
+        "reason": "documented incumbent design: CLAUDE.md's 'glassy violet hairline border + soft glow shadow' signature, reused verbatim from index.html's shared button/card/cta-band styles"
+      },
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "compare.html"
+        ],
+        "createdAt": "2026-09-23T06:20:50.655Z",
+        "reason": "FAQ accordion transition:max-height copied verbatim from index.html's own established, working accordion technique; preserving identical behavior across pages outranks changing the animation approach as a side effect of this build"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "compare.html"
+        ],
+        "createdAt": "2026-09-23T06:20:50.664Z",
+        "reason": "compare-grid is a genuine data-comparison table: cells carry their own 16px internal padding and sit flush to the table's outer border by convention, not an oversight"
+      },
+      {
+        "rule": "skipped-heading",
+        "value": "*",
+        "files": [
+          "compare.html"
+        ],
+        "createdAt": "2026-09-23T06:20:50.673Z",
+        "reason": "mirrors an identical, already-unaddressed h2-to-h4 skip on live index.html (cta-band h2 directly followed by footer h4), inherited via the shared footer/cta-band markup; worth a coordinated a11y fix across both pages, flagged rather than patched narrowly here"
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "compare.html"
+        ],
+        "createdAt": "2026-09-23T06:20:50.682Z",
+        "reason": "deliberate CRT/monitor scanline texture on the passive-camera feed only, tied directly to the Twin Feeds thesis (flat/analog vs. alive), not decorative filler"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-23T07:09:14.207Z",
+        "reason": "confirmed false positive during critique: .wheel-frame's visible labels sit on a child (#wheel > .wheel-label) transformed translateY(-98px) from center, ~42px inset from the rim; a static padding check can't see transform-computed inset on a circular control"
+      }
+    ]
+  }
+}

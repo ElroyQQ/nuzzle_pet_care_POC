@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuzzle — Compare Plans</title>
+<meta name="description" content="Watch a typical treat-cam next to NuzzlePal on the same afternoon, then compare Cat, Dog, and Future Pets plans feature by feature.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#06040F;
+    --card:#120F2E;
+    --card-2:#1A1640;
+    --ink-900:#F5F2FF;
+    --ink-700:#C6BFE8;
+    --ink-500:#8B82B8;
+    --navy-700:#0A0818;
+    --navy-600:#000000;
+    --navy-100:#1E1A47;
+    --brand-500:#8B5CF6;
+    --brand-600:#7C3AED;
+    --brand-100:rgba(139,92,246,.18);
+    --cat-500:#FF4FD8;
+    --cat-100:rgba(255,79,216,.18);
+    --dog-500:#4F8CFF;
+    --dog-100:rgba(79,140,255,.18);
+    --future-500:#4FFFB0;
+    --future-100:rgba(79,255,176,.18);
+    --bonus-500:#FFD24F;
+    --bonus-100:rgba(255,210,79,.18);
+    --line:rgba(160,140,255,.25);
+    --line-strong:rgba(197,177,255,.55);
+    --border-w:1.5px;
+    --shadow-md:0 10px 30px -8px rgba(139,92,246,.35);
+    --shadow-lg:0 24px 70px -16px rgba(139,92,246,.5);
+    --radius-lg:26px;
+    --radius-md:16px;
+    --radius-sm:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink-900);
+    font-family:'Manrope',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  h1,h2,h3,h4{
+    font-family:'Sora',sans-serif;
+    font-weight:600;
+    line-height:1.15;
+    letter-spacing:-.01em;
+    margin:0 0 .5em;
+    color:var(--ink-900);
+  }
+  p{margin:0 0 1em;}
+  a{color:inherit;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  section{padding:100px 0;position:relative;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5em;
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:.92rem;
+    padding:14px 28px;border-radius:999px;border:var(--border-w) solid transparent;
+    cursor:pointer;text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn-primary{background:linear-gradient(135deg,var(--brand-500),var(--cat-500));color:#fff;box-shadow:var(--shadow-md);}
+  .btn-primary:hover{box-shadow:var(--shadow-lg);}
+  .btn-outline{background:rgba(255,255,255,.03);border-color:var(--line-strong);color:var(--ink-900);}
+  .btn-outline:hover{background:var(--card-2);border-color:var(--brand-500);}
+  .btn-ghost{background:var(--card);color:var(--ink-900);border-color:var(--line);}
+  .btn-ghost:hover{background:var(--card-2);}
+  .btn-sm{padding:10px 20px;font-size:.82rem;}
+  .pill{
+    font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;
+    padding:5px 12px;border-radius:999px;border:1px solid transparent;display:inline-block;
+  }
+
+  /* Header */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(6,4,15,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  header.is-scrolled{box-shadow:0 12px 40px -20px rgba(139,92,246,.6);border-color:var(--line-strong);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1180px;margin:0 auto;}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+  .logo-mark{width:38px;height:38px;flex-shrink:0;border-radius:50%;box-shadow:0 0 0 1px var(--line-strong), 0 0 16px -2px var(--brand-500);}
+  .logo-word{font-family:'Sora',sans-serif;font-weight:700;font-size:1.25rem;color:var(--ink-900);}
+  .nav-links{display:flex;align-items:center;gap:30px;list-style:none;margin:0;padding:0;}
+  .nav-links a{text-decoration:none;font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-700);transition:color .15s ease;}
+  .nav-links a:hover{color:var(--ink-900);}
+  .nav-links a[aria-current="page"]{color:var(--ink-900);}
+  .nav-actions{display:flex;align-items:center;gap:14px;}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
+  .nav-toggle span{display:block;width:24px;height:2px;background:var(--ink-900);margin:5px 0;transition:transform .2s ease, opacity .2s ease;}
+
+  /* Hero */
+  .hero{padding:64px 0 90px;overflow:hidden;}
+  .hero::before{
+    content:"";position:absolute;left:50%;top:128%;transform:translateX(-50%) scale(1);
+    width:1500px;height:1500px;border-radius:50%;pointer-events:none;z-index:0;
+    background:radial-gradient(circle at 50% 50%, transparent 54%, rgba(139,92,246,.5) 56%, rgba(255,79,216,.22) 61%, transparent 68%);
+    filter:blur(50px);
+    animation:nebula-breathe 14s cubic-bezier(.45,0,.55,1) infinite;
+  }
+  @keyframes nebula-breathe{
+    0%,100%{opacity:.85;transform:translateX(-50%) scale(1);}
+    50%{opacity:1;transform:translateX(-50%) scale(1.07);}
+  }
+  .hero h1{font-size:3.4rem;letter-spacing:-.02em;font-weight:600;}
+  .hero .lead{font-size:1.1rem;color:var(--ink-700);max-width:46ch;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+
+  /* Section heading */
+  .section-head{max-width:620px;margin:0 0 48px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head h2{font-size:2.3rem;}
+  .section-head p{color:var(--ink-700);font-size:1.05rem;font-family:'Manrope',sans-serif;}
+
+  /* Pill-style toggle (reused for the species switch) */
+  .mode-toggle{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:28px;}
+  .mode-toggle button{
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:.85rem;border:none;background:transparent;
+    color:var(--ink-700);padding:9px 22px;border-radius:999px;cursor:pointer;transition:background .15s ease,color .15s ease;
+  }
+  .mode-toggle button.is-active{background:linear-gradient(135deg,var(--brand-500),var(--cat-500));color:#fff;}
+
+  /* Pill-style tabs (reused for the moment picker) */
+  .app-tabs{display:flex;gap:10px;margin-bottom:22px;}
+  .app-tabs button{
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;padding:9px 18px;border-radius:999px;
+    border:1px solid var(--line);background:var(--navy-700);color:var(--ink-700);cursor:pointer;transition:all .15s ease;
+  }
+  .app-tabs button.is-active{background:linear-gradient(135deg,var(--brand-500),var(--cat-500));border-color:transparent;color:#fff;}
+
+  /* FAQ */
+  .faq-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:12px;position:relative;z-index:1;}
+  .faq-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;transition:border-color .2s ease;}
+  .faq-item.is-open{border-color:var(--line-strong);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;padding:20px 22px;font-family:'Manrope',sans-serif;
+    font-weight:700;font-size:.98rem;color:var(--ink-900);cursor:pointer;display:flex;justify-content:space-between;
+    align-items:center;gap:16px;
+  }
+  .faq-q .plus{font-size:1.3rem;color:var(--ink-700);background:var(--navy-700);border:1px solid var(--line);border-radius:50%;width:26px;height:26px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;transition:transform .2s ease, background .2s ease, color .2s ease;}
+  .faq-item.is-open .faq-q .plus{transform:rotate(45deg);background:linear-gradient(135deg,var(--brand-500),var(--cat-500));color:#fff;border-color:transparent;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .faq-a p{padding:0 22px 20px;font-size:.92rem;color:var(--ink-700);margin:0;}
+
+  /* Final CTA */
+  .cta-band{
+    background:linear-gradient(135deg,var(--navy-700),var(--card) 60%,var(--navy-700));color:#fff;border-radius:var(--radius-lg);border:1px solid var(--line-strong);
+    padding:60px;display:flex;justify-content:space-between;align-items:center;gap:32px;margin:0 24px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;
+  }
+  .cta-band::before{
+    content:"";position:absolute;left:50%;bottom:-60%;transform:translateX(-50%);
+    width:900px;height:900px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle at 50% 50%, transparent 56%, rgba(139,92,246,.4) 58%, transparent 66%);
+    filter:blur(40px);
+  }
+  .cta-band h2{color:#fff;margin-bottom:.3em;position:relative;}
+  .cta-band p{color:rgba(255,255,255,.68);margin:0;max-width:46ch;position:relative;}
+  .cta-band .btn{position:relative;}
+
+  /* Footer */
+  footer{padding:70px 0 30px;border-top:1px solid var(--line);margin-top:40px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:48px;}
+  .footer-brand p{color:var(--ink-500);font-size:.88rem;max-width:32ch;}
+  .footer-col h4{font-family:'Space Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-700);margin-bottom:14px;}
+  .footer-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .footer-col a{text-decoration:none;font-size:.9rem;color:var(--ink-700);}
+  .footer-col a:hover{color:var(--brand-500);}
+  .footer-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.78rem;color:var(--ink-500);}
+  .footer-bottom .credits{max-width:60ch;}
+
+  /* Toast */
+  #toast{
+    position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--card);color:var(--ink-900);padding:14px 22px;border-radius:999px;border:1px solid var(--line-strong);font-size:.88rem;font-weight:700;font-family:'Manrope',sans-serif;
+    box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;z-index:1000;
+  }
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  /* Pet-themed decorative background (matches index.html) */
+  body{position:relative;}
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20% 30%, rgba(245,242,255,.5), transparent),
+      radial-gradient(1.5px 1.5px at 70% 60%, rgba(245,242,255,.4), transparent),
+      radial-gradient(1px 1px at 40% 80%, rgba(245,242,255,.35), transparent),
+      radial-gradient(1px 1px at 85% 20%, rgba(245,242,255,.4), transparent),
+      radial-gradient(1.5px 1.5px at 55% 45%, rgba(245,242,255,.3), transparent),
+      radial-gradient(1px 1px at 10% 65%, rgba(245,242,255,.35), transparent),
+      radial-gradient(1px 1px at 92% 85%, rgba(245,242,255,.3), transparent),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg transform='translate(110,110) rotate(18) translate(-128,-128) scale(0.42)' fill='%23B49CDB' fill-opacity='0.05'%3E%3Cpath d='M136,60a28,28,0,1,1,28,28A28.03146,28.03146,0,0,1,136,60ZM72,108a28,28,0,1,0-28,28A28.03146,28.03146,0,0,0,72,108ZM92,88A28,28,0,1,0,64,60,28.03146,28.03146,0,0,0,92,88Zm95.0918,60.84473a35.3317,35.3317,0,0,1-16.8418-21.124,43.99839,43.99839,0,0,0-84.5-.00439,35.2806,35.2806,0,0,1-16.7998,21.105,40.00718,40.00718,0,0,0,34.57226,72.05176,64.08634,64.08634,0,0,1,48.86524-.03711,40.0067,40.0067,0,0,0,34.7041-71.99121ZM212,80a28,28,0,1,0,28,28A28.03146,28.03146,0,0,0,212,80Z'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:auto, auto, auto, auto, auto, auto, auto, 220px 220px;
+    background-repeat:no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat;
+  }
+  main, footer{position:relative;z-index:1;}
+
+  @media (max-width: 980px){
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width: 720px){
+    .nav-links,.nav-actions .btn-outline{display:none;}
+    .nav-toggle{display:block;}
+    header.nav-open .nav-links{
+      display:flex;position:absolute;top:100%;left:0;right:0;background:var(--paper);
+      flex-direction:column;padding:20px 24px;border-bottom:1px solid var(--line-strong);gap:18px;
+    }
+    section{padding:64px 0;}
+    .cta-band{flex-direction:column;text-align:center;margin:0 16px;padding:40px 28px;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+
+  /* ===== Compare page — Twin Feeds ===== */
+
+  :root{
+    /* A darker dog-blue for small white-on-color text, mirroring --brand-600 */
+    --dog-600:#2E64D6;
+  }
+
+  /* Browser surfaces: theme what we didn't draw */
+  ::selection{background:var(--brand-500);color:#fff;}
+  :focus-visible{outline:2px solid var(--brand-500);outline-offset:3px;border-radius:4px;}
+
+  /* Hero */
+  .compare-hero{padding:60px 0 56px;}
+  .compare-hero .wrap{display:block;max-width:760px;position:relative;z-index:1;}
+  .compare-hero h1{font-size:2.7rem;letter-spacing:-.02em;}
+  .compare-hero .lead{font-size:1.08rem;color:var(--ink-700);max-width:56ch;margin-bottom:26px;}
+  .compare-hero .hero-ctas{margin-top:0;}
+
+  /* Moment picker (extends .app-tabs) */
+  .moment-tabs{flex-wrap:wrap;margin-bottom:0;}
+  .moment-tabs button{
+    display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;padding:10px 18px;
+  }
+  .moment-tabs button .time{
+    font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.04em;opacity:.7;font-variant-numeric:tabular-nums;
+  }
+  .moment-tabs button.is-active .time{opacity:1;}
+
+  .feeds-section{padding-top:20px;}
+  .feeds-section .section-head{margin-bottom:26px;}
+
+  /* Twin monitors */
+  .feed-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px;position:relative;z-index:1;}
+  .feed-frame{
+    border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line-strong);
+    box-shadow:var(--shadow-md);position:relative;background:var(--navy-700);
+  }
+  .feed-frame .pill{position:absolute;top:16px;left:16px;z-index:3;}
+  .feed-timestamp{
+    position:absolute;top:16px;right:16px;z-index:3;font-family:'Space Mono',monospace;font-size:.72rem;
+    color:rgba(255,255,255,.8);background:rgba(6,4,15,.5);backdrop-filter:blur(4px);padding:5px 10px;
+    border-radius:999px;font-variant-numeric:tabular-nums;letter-spacing:.03em;
+  }
+  .feed-media{position:relative;height:360px;overflow:hidden;background:#000;}
+  .feed-media img,.feed-media video{
+    width:100%;height:100%;object-fit:cover;display:block;
+    transition:opacity .32s cubic-bezier(.22,1,.36,1);
+  }
+  .feed-media.is-changing img,.feed-media.is-changing video{opacity:0;}
+  .feed-frame.passive .feed-media img{filter:grayscale(1) brightness(.7) contrast(1.1);}
+  .feed-frame.passive .feed-media::before{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0px, rgba(255,255,255,.035) 1px, transparent 1px, transparent 3px);
+    mix-blend-mode:overlay;
+  }
+  .feed-rec{
+    position:absolute;bottom:14px;right:16px;z-index:2;font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;
+    color:rgba(255,255,255,.65);letter-spacing:.06em;background:rgba(0,0,0,.4);padding:4px 9px;border-radius:4px;
+    display:flex;align-items:center;gap:6px;
+  }
+  .feed-rec .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55);}
+  .feed-pill-passive{background:rgba(255,255,255,.08);color:var(--ink-500);border-color:var(--line);}
+  .feed-pill-active{background:var(--brand-600);color:#fff;border-color:transparent;}
+  .feed-ring{
+    position:absolute;inset:0;pointer-events:none;z-index:2;border-radius:inherit;
+    box-shadow:inset 0 0 0 3px rgba(139,92,246,.3);animation:feed-pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes feed-pulse{
+    0%,100%{box-shadow:inset 0 0 0 3px rgba(139,92,246,.22);}
+    50%{box-shadow:inset 0 0 0 3px rgba(255,79,216,.4);}
+  }
+  .feed-caption{padding:16px 18px;font-size:.9rem;color:var(--ink-700);margin:0;min-height:3.6em;}
+  .feed-frame.active .feed-caption{color:var(--ink-900);}
+
+  .feed-logs{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:16px;position:relative;z-index:1;}
+  .feed-log{
+    font-family:'Space Mono',monospace;font-size:.78rem;color:var(--ink-500);padding:0 6px;
+    border-left:1px solid var(--line);padding-left:14px;font-variant-numeric:tabular-nums;
+  }
+  .feed-log.is-active{color:var(--ink-700);border-left-color:var(--line-strong);}
+  .feed-log strong{color:inherit;font-weight:700;}
+
+  .feed-disclaimer{font-size:.8rem;color:var(--ink-500);margin:20px 0 0;text-align:center;position:relative;z-index:1;}
+
+  /* Comparison grid */
+  .comparison-section .section-head{margin-left:auto;margin-right:auto;text-align:center;}
+  .compare-grid-wrap{overflow-x:auto;position:relative;z-index:1;}
+  .compare-grid{
+    display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;
+    border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:var(--navy-700);
+  }
+  .compare-row{display:contents;}
+  .compare-cell{
+    padding:16px;display:flex;align-items:center;justify-content:center;text-align:center;
+    border-bottom:1px solid var(--line);font-size:.9rem;color:var(--ink-700);
+  }
+  .compare-cell.label{justify-content:flex-start;text-align:left;color:var(--ink-900);font-weight:600;}
+  .compare-head .compare-cell{
+    background:var(--card);font-family:'Space Mono',monospace;font-size:.7rem;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--ink-500);border-bottom:1px solid var(--line-strong);
+  }
+  .compare-head .compare-cell.plan-col{
+    background:var(--dog-600);color:#fff;
+    font-family:'Sora',sans-serif;text-transform:none;letter-spacing:0;font-weight:700;font-size:.92rem;
+  }
+  .compare-grid[data-species="cat"] .compare-head .compare-cell.plan-col{background:var(--cat-500);color:var(--navy-700);}
+  .compare-row:last-child .compare-cell{border-bottom:none;}
+  .compare-check{
+    width:28px;height:28px;border-radius:50%;flex-shrink:0;
+    background:var(--brand-600);color:#fff;
+    display:inline-flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:700;
+    box-shadow:var(--shadow-md);transform:translateY(-1px);
+  }
+  .compare-x{width:28px;height:28px;border-radius:50%;flex-shrink:0;border:1.5px dashed var(--line-strong);display:inline-flex;}
+  .compare-cell.price-cell{font-family:'Sora',sans-serif;font-weight:700;color:var(--ink-900);font-size:1.05rem;}
+  .compare-cell .btn{width:100%;}
+  .compare-grid[data-species="dog"] .row-cat{display:none;}
+  .compare-grid[data-species="cat"] .row-dog{display:none;}
+  .compare-note{font-size:.84rem;color:var(--ink-500);margin:18px 0 0;text-align:center;position:relative;z-index:1;}
+
+  .compare-grid-wrap::-webkit-scrollbar{height:8px;}
+  .compare-grid-wrap::-webkit-scrollbar-track{background:transparent;}
+  .compare-grid-wrap::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:999px;}
+
+  @media (max-width: 980px){
+    .compare-hero h1{font-size:2.1rem;}
+    .feed-grid{grid-template-columns:1fr;}
+    .feed-logs{grid-template-columns:1fr;gap:10px;}
+    .feed-media{height:300px;}
+  }
+  @media (max-width: 720px){
+    .compare-grid{grid-template-columns:1.5fr .9fr .9fr .9fr;min-width:600px;}
+    .moment-tabs button{padding:9px 14px;}
+  }
+</style>
+<body>
+
+<header id="site-header">
+  <div class="nav">
+    <a href="index.html#top" class="logo">
+      <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="24" fill="#8B5CF6"/>
+        <circle cx="24" cy="22" r="9" fill="#FFD24F"/>
+        <circle cx="18" cy="14" r="3.4" fill="#FFD24F"/>
+        <circle cx="30" cy="14" r="3.4" fill="#FFD24F"/>
+        <circle cx="21" cy="21" r="1.6" fill="#0A0818"/>
+        <circle cx="27" cy="21" r="1.6" fill="#0A0818"/>
+        <path d="M21 25.5c1 1 5 1 6 0" stroke="#0A0818" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-word">Nuzzle</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#nuzzlepal">Meet NuzzlePal</a></li>
+      <li><a href="index.html#how">How it works</a></li>
+      <li><a href="compare.html" aria-current="page">Compare</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#comparison" class="btn btn-outline btn-sm">See plans</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero compare-hero">
+    <div class="wrap">
+      <h1>Same afternoon. Two very different feeds.</h1>
+      <p class="lead">A typical treat-cam only records. Scrub through one afternoon below and watch NuzzlePal actually respond to it, bark by bark, storm by storm, then pick the plan built for your pet.</p>
+      <div class="mode-toggle species-switch" id="speciesSwitch" role="group" aria-label="Choose a pet">
+        <button type="button" data-species="dog">Dog</button>
+        <button type="button" data-species="cat">Cat</button>
+      </div>
+      <div class="hero-ctas">
+        <a href="#comparison" class="btn btn-primary" id="heroCta">See Dog Plan — $39/mo</a>
+        <a href="#feeds" class="btn btn-outline">Watch the feeds</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWIN FEEDS -->
+  <section class="feeds-section" id="feeds">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Scrub through the afternoon.</h2>
+        <p>Same four moments, watched two ways. Pick a moment to see what each feed actually does with it.</p>
+      </div>
+
+      <div class="app-tabs moment-tabs" id="momentPicker" role="tablist" aria-label="Choose a moment"></div>
+
+      <div class="feed-grid">
+        <div class="feed-frame passive">
+          <span class="pill feed-pill-passive">Typical treat-cam</span>
+          <span class="feed-timestamp" id="passiveTime"></span>
+          <div class="feed-media" id="passiveMedia">
+            <img id="passiveImg" src="images/hero-dog.jpg" style="object-position:62% 32%" alt="Left alone for the afternoon — passive camera view">
+            <div class="feed-rec"><span class="dot"></span>REC · fixed angle</div>
+          </div>
+          <p class="feed-caption" id="passiveCaption"></p>
+        </div>
+        <div class="feed-frame active">
+          <span class="pill feed-pill-active">NuzzlePal</span>
+          <span class="feed-timestamp" id="activeTime"></span>
+          <div class="feed-media" id="activeMedia">
+            <img id="activeImg" src="images/hero-dog.jpg" style="object-position:62% 32%" alt="Left alone for the afternoon — NuzzlePal view">
+            <video id="activeVideo" muted loop playsinline webkit-playsinline disablepictureinpicture preload="none" hidden>
+              <source src="video/nuzzlepal-cam-loop.mp4" type="video/mp4">
+            </video>
+            <div class="feed-ring"></div>
+          </div>
+          <p class="feed-caption" id="activeCaption"></p>
+        </div>
+      </div>
+
+      <div class="feed-logs">
+        <div class="feed-log" id="passiveLog"></div>
+        <div class="feed-log is-active" id="activeLog"></div>
+      </div>
+
+      <p class="feed-disclaimer">Photos and video are real; the afternoon shown here is an illustrative demo, not a live recording.</p>
+    </div>
+  </section>
+
+  <!-- COMPARISON GRID -->
+  <section class="comparison-section" id="comparison">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Pick the plan built for your pet.</h2>
+        <p>Every feature below is already part of Nuzzle; the Future Pets tier is the one exception, since it's still a waitlist.</p>
+      </div>
+
+      <div class="compare-grid-wrap">
+        <div class="compare-grid" id="compareGrid" data-species="dog">
+          <div class="compare-row compare-head">
+            <div class="compare-cell label"></div>
+            <div class="compare-cell">Typical treat-cam</div>
+            <div class="compare-cell plan-col" id="planColHeader">Dog Plan — $39/mo</div>
+            <div class="compare-cell">Future Pets (waitlist)</div>
+          </div>
+
+          <div class="compare-row">
+            <div class="compare-cell label">Live HD viewing &amp; recording</div>
+            <div class="compare-cell"><span class="compare-check" aria-label="Included">✓</span></div>
+            <div class="compare-cell"><span class="compare-check" aria-label="Included">✓</span></div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not yet available"></span></div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell label">Unlimited two-way talk</div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not included"></span></div>
+            <div class="compare-cell"><span class="compare-check" aria-label="Included">✓</span></div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not yet available"></span></div>
+          </div>
+
+          <div class="compare-row row-dog">
+            <div class="compare-cell label">Treat launcher for fetch-and-reward play</div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not included"></span></div>
+            <div class="compare-cell"><span class="compare-check" aria-label="Included">✓</span></div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not yet available"></span></div>
+          </div>
+          <div class="compare-row row-dog">
+            <div class="compare-cell label">Bark-responsive AI that checks in automatically</div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not included"></span></div>
+            <div class="compare-cell"><span class="compare-check" aria-label="Included">✓</span></div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not yet available"></span></div>
+          </div>
+          <div class="compare-row row-dog">
+            <div class="compare-cell label">Separation-anxiety soothing routines</div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not included"></span></div>
+            <div class="compare-cell"><span class="compare-check" aria-label="Included">✓</span></div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not yet available"></span></div>
+          </div>
+
+          <div class="compare-row row-cat">
+            <div class="compare-cell label">Laser-pointer play mode with adjustable speed</div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not included"></span></div>
+            <div class="compare-cell"><span class="compare-check" aria-label="Included">✓</span></div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not yet available"></span></div>
+          </div>
+          <div class="compare-row row-cat">
+            <div class="compare-cell label">Calming voice presets for thunderstorms or fireworks</div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not included"></span></div>
+            <div class="compare-cell"><span class="compare-check" aria-label="Included">✓</span></div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not yet available"></span></div>
+          </div>
+          <div class="compare-row row-cat">
+            <div class="compare-cell label">Feeding &amp; litter-box activity nudges</div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not included"></span></div>
+            <div class="compare-cell"><span class="compare-check" aria-label="Included">✓</span></div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not yet available"></span></div>
+          </div>
+
+          <div class="compare-row">
+            <div class="compare-cell label">Daily activity recap</div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not included"></span></div>
+            <div class="compare-cell"><span class="compare-check" aria-label="Included">✓</span></div>
+            <div class="compare-cell"><span class="compare-x" aria-label="Not yet available"></span></div>
+          </div>
+
+          <div class="compare-row">
+            <div class="compare-cell label">Price</div>
+            <div class="compare-cell">—</div>
+            <div class="compare-cell price-cell" id="priceCell">$39/mo</div>
+            <div class="compare-cell price-cell">Free to join</div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell label"></div>
+            <div class="compare-cell">—</div>
+            <div class="compare-cell"><button type="button" class="btn btn-primary btn-sm" id="planCtaBtn">Choose Dog Plan</button></div>
+            <div class="compare-cell"><button type="button" class="btn btn-ghost btn-sm" id="waitlistCtaBtn">Join the Waitlist</button></div>
+          </div>
+        </div>
+      </div>
+      <p class="compare-note">Treat-cam features shown are the baseline most passive pet cameras offer today; NuzzlePal features match what's listed under Services on the homepage.</p>
+    </div>
+  </section>
+
+  <!-- BILLING FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head center">
+        <h2>Billing, in plain terms.</h2>
+        <p>The two questions people ask most before switching.</p>
+      </div>
+      <div class="faq-list" id="faqList">
+        <div class="faq-item">
+          <button type="button" class="faq-q">
+            <span>Can I cancel anytime?</span><span class="plus">+</span>
+          </button>
+          <div class="faq-a"><p>Yes, plans are month-to-month with no lock-in contract. If you cancel, we'll send you a prepaid box to return the NuzzlePal unit.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="faq-q">
+            <span>What happens to my video footage?</span><span class="plus">+</span>
+          </button>
+          <div class="faq-a"><p>Footage streams to your app and is stored encrypted for 30 days by default, viewable only by accounts you approve. You can download or delete clips anytime from Settings.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section style="padding-bottom:100px;">
+    <div class="cta-band">
+      <div>
+        <h2>Ready to stop just watching?</h2>
+        <p>Join the homes already using NuzzlePal to stay close to their cats and dogs — with more species on the way.</p>
+      </div>
+      <a href="#comparison" class="btn btn-primary">See plans for your pet</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html#top" class="logo" style="margin-bottom:14px;display:inline-flex;">
+          <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="24" fill="#8B5CF6"/>
+            <circle cx="24" cy="22" r="9" fill="#FFD24F"/>
+            <circle cx="18" cy="14" r="3.4" fill="#FFD24F"/>
+            <circle cx="30" cy="14" r="3.4" fill="#FFD24F"/>
+            <circle cx="21" cy="21" r="1.6" fill="#0A0818"/>
+            <circle cx="27" cy="21" r="1.6" fill="#0A0818"/>
+            <path d="M21 25.5c1 1 5 1 6 0" stroke="#0A0818" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span class="logo-word">Nuzzle</span>
+        </a>
+        <p>AI-powered remote pet care. Live monitoring and interactive play for cats and dogs today — more companions on the way.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#nuzzlepal">Meet NuzzlePal</a></li>
+          <li><a href="index.html#how">How it works</a></li>
+          <li><a href="index.html#plans">Plans</a></li>
+          <li><a href="compare.html">Compare plans</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Species</h4>
+        <ul>
+          <li><a href="index.html#services">Cats</a></li>
+          <li><a href="index.html#services">Dogs</a></li>
+          <li><a href="index.html#services">Small pets (coming soon)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="index.html#faq">Privacy &amp; footage</a></li>
+          <li><a href="index.html#top">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nuzzle. A fictional demo brand built for a coding project.</span>
+      <span class="credits">Photos &amp; video via Pexels (free license): dog by Marcelo Chagas, cat by Vũ Nguyễn, dog portrait by Helena Lopes, hero "live cam" video by Erik Mclean.</span>
+    </div>
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+(function(){
+
+  var DAYS = {
+    dog: {
+      price: '$39', period: '/mo', planName: 'Dog Plan', ctaText: 'Choose Dog Plan',
+      moments: [
+        {
+          time: '12:15 PM', title: 'Left alone for the afternoon',
+          img: 'images/hero-dog.jpg', pos: '62% 32%', kind: 'img',
+          passiveCaption: 'Static wide shot. Motion is logged — nothing else happens.',
+          activeCaption: 'NuzzlePal notices the pacing and rolls over for a check-in.',
+          passiveLog: 'Motion logged.', activeLog: 'Responded — rolled over to check in.'
+        },
+        {
+          time: '2:40 PM', title: 'A delivery knock outside',
+          img: 'images/hero-dog.jpg', pos: '18% 68%', kind: 'img',
+          passiveCaption: 'Barking logged to the clip library. Nothing plays back.',
+          activeCaption: 'Bark-responsive AI checks in automatically with a calming voice preset.',
+          passiveLog: 'Bark event logged.', activeLog: 'Responded — calming preset played.'
+        },
+        {
+          time: '4:05 PM', title: 'Zoomies before dinner',
+          img: 'images/hero-dog.jpg', pos: '50% 55%', kind: 'video', video: 'video/nuzzlepal-cam-loop.mp4',
+          passiveCaption: "Fixed angle. Whatever's out of frame stays out of frame.",
+          activeCaption: 'Follows at floor level and launches a treat for fetch-and-reward play.',
+          passiveLog: 'Out of frame.', activeLog: 'Responded — treat launched, play started.'
+        },
+        {
+          time: '5:50 PM', title: 'You check in from work',
+          img: 'images/dog-portrait.jpg', pos: '50% 38%', kind: 'img',
+          passiveCaption: "You can see him bark. That's the whole feature.",
+          activeCaption: 'Two-way talk lets you answer back — treat launcher stays armed.',
+          passiveLog: 'Live view only.', activeLog: 'Responded — two-way talk opened.'
+        }
+      ]
+    },
+    cat: {
+      price: '$29', period: '/mo', planName: 'Cat Plan', ctaText: 'Choose Cat Plan',
+      moments: [
+        {
+          time: '12:30 PM', title: 'A nap in the sun',
+          img: 'images/cat-portrait.jpg', pos: '50% 12%', kind: 'img',
+          passiveCaption: 'Recording an empty patch of sunlight.',
+          activeCaption: 'Feeding & litter-box activity nudges keep the afternoon on schedule.',
+          passiveLog: 'Motion logged.', activeLog: 'Responded — schedule nudge sent.'
+        },
+        {
+          time: '2:15 PM', title: 'Watching a bird outside',
+          img: 'images/cat-portrait.jpg', pos: '55% 65%', kind: 'img',
+          passiveCaption: 'Same fixed frame. No reaction to anything in it.',
+          activeCaption: 'Laser-pointer play mode switches on for unpredictable chase play.',
+          passiveLog: 'No change detected.', activeLog: 'Responded — laser play started.'
+        },
+        {
+          time: '3:50 PM', title: 'Thunder rolling in',
+          img: 'images/cat-portrait.jpg', pos: '42% 45%', kind: 'img',
+          passiveCaption: 'Nothing changes on the feed.',
+          activeCaption: 'A calming voice preset plays until the storm passes.',
+          passiveLog: 'Feed unchanged.', activeLog: 'Responded — calming preset played.'
+        },
+        {
+          time: '5:30 PM', title: 'Dinnertime nudge',
+          img: 'images/cat-portrait.jpg', pos: '60% 20%', kind: 'img',
+          passiveCaption: "You'd have to check the clock yourself.",
+          activeCaption: "Sends a feeding nudge right when it's due.",
+          passiveLog: 'No alert sent.', activeLog: 'Responded — feeding nudge sent.'
+        }
+      ]
+    }
+  };
+
+  var currentSpecies = 'dog';
+  var currentMoment = 0;
+
+  function el(html){
+    var t = document.createElement('template');
+    t.innerHTML = html.trim();
+    return t.content.firstElementChild;
+  }
+
+  function showToast(msg){
+    var toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function(){ toast.classList.remove('show'); }, 3200);
+  }
+
+  function renderMomentTabs(){
+    var wrap = document.getElementById('momentPicker');
+    wrap.innerHTML = '';
+    DAYS[currentSpecies].moments.forEach(function(m, i){
+      var btn = el(
+        '<button type="button" role="tab" aria-selected="'+(i === currentMoment ? 'true' : 'false')+'"' + (i === currentMoment ? ' class="is-active"' : '') + '>' +
+          '<span class="time">'+m.time+'</span><span>'+m.title+'</span>' +
+        '</button>'
+      );
+      btn.addEventListener('click', function(){ applyMoment(i); });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function applyMoment(index){
+    currentMoment = index;
+    var m = DAYS[currentSpecies].moments[index];
+
+    document.querySelectorAll('#momentPicker button').forEach(function(b, i){
+      b.classList.toggle('is-active', i === index);
+      b.setAttribute('aria-selected', i === index ? 'true' : 'false');
+    });
+
+    var passiveMedia = document.getElementById('passiveMedia');
+    var activeMedia = document.getElementById('activeMedia');
+    passiveMedia.classList.add('is-changing');
+    activeMedia.classList.add('is-changing');
+
+    setTimeout(function(){
+      document.getElementById('passiveImg').src = m.img;
+      document.getElementById('passiveImg').style.objectPosition = m.pos;
+      document.getElementById('passiveImg').alt = m.title + ' — passive camera view';
+      document.getElementById('passiveTime').textContent = m.time;
+      document.getElementById('activeTime').textContent = m.time;
+      document.getElementById('passiveCaption').textContent = m.passiveCaption;
+      document.getElementById('activeCaption').textContent = m.activeCaption;
+      document.getElementById('passiveLog').innerHTML = '<strong>'+m.time+'</strong> — '+m.passiveLog;
+      document.getElementById('activeLog').innerHTML = '<strong>'+m.time+'</strong> — '+m.activeLog;
+
+      var activeImg = document.getElementById('activeImg');
+      var activeVideo = document.getElementById('activeVideo');
+      if (m.kind === 'video'){
+        activeImg.hidden = true;
+        activeVideo.hidden = false;
+        activeVideo.play().catch(function(){});
+      } else {
+        activeVideo.pause();
+        activeVideo.hidden = true;
+        activeImg.hidden = false;
+        activeImg.src = m.img;
+        activeImg.style.objectPosition = m.pos;
+        activeImg.alt = m.title + ' — NuzzlePal view';
+      }
+
+      passiveMedia.classList.remove('is-changing');
+      activeMedia.classList.remove('is-changing');
+    }, 180);
+  }
+
+  function setSpecies(species){
+    currentSpecies = species;
+    currentMoment = 0;
+    var d = DAYS[species];
+
+    document.querySelectorAll('#speciesSwitch button').forEach(function(b){
+      b.classList.toggle('is-active', b.getAttribute('data-species') === species);
+    });
+
+    document.getElementById('heroCta').textContent = 'See ' + d.planName + ' — ' + d.price + d.period;
+    document.getElementById('planColHeader').textContent = d.planName + ' — ' + d.price + d.period;
+    document.getElementById('priceCell').textContent = d.price + d.period;
+    document.getElementById('planCtaBtn').textContent = d.ctaText;
+    document.getElementById('compareGrid').setAttribute('data-species', species);
+
+    renderMomentTabs();
+    applyMoment(0);
+  }
+
+  function initSpeciesSwitch(){
+    document.querySelectorAll('#speciesSwitch button').forEach(function(b){
+      b.addEventListener('click', function(){ setSpecies(b.getAttribute('data-species')); });
+    });
+  }
+
+  function initPlanButtons(){
+    document.getElementById('planCtaBtn').addEventListener('click', function(){
+      var d = DAYS[currentSpecies];
+      showToast("You're on the list for the "+d.planName+" — check your email to finish setup.");
+    });
+    document.getElementById('waitlistCtaBtn').addEventListener('click', function(){
+      showToast("You're on the Future Pets waitlist — we'll email you when it's ready.");
+    });
+  }
+
+  function initFaq(){
+    document.querySelectorAll('.faq-item').forEach(function(item){
+      var q = item.querySelector('.faq-q');
+      var a = item.querySelector('.faq-a');
+      q.addEventListener('click', function(){
+        var isOpen = item.classList.contains('is-open');
+        document.querySelectorAll('.faq-item.is-open').forEach(function(openItem){
+          if (openItem !== item){
+            openItem.classList.remove('is-open');
+            openItem.querySelector('.faq-a').style.maxHeight = null;
+          }
+        });
+        item.classList.toggle('is-open', !isOpen);
+        a.style.maxHeight = !isOpen ? a.scrollHeight + 'px' : null;
+      });
+    });
+  }
+
+  function initHeader(){
+    var header = document.getElementById('site-header');
+    window.addEventListener('scroll', function(){
+      header.classList.toggle('is-scrolled', window.scrollY > 8);
+    });
+    document.getElementById('navToggle').addEventListener('click', function(){
+      header.classList.toggle('nav-open');
+    });
+    header.querySelectorAll('.nav-links a').forEach(function(a){
+      a.addEventListener('click', function(){ header.classList.remove('nav-open'); });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    initHeader();
+    initSpeciesSwitch();
+    initPlanButtons();
+    initFaq();
+    setSpecies('dog');
+  });
+
+})();
+
+</script>
+</body>
+</html>

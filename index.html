@@ -7,37 +7,37 @@
 <meta name="description" content="Nuzzle pairs a live HD camera with NuzzlePal, an AI companion robot, so you can watch, talk to, and play with your cat or dog from anywhere.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#06040F;
-    --card:#120F2E;
-    --card-2:#1A1640;
-    --ink-900:#F5F2FF;
-    --ink-700:#C6BFE8;
-    --ink-500:#8B82B8;
-    --navy-700:#0A0818;
+    --paper:#E7E6E5;
+    --card:#DCDAD8;
+    --card-2:#CFCDC9;
+    --ink-900:#0B0B0A;
+    --ink-700:#4A4844;
+    --ink-500:#615F58;
+    --navy-700:#121110;
     --navy-600:#000000;
-    --navy-100:#1E1A47;
-    --brand-500:#8B5CF6;
-    --brand-600:#7C3AED;
-    --brand-100:rgba(139,92,246,.18);
-    --cat-500:#FF4FD8;
-    --cat-100:rgba(255,79,216,.18);
-    --dog-500:#4F8CFF;
-    --dog-100:rgba(79,140,255,.18);
-    --future-500:#4FFFB0;
-    --future-100:rgba(79,255,176,.18);
-    --bonus-500:#FFD24F;
-    --bonus-100:rgba(255,210,79,.18);
-    --line:rgba(160,140,255,.25);
-    --line-strong:rgba(197,177,255,.55);
-    --border-w:1.5px;
-    --shadow-md:0 10px 30px -8px rgba(139,92,246,.35);
-    --shadow-lg:0 24px 70px -16px rgba(139,92,246,.5);
-    --radius-lg:26px;
-    --radius-md:16px;
-    --radius-sm:10px;
+    --navy-100:#CFCDC9;
+    --brand-500:#0B0B0A;
+    --brand-600:#000000;
+    --brand-100:rgba(11,11,10,.08);
+    --cat-500:#B23E6B;
+    --cat-100:rgba(178,62,107,.14);
+    --dog-500:#2E5AA8;
+    --dog-100:rgba(46,90,168,.14);
+    --future-500:#3D7A5C;
+    --future-100:rgba(61,122,92,.14);
+    --bonus-500:#A87C2E;
+    --bonus-100:rgba(168,124,46,.16);
+    --line:rgba(11,11,10,.14);
+    --line-strong:rgba(11,11,10,.32);
+    --border-w:1px;
+    --shadow-md:0 1px 2px rgba(11,11,10,.05);
+    --shadow-lg:0 2px 4px rgba(11,11,10,.07);
+    --radius-lg:18px;
+    --radius-md:10px;
+    --radius-sm:6px;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -51,258 +51,249 @@
   }
   img{max-width:100%;display:block;}
   h1,h2,h3,h4{
-    font-family:'Sora',sans-serif;
-    font-weight:600;
-    line-height:1.15;
-    letter-spacing:-.01em;
-    margin:0 0 .5em;
+    font-family:'Bebas Neue',sans-serif;
+    font-weight:400;
+    line-height:.96;
+    letter-spacing:.005em;
+    text-transform:uppercase;
+    margin:0 0 .35em;
     color:var(--ink-900);
   }
   p{margin:0 0 1em;}
   a{color:inherit;}
-  .eyebrow{
-    font-family:'Space Mono',monospace;
-    text-transform:uppercase;
-    letter-spacing:.14em;
-    font-size:.72rem;
-    font-weight:700;
-    color:var(--ink-700);
-    background:var(--brand-100);
-    border:var(--border-w) solid var(--line-strong);
-    border-radius:999px;
-    padding:6px 14px 6px 10px;
-    display:inline-flex;
-    align-items:center;
-    gap:.6em;
-    margin-bottom:.9em;
-  }
-  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand-500);box-shadow:0 0 8px 1px var(--brand-500);display:inline-block;}
   .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
   section{padding:100px 0;position:relative;}
   .btn{
     display:inline-flex;align-items:center;justify-content:center;gap:.5em;
-    font-family:'Manrope',sans-serif;font-weight:700;font-size:.92rem;
-    padding:14px 28px;border-radius:999px;border:var(--border-w) solid transparent;
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:.9rem;
+    padding:14px 26px;border-radius:var(--radius-sm);border:var(--border-w) solid transparent;
     cursor:pointer;text-decoration:none;
-    transition:transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+    transition:transform .12s ease, background .15s ease, color .15s ease, border-color .15s ease;
     white-space:nowrap;
   }
-  .btn:hover{transform:translateY(-2px);}
+  .btn:hover{transform:translateY(-1px);}
   .btn:active{transform:translateY(0);}
-  .btn-primary{background:linear-gradient(135deg,var(--brand-500),var(--cat-500));color:#fff;box-shadow:var(--shadow-md);}
-  .btn-primary:hover{box-shadow:var(--shadow-lg);}
-  .btn-outline{background:rgba(255,255,255,.03);border-color:var(--line-strong);color:var(--ink-900);}
-  .btn-outline:hover{background:var(--card-2);border-color:var(--brand-500);}
+  .btn-primary{background:var(--ink-900);color:var(--paper);}
+  .btn-primary:hover{background:var(--brand-600);}
+  .btn-outline{background:transparent;border-color:var(--line-strong);color:var(--ink-900);}
+  .btn-outline:hover{background:var(--card);border-color:var(--ink-900);}
   .btn-ghost{background:var(--card);color:var(--ink-900);border-color:var(--line);}
   .btn-ghost:hover{background:var(--card-2);}
-  .btn-sm{padding:10px 20px;font-size:.82rem;}
+  .btn-sm{padding:10px 18px;font-size:.8rem;}
   .pill{
-    font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;
+    font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;
     letter-spacing:.06em;text-transform:uppercase;
-    padding:5px 12px;border-radius:999px;border:1px solid transparent;display:inline-block;
+    padding:5px 11px;border-radius:999px;border:1px solid transparent;display:inline-block;
   }
-  .pill-cat{background:var(--cat-100);color:var(--cat-500);border-color:rgba(255,79,216,.35);}
-  .pill-dog{background:var(--dog-100);color:var(--dog-500);border-color:rgba(79,140,255,.35);}
-  .pill-future{background:var(--future-100);color:var(--future-500);border-color:rgba(79,255,176,.35);}
+  .pill-cat{background:var(--cat-100);color:var(--cat-500);border-color:rgba(178,62,107,.3);}
+  .pill-dog{background:var(--dog-100);color:var(--dog-500);border-color:rgba(46,90,168,.3);}
+  .pill-future{background:var(--future-100);color:var(--future-500);border-color:rgba(61,122,92,.3);}
 
   /* Header */
   header{
     position:sticky;top:0;z-index:100;
-    background:rgba(6,4,15,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    background:var(--paper);
     border-bottom:1px solid var(--line);
     transition:border-color .2s ease, box-shadow .2s ease;
   }
-  header.is-scrolled{box-shadow:0 12px 40px -20px rgba(139,92,246,.6);border-color:var(--line-strong);}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1180px;margin:0 auto;}
+  header.is-scrolled{box-shadow:var(--shadow-md);border-color:var(--line-strong);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;max-width:1180px;margin:0 auto;}
   .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-  .logo-mark{width:38px;height:38px;flex-shrink:0;border-radius:50%;box-shadow:0 0 0 1px var(--line-strong), 0 0 16px -2px var(--brand-500);}
-  .logo-word{font-family:'Sora',sans-serif;font-weight:700;font-size:1.25rem;color:var(--ink-900);}
+  .logo-mark{width:34px;height:34px;flex-shrink:0;}
+  .logo-word{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.5rem;letter-spacing:.01em;color:var(--ink-900);}
   .nav-links{display:flex;align-items:center;gap:30px;list-style:none;margin:0;padding:0;}
-  .nav-links a{text-decoration:none;font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-700);transition:color .15s ease;}
+  .nav-links a{text-decoration:none;font-weight:600;font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-700);transition:color .15s ease;}
   .nav-links a:hover{color:var(--ink-900);}
-  .nav-actions{display:flex;align-items:center;gap:14px;}
+  .nav-links a[aria-current="page"]{color:var(--ink-900);}
+  .nav-actions{display:flex;align-items:center;gap:20px;}
   .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;}
-  .nav-toggle span{display:block;width:24px;height:2px;background:var(--ink-900);margin:5px 0;transition:transform .2s ease, opacity .2s ease;}
+  .nav-toggle span{display:block;width:24px;height:2px;background:var(--ink-900);margin:6px 0;transition:transform .25s ease, opacity .2s ease;}
+  header.nav-open .nav-toggle span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+  header.nav-open .nav-toggle span:nth-child(2){opacity:0;}
+  header.nav-open .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
 
   /* Hero */
-  .hero{padding:64px 0 90px;overflow:hidden;}
-  .hero::before{
-    content:"";position:absolute;left:50%;top:128%;transform:translateX(-50%);
-    width:1500px;height:1500px;border-radius:50%;pointer-events:none;z-index:0;
-    background:radial-gradient(circle at 50% 50%, transparent 54%, rgba(139,92,246,.5) 56%, rgba(255,79,216,.22) 61%, transparent 68%);
-    filter:blur(50px);
-  }
-  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative;z-index:1;}
-  .hero h1{font-size:3.4rem;letter-spacing:-.02em;font-weight:600;}
-  .hero .lead{font-size:1.1rem;color:var(--ink-700);max-width:46ch;}
-  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
-  .hero-figure{position:relative;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line-strong);box-shadow:var(--shadow-lg);}
-  .hero-figure img,.hero-figure video{width:100%;height:520px;object-fit:cover;display:block;}
+  .hero{padding:56px 0 0;overflow:hidden;}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch;position:relative;z-index:1;}
+  .hero-copy{padding:32px 48px 64px 0;display:flex;flex-direction:column;justify-content:center;}
+  .hero h1{font-size:6rem;letter-spacing:0;}
+  .hero .lead{font-family:'Manrope',sans-serif;text-transform:none;font-size:1.05rem;color:var(--ink-700);max-width:42ch;margin-top:6px;}
+  .hero-ctas{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:20px;}
+  .hero-ctas .btn-outline{border:none;padding:0;text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:4px;background:none;font-family:'Manrope',sans-serif;font-weight:700;font-size:.9rem;text-transform:none;letter-spacing:0;}
+  .hero-ctas .btn-outline:hover{background:none;color:var(--ink-500);}
+  .hero-figure{position:relative;overflow:hidden;border-left:1px solid var(--line);min-height:560px;}
+  .hero-figure img,.hero-figure video{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;}
   .hero-badge{
-    position:absolute;top:20px;left:20px;background:rgba(6,4,15,.65);backdrop-filter:blur(8px);color:#fff;
-    font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;letter-spacing:.08em;
-    padding:8px 14px;border-radius:999px;border:1px solid var(--line-strong);display:flex;align-items:center;gap:8px;
+    position:absolute;top:20px;left:20px;background:var(--navy-700);color:#fff;
+    font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.08em;
+    padding:7px 12px;border-radius:var(--radius-sm);display:flex;align-items:center;gap:8px;z-index:2;
   }
-  .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:#FF3B3B;animation:pulse 1.6s infinite;box-shadow:0 0 8px 1px #FF3B3B;}
-  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+  .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#fff;opacity:.6;}
   .hero-card{
-    position:absolute;bottom:20px;left:20px;right:20px;background:rgba(18,15,46,.85);backdrop-filter:blur(10px);
-    border:1px solid var(--line-strong);border-radius:var(--radius-md);padding:14px 16px;
-    display:flex;align-items:center;gap:12px;box-shadow:var(--shadow-md);
+    position:absolute;bottom:20px;left:20px;right:20px;background:var(--navy-700);color:#fff;
+    border-radius:var(--radius-sm);padding:13px 15px;z-index:2;
+    display:flex;align-items:center;gap:12px;
   }
-  .hero-card .avatar{width:38px;height:38px;border-radius:50%;border:1px solid var(--line-strong);background:var(--brand-100);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
-  .hero-card strong{display:block;font-size:.88rem;color:var(--ink-900);}
-  .hero-card span{font-size:.8rem;color:var(--ink-500);}
+  .hero-card::after{content:"";position:absolute;bottom:0;right:0;width:0;height:0;border-style:solid;border-width:0 0 12px 12px;border-color:transparent transparent rgba(255,255,255,.18) transparent;}
+  .hero-card .avatar{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+  .hero-card strong{display:block;font-size:.85rem;color:#fff;font-family:'Manrope',sans-serif;}
+  .hero-card span{font-size:.76rem;color:rgba(255,255,255,.65);}
 
   /* Stats bar */
-  .stats{padding:36px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.015);}
-  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;}
-  .stats strong{display:block;font-family:'Sora',sans-serif;font-weight:700;font-size:1.9rem;color:var(--ink-900);}
-  .stats span{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--ink-500);text-transform:uppercase;letter-spacing:.02em;}
+  .stats{padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--card);}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);}
+  .stats .wrap>div{padding:0 22px;border-left:1px solid var(--line);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+  .stats .wrap>div:first-child{border-left:none;padding-left:0;}
+  .stats strong{font-family:'Space Mono',monospace;font-weight:700;font-size:.92rem;color:var(--ink-900);line-height:1.3;letter-spacing:.02em;}
+  .stats span{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--ink-700);letter-spacing:.01em;line-height:1.3;}
 
   /* Section heading */
   .section-head{max-width:620px;margin:0 0 48px;}
   .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
-  .section-head h2{font-size:2.3rem;}
-  .section-head p{color:var(--ink-700);font-size:1.05rem;font-family:'Manrope',sans-serif;}
+  .section-head h2{font-size:2.9rem;}
+  .section-head p{color:var(--ink-700);font-size:1.02rem;font-family:'Manrope',sans-serif;text-transform:none;}
 
-  /* Feature grid */
-  .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;z-index:1;}
-  .feature-card{background:var(--card);border-radius:var(--radius-md);padding:28px 24px;border:1px solid var(--line);transition:border-color .2s ease, transform .2s ease;}
-  .feature-card:hover{border-color:var(--line-strong);transform:translateY(-3px);}
-  .feature-card .icon{width:44px;height:44px;border-radius:var(--radius-sm);background:var(--brand-100);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--brand-500);}
-  .feature-card h3{font-size:1.02rem;margin-bottom:.4em;}
-  .feature-card p{font-size:.92rem;color:var(--ink-500);margin:0;}
+  /* Feature grid — icon sits inline beside the heading, not stacked in its own tile */
+  .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:36px 48px;position:relative;z-index:1;}
+  .feature-card{display:flex;flex-direction:column;gap:10px;padding:0;border:none;background:none;border-top:1px solid var(--line);padding-top:24px;}
+  .feature-head{display:flex;align-items:center;gap:14px;}
+  .feature-head svg{flex-shrink:0;color:var(--ink-900);}
+  .feature-head h3{margin:0;font-size:1.3rem;}
+  .feature-card p{font-size:.92rem;color:var(--ink-700);margin:0;text-transform:none;}
 
   /* Services */
   .services{background:var(--card);}
-  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-  .service-card{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);background:var(--navy-700);box-shadow:var(--shadow-md);display:flex;flex-direction:column;transition:border-color .2s ease, transform .2s ease;}
-  .service-card:hover{border-color:var(--line-strong);transform:translateY(-4px);}
-  .service-card:nth-child(2){transform:none;}
-  .service-card:nth-child(3){transform:none;}
-  .service-photo{height:220px;overflow:hidden;position:relative;border-bottom:1px solid var(--line);}
-  .service-photo img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease;}
-  .service-card:hover .service-photo img{transform:scale(1.05);}
-  .service-body{padding:24px;display:flex;flex-direction:column;gap:10px;flex:1;}
-  .service-body h3{font-size:1.15rem;margin:0;}
-  .service-body p{color:var(--ink-700);font-size:.94rem;margin:0;}
+  .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-strong);border:1px solid var(--line-strong);}
+  .service-card{overflow:hidden;background:var(--paper);display:flex;flex-direction:column;transition:background .2s ease;}
+  .service-card:hover{background:var(--card-2);}
+  .service-photo{height:220px;overflow:hidden;position:relative;}
+  .service-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15);transition:filter .3s ease;}
+  .service-card:hover .service-photo img{filter:grayscale(0);}
+  .photo-chip{
+    position:absolute;bottom:12px;left:12px;z-index:1;background:var(--navy-700);color:#fff;
+    font-family:'Space Mono',monospace;font-size:.64rem;font-weight:700;letter-spacing:.04em;
+    padding:6px 10px;border-radius:var(--radius-sm);
+  }
+  .photo-chip::after{content:"";position:absolute;bottom:0;right:0;width:0;height:0;border-style:solid;border-width:0 0 7px 7px;border-color:transparent transparent rgba(255,255,255,.18) transparent;}
+  .service-body{padding:26px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .service-body h3{font-size:1.5rem;margin:0;}
+  .service-body p{color:var(--ink-700);font-size:.92rem;margin:0;text-transform:none;}
   .service-list{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:7px;}
-  .service-list li{font-size:.86rem;color:var(--ink-700);display:flex;gap:8px;align-items:flex-start;}
-  .service-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand-500);box-shadow:0 0 6px 0 var(--brand-500);margin-top:7px;flex-shrink:0;}
+  .service-list li{font-size:.85rem;color:var(--ink-700);display:flex;gap:8px;align-items:flex-start;text-transform:none;}
+  .service-list li::before{content:"—";color:var(--ink-500);flex-shrink:0;}
   .service-card.future{opacity:1;}
   .waitlist-note{font-size:.8rem;color:var(--ink-500);margin-top:auto;padding-top:8px;}
 
-  /* NuzzlePal */
-  .robot-section .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:center;position:relative;z-index:1;}
-  .robot-section{position:relative;overflow:hidden;}
-  .robot-section::before{
-    content:"";position:absolute;left:8%;top:-10%;transform:translateX(-50%);
-    width:1100px;height:1100px;border-radius:50%;pointer-events:none;z-index:0;
-    background:radial-gradient(circle at 50% 50%, transparent 56%, rgba(139,92,246,.35) 58%, transparent 66%);
-    filter:blur(50px);
-  }
+  /* NuzzlePal — spec-sheet device stage */
+  .robot-section .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center;position:relative;z-index:1;}
+  .robot-section{position:relative;}
   .device-stage{
-    background:var(--navy-700);
+    background:var(--card);
     border-radius:var(--radius-lg);border:1px solid var(--line-strong);
-    padding:28px;display:flex;align-items:center;justify-content:center;
-    box-shadow:var(--shadow-lg);position:relative;
+    padding:24px;display:flex;align-items:center;justify-content:center;
+    position:relative;
   }
-  .device-stage::after{content:none;}
   .device-photo-wrap{width:100%;max-width:300px;position:relative;z-index:1;}
-  .device-photo-wrap img{width:100%;display:block;border-radius:var(--radius-md);border:1px solid var(--line-strong);}
+  .device-photo-wrap img{width:100%;display:block;border-radius:var(--radius-md);}
   .device-overlay{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
-  .mode-toggle{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:28px;}
+  .spec-label{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.03em;fill:#0B0B0A;}
+  .mode-toggle{display:inline-flex;background:var(--card-2);border-radius:var(--radius-sm);padding:4px;margin-bottom:28px;}
   .mode-toggle button{
-    font-family:'Manrope',sans-serif;font-weight:700;font-size:.85rem;border:none;background:transparent;
-    color:var(--ink-700);padding:9px 22px;border-radius:999px;cursor:pointer;transition:background .15s ease,color .15s ease;
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;border:none;background:transparent;
+    color:var(--ink-700);padding:9px 20px;border-radius:var(--radius-sm);cursor:pointer;transition:background .15s ease,color .15s ease;
   }
-  .mode-toggle button.is-active{background:linear-gradient(135deg,var(--brand-500),var(--cat-500));color:#fff;}
+  .mode-toggle button.is-active{background:var(--ink-900);color:var(--paper);}
   .spec-list{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-direction:column;gap:16px;}
-  .spec-list li{display:flex;gap:14px;align-items:flex-start;}
-  .spec-list .spec-icon{width:34px;height:34px;border-radius:var(--radius-sm);background:var(--brand-100);border:1px solid var(--line);color:var(--brand-500);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .spec-list strong{display:block;font-size:.98rem;color:var(--ink-900);}
-  .spec-list span{font-size:.87rem;color:var(--ink-500);}
+  .spec-list li{display:flex;gap:14px;align-items:flex-start;padding-top:14px;border-top:1px solid var(--line);}
+  .spec-list li:first-child{border-top:none;padding-top:0;}
+  .spec-list .spec-icon{width:28px;height:28px;color:var(--ink-900);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+  .spec-list strong{display:block;font-size:.95rem;color:var(--ink-900);font-family:'Manrope',sans-serif;text-transform:none;}
+  .spec-list span{font-size:.85rem;color:var(--ink-500);}
   .mode-caption{
-    font-size:.92rem;color:var(--ink-700);background:var(--card);border:1px dashed var(--line-strong);
-    border-radius:var(--radius-sm);padding:14px 16px;
+    font-size:.9rem;color:var(--ink-700);background:var(--card);
+    border-radius:var(--radius-sm);padding:12px 16px;
   }
   .mode-caption strong{color:var(--ink-900);}
 
   /* How it works */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:step;position:relative;z-index:1;}
-  .step{position:relative;padding-top:8px;border-left:1px solid var(--line);padding-left:16px;}
+  .step{position:relative;padding-top:0;border-left:1px solid var(--line);padding-left:18px;}
   .step .num{
-    font-family:'Sora',sans-serif;font-weight:700;font-size:1.7rem;
-    background:linear-gradient(135deg,var(--brand-500),var(--cat-500));-webkit-background-clip:text;background-clip:text;color:transparent;
-    display:block;margin-bottom:10px;
+    font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:2.6rem;
+    color:var(--ink-900);
+    display:block;margin-bottom:6px;line-height:1;
   }
-  .step h3{font-size:1.02rem;margin-bottom:.4em;}
-  .step p{font-size:.88rem;color:var(--ink-500);}
+  .step h3{font-size:1.15rem;margin-bottom:.35em;}
+  .step p{font-size:.88rem;color:var(--ink-500);text-transform:none;}
 
   /* App mockup */
   .app-section{background:var(--card);}
   .app-section .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
   .app-tabs{display:flex;gap:10px;margin-bottom:22px;}
   .app-tabs button{
-    font-family:'Manrope',sans-serif;font-weight:700;font-size:.82rem;padding:9px 18px;border-radius:999px;
-    border:1px solid var(--line);background:var(--navy-700);color:var(--ink-700);cursor:pointer;transition:all .15s ease;
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:.8rem;padding:9px 16px;border-radius:var(--radius-sm);
+    border:1px solid var(--line-strong);background:var(--paper);color:var(--ink-700);cursor:pointer;transition:all .15s ease;
   }
-  .app-tabs button.is-active{background:linear-gradient(135deg,var(--brand-500),var(--cat-500));border-color:transparent;color:#fff;}
+  .app-tabs button.is-active{background:var(--ink-900);border-color:var(--ink-900);color:var(--paper);}
   .phone{
-    width:280px;margin:0 auto;background:var(--navy-700);border-radius:40px;padding:14px;box-shadow:var(--shadow-lg);border:1px solid var(--line-strong);
+    width:280px;margin:0 auto;background:var(--navy-700);border-radius:32px;padding:12px;border:1px solid var(--line-strong);
   }
-  .phone-screen{background:var(--card);border-radius:28px;overflow:hidden;min-height:480px;display:flex;flex-direction:column;border:1px solid var(--line);}
-  .phone-feed{height:220px;position:relative;background-size:cover;background-position:center;border-bottom:1px solid var(--line);}
+  .phone-screen{background:var(--paper);border-radius:22px;overflow:hidden;min-height:480px;display:flex;flex-direction:column;}
+  .phone-feed{height:220px;position:relative;background-size:cover;background-position:center;filter:grayscale(.1);}
   .phone-feed .tag{
-    position:absolute;top:12px;left:12px;background:rgba(6,4,15,.7);backdrop-filter:blur(6px);color:#fff;font-family:'Space Mono',monospace;
-    font-size:.65rem;font-weight:700;padding:5px 10px;border-radius:999px;border:1px solid var(--line-strong);letter-spacing:.06em;
+    position:absolute;top:12px;left:12px;background:var(--navy-700);color:#fff;font-family:'Space Mono',monospace;
+    font-size:.72rem;font-weight:700;padding:5px 9px;border-radius:var(--radius-sm);letter-spacing:.05em;
   }
   .phone-body{padding:18px;display:flex;flex-direction:column;gap:14px;flex:1;}
-  .phone-body h4{margin:0;font-size:1rem;color:var(--ink-900);}
-  .phone-actions{display:flex;gap:10px;}
+  .phone-body h4{margin:0;font-size:1.15rem;color:var(--ink-900);}
+  .phone-actions{display:flex;gap:8px;}
   .phone-actions button{
-    flex:1;border:1px solid var(--line);border-radius:999px;padding:12px 6px;font-family:'Manrope',sans-serif;font-weight:700;
-    font-size:.76rem;background:var(--navy-700);color:var(--ink-700);cursor:pointer;
+    flex:1;border:1px solid var(--line-strong);border-radius:var(--radius-sm);padding:11px 6px;font-family:'Manrope',sans-serif;font-weight:700;
+    font-size:.74rem;background:var(--card);color:var(--ink-700);cursor:pointer;
   }
-  .phone-actions button.accent{background:linear-gradient(135deg,var(--brand-500),var(--cat-500));border-color:transparent;color:#fff;}
+  .phone-actions button.accent{background:var(--ink-900);border-color:var(--ink-900);color:var(--paper);}
   .insight-bubble{
-    background:var(--future-100);color:var(--future-500);border:1px solid rgba(79,255,176,.35);border-radius:var(--radius-sm);padding:12px 14px;font-size:.82rem;
+    background:var(--card);color:var(--ink-700);border-radius:var(--radius-sm);padding:12px 14px;font-size:.82rem;
   }
-  .stat-row{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--ink-500);}
-  .stat-row strong{display:block;font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;color:var(--ink-900);}
-  .app-copy .lifestyle-photo{border-radius:var(--radius-md);overflow:hidden;margin-top:26px;border:1px solid var(--line-strong);box-shadow:var(--shadow-md);}
+  .stat-row{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--ink-500);}
+  .stat-row strong{display:block;font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:1.3rem;color:var(--ink-900);}
+  .app-copy .lifestyle-photo{border-radius:var(--radius-md);overflow:hidden;margin-top:26px;}
   .app-copy .lifestyle-photo img{height:220px;object-fit:cover;width:100%;}
 
   /* Plans */
   .plan-card{
-    background:var(--navy-700);border-radius:var(--radius-lg);border:1px solid var(--line);padding:32px 28px;
-    display:flex;flex-direction:column;gap:16px;position:relative;box-shadow:var(--shadow-md);
+    background:var(--card);border-radius:var(--radius-lg);border:1px solid var(--line-strong);padding:32px 28px;
+    display:flex;flex-direction:column;gap:16px;position:relative;
   }
-  .plan-card.featured{border-color:var(--brand-500);box-shadow:var(--shadow-lg);}
+  .plan-card.featured{border-color:var(--ink-900);border-width:1.5px;}
   .plan-card .badge{
-    position:absolute;top:-14px;right:28px;background:linear-gradient(135deg,var(--brand-500),var(--cat-500));color:#fff;font-family:'Space Mono',monospace;
-    font-size:.68rem;font-weight:700;padding:6px 14px;border-radius:999px;letter-spacing:.05em;
+    position:absolute;top:-13px;right:28px;background:var(--ink-900);color:var(--paper);font-family:'Space Mono',monospace;
+    font-size:.66rem;font-weight:700;padding:6px 13px;border-radius:var(--radius-sm);letter-spacing:.05em;
   }
-  .plan-card h3{font-size:1.3rem;margin-bottom:0;}
-  .plan-card .tagline{font-size:.9rem;color:var(--ink-500);margin:-10px 0 0;font-family:'Manrope',sans-serif;text-transform:none;}
-  .plan-card .price{font-family:'Sora',sans-serif;font-weight:700;font-size:2.3rem;color:var(--ink-900);}
-  .plan-card .price span{font-family:'Manrope',sans-serif;font-size:.9rem;font-weight:600;color:var(--ink-500);text-transform:none;}
+  .plan-card h3{font-size:1.7rem;margin-bottom:0;}
+  .plan-card h3 svg{vertical-align:-.12em;margin-right:.1em;}
+  .plan-card .tagline{font-size:.9rem;color:var(--ink-500);margin:-8px 0 0;font-family:'Manrope',sans-serif;text-transform:none;}
+  .plan-card .price{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:2.8rem;color:var(--ink-900);line-height:1;}
+  .plan-card .price span{font-family:'Manrope',sans-serif;font-size:.85rem;font-weight:600;color:var(--ink-500);text-transform:none;}
   .plan-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;flex:1;}
-  .plan-card li{font-size:.88rem;color:var(--ink-700);display:flex;gap:8px;}
-  .plan-card li::before{content:"✓";color:var(--brand-500);font-weight:700;width:16px;height:16px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;}
+  .plan-card li{font-size:.88rem;color:var(--ink-700);display:flex;gap:8px;text-transform:none;}
+  .plan-card li::before{content:"";width:16px;height:16px;flex-shrink:0;margin-top:3px;background:var(--ink-900);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12.5l5 5L20 6' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12.5l5 5L20 6' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;}
 
-  /* Wheel of fortune plan picker */
-  .wheel-layout{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:center;position:relative;z-index:1;}
-  .wheel-stage{position:relative;width:280px;height:280px;flex-shrink:0;margin:0 auto;}
+  /* Plans wheel — demoted to a secondary bonus-spin novelty */
+  .wheel-note{max-width:640px;margin:64px auto 0;text-align:center;padding-top:48px;border-top:1px solid var(--line);}
+  .wheel-note .section-head{margin:0 0 30px;}
+  .wheel-note .section-head h3{font-size:1.6rem;margin-bottom:.3em;}
+  .wheel-note .section-head p{font-size:.92rem;}
+  .wheel-layout{display:flex;flex-direction:column;align-items:center;gap:20px;position:relative;z-index:1;}
+  .wheel-stage{position:relative;width:220px;height:220px;flex-shrink:0;margin:0 auto;}
   .wheel-pointer{
-    position:absolute;top:-10px;left:50%;transform:translateX(-50%);z-index:3;
-    width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;
-    border-top:26px solid var(--ink-900);filter:drop-shadow(0 3px 0 var(--brand-500));
+    position:absolute;top:-8px;left:50%;transform:translateX(-50%);z-index:3;
+    width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;
+    border-top:20px solid var(--ink-900);
   }
   .wheel-frame{
     width:100%;height:100%;border-radius:50%;position:relative;overflow:hidden;
-    border:1px solid var(--line-strong);box-shadow:var(--shadow-lg);
+    border:1px solid var(--line-strong);
   }
   .wheel{
     width:100%;height:100%;border-radius:50%;position:relative;
@@ -311,108 +302,100 @@
     cursor:pointer;
   }
   .wheel-label{
-    position:absolute;top:50%;left:50%;font-size:2.1rem;line-height:1;
-    transform:translate(-50%,-50%) rotate(var(--ang)) translateY(-98px) rotate(calc(-1 * var(--ang)));
-    filter:drop-shadow(0 2px 4px rgba(0,0,0,.5));
+    position:absolute;top:50%;left:50%;line-height:1;color:#fff;
+    transform:translate(-50%,-50%) rotate(var(--ang)) translateY(-76px) rotate(calc(-1 * var(--ang)));
+    filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));
   }
   .wheel-hub{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
-    width:74px;height:74px;border-radius:50%;background:linear-gradient(135deg,var(--brand-500),var(--cat-500));color:#fff;border:3px solid var(--paper);
-    font-family:'Sora',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.02em;cursor:pointer;
-    box-shadow:var(--shadow-md);transition:transform .15s ease;
+    width:60px;height:60px;border-radius:50%;background:var(--ink-900);color:var(--paper);border:3px solid var(--paper);
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.03em;cursor:pointer;
+    transition:transform .15s ease;
   }
   .wheel-hub:hover{transform:translate(-50%,-50%) scale(1.06);}
   .wheel-hub:active{transform:translate(-50%,-50%) scale(.95);}
   .plan-tabs{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap;}
   .plan-tabs button{
-    font-family:'Manrope',sans-serif;font-weight:700;font-size:.85rem;padding:10px 20px;border-radius:999px;
-    border:1px solid var(--line);background:var(--navy-700);color:var(--ink-700);cursor:pointer;transition:all .15s ease;
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:.85rem;padding:10px 20px;border-radius:var(--radius-sm);
+    border:1px solid var(--line-strong);background:var(--paper);color:var(--ink-700);cursor:pointer;transition:all .15s ease;
     display:inline-flex;align-items:center;gap:7px;
   }
-  .plan-tabs button[data-pet="cat"].is-active{background:var(--cat-500);border-color:transparent;color:#fff;}
-  .plan-tabs button[data-pet="dog"].is-active{background:var(--dog-500);border-color:transparent;color:#fff;}
-  .plan-tabs button[data-pet="future"].is-active{background:var(--future-500);border-color:transparent;color:var(--navy-700);}
-  .plan-tabs button[data-pet="bonus"].is-active{background:var(--bonus-500);border-color:transparent;color:var(--navy-700);}
-  .plan-panel{transition:opacity .3s ease, transform .3s ease;}
-  .plan-panel.is-swapping{opacity:0;transform:translateY(8px);}
+  .plan-tabs button[data-pet="cat"].is-active{background:var(--cat-500);border-color:var(--cat-500);color:#fff;}
+  .plan-tabs button[data-pet="dog"].is-active{background:var(--dog-500);border-color:var(--dog-500);color:#fff;}
+  .plan-tabs button[data-pet="future"].is-active{background:var(--future-500);border-color:var(--future-500);color:#fff;}
+  .plan-panel{transition:opacity .18s ease, transform .18s ease;}
+  .plan-panel.is-swapping{opacity:0;transform:translateY(4px);}
   .bundle-note{
     margin-top:16px;font-size:.85rem;color:var(--ink-500);background:none;border:none;padding:0;
     text-decoration:underline;text-decoration-style:dotted;cursor:pointer;font-family:'Manrope',sans-serif;
   }
-  .voucher-card{border:1px solid var(--line-strong);background:linear-gradient(160deg,var(--navy-700),var(--card));}
+  .bundle-note svg{vertical-align:-.15em;margin-right:.2em;}
+  .voucher-card{border:1px dashed var(--line-strong);background:var(--card);}
   .voucher-code{
-    font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;letter-spacing:.06em;color:var(--navy-700);
-    background:var(--bonus-500);border:1px solid rgba(255,210,79,.5);border-radius:var(--radius-sm);
+    font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;letter-spacing:.06em;color:var(--paper);
+    background:var(--ink-900);border-radius:var(--radius-sm);
     padding:14px 16px;text-align:center;word-break:break-all;
   }
-  .voucher-meta{font-size:.84rem;color:var(--ink-700);margin:0;background:var(--navy-700);border:1px solid var(--line);border-radius:999px;display:inline-block;padding:6px 12px;}
+  .voucher-meta{font-size:.84rem;color:var(--ink-700);margin:0;background:var(--card-2);border-radius:var(--radius-sm);display:inline-block;padding:6px 12px;}
 
   /* Testimonials */
   .testimonials{background:var(--card);position:relative;}
-  .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;z-index:1;}
-  .testimonial-card{background:var(--navy-700);border-radius:var(--radius-lg);padding:26px;border:1px solid var(--line);box-shadow:var(--shadow-md);transition:border-color .2s ease;}
-  .testimonial-card:hover{border-color:var(--line-strong);}
-  .testimonial-card:nth-child(odd){transform:none;}
-  .testimonial-card:nth-child(even){transform:none;}
-  .testimonial-card p{font-size:.95rem;color:var(--ink-700);font-style:normal;}
+  .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-strong);border:1px solid var(--line-strong);position:relative;z-index:1;}
+  .testimonial-card{background:var(--paper);padding:28px;}
+  .testimonial-card p{font-size:.95rem;color:var(--ink-700);font-style:normal;text-transform:none;}
   .testimonial-who{display:flex;align-items:center;gap:12px;margin-top:14px;}
-  .testimonial-who .avatar{width:40px;height:40px;border-radius:50%;border:1px solid var(--line-strong);background:var(--brand-100);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
-  .testimonial-who strong{display:block;font-size:.88rem;color:var(--ink-900);}
+  .testimonial-who .avatar{width:38px;height:38px;border-radius:50%;background:var(--card-2);display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+  .testimonial-who strong{display:block;font-size:.86rem;color:var(--ink-900);font-family:'Manrope',sans-serif;text-transform:none;}
   .testimonial-who span{font-size:.78rem;color:var(--ink-500);}
 
   /* FAQ */
-  .faq-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:12px;position:relative;z-index:1;}
-  .faq-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;transition:border-color .2s ease;}
-  .faq-item.is-open{border-color:var(--line-strong);}
+  .faq-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;position:relative;z-index:1;}
+  .faq-item{background:var(--paper);border-bottom:1px solid var(--line-strong);overflow:hidden;}
+  .faq-item:first-child{border-top:1px solid var(--line-strong);}
   .faq-q{
-    width:100%;text-align:left;background:none;border:none;padding:20px 22px;font-family:'Manrope',sans-serif;
-    font-weight:700;font-size:.98rem;color:var(--ink-900);cursor:pointer;display:flex;justify-content:space-between;
+    width:100%;text-align:left;background:none;border:none;padding:22px 4px;font-family:'Manrope',sans-serif;
+    font-weight:700;font-size:1.02rem;color:var(--ink-900);cursor:pointer;display:flex;justify-content:space-between;
     align-items:center;gap:16px;
   }
-  .faq-q .plus{font-size:1.3rem;color:var(--ink-700);background:var(--navy-700);border:1px solid var(--line);border-radius:50%;width:26px;height:26px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;transition:transform .2s ease, background .2s ease, color .2s ease;}
-  .faq-item.is-open .faq-q .plus{transform:rotate(45deg);background:linear-gradient(135deg,var(--brand-500),var(--cat-500));color:#fff;border-color:transparent;}
+  .faq-q .plus{font-size:1.3rem;color:var(--ink-900);flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;transition:transform .2s ease;}
+  .faq-item.is-open .faq-q .plus{transform:rotate(45deg);}
   .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
-  .faq-a p{padding:0 22px 20px;font-size:.92rem;color:var(--ink-700);margin:0;}
+  .faq-a p{padding:0 4px 22px;font-size:.94rem;color:var(--ink-700);margin:0;text-transform:none;}
 
   /* Final CTA */
   .cta-band{
-    background:linear-gradient(135deg,var(--navy-700),var(--card) 60%,var(--navy-700));color:#fff;border-radius:var(--radius-lg);border:1px solid var(--line-strong);
-    padding:60px;display:flex;justify-content:space-between;align-items:center;gap:32px;margin:0 24px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;
+    background:var(--ink-900);color:var(--paper);border-radius:var(--radius-lg);
+    padding:60px;display:flex;justify-content:space-between;align-items:center;gap:32px;margin:0 24px;position:relative;overflow:hidden;
   }
-  .cta-band::before{
-    content:"";position:absolute;left:50%;bottom:-60%;transform:translateX(-50%);
-    width:900px;height:900px;border-radius:50%;pointer-events:none;
-    background:radial-gradient(circle at 50% 50%, transparent 56%, rgba(139,92,246,.4) 58%, transparent 66%);
-    filter:blur(40px);
-  }
-  .cta-band h2{color:#fff;margin-bottom:.3em;position:relative;}
-  .cta-band p{color:rgba(255,255,255,.68);margin:0;max-width:46ch;position:relative;}
+  .cta-band h2{color:var(--paper);margin-bottom:.3em;position:relative;}
+  .cta-band p{color:rgba(231,230,229,.68);margin:0;max-width:46ch;position:relative;font-family:'Manrope',sans-serif;text-transform:none;}
   .cta-band .btn{position:relative;}
+  .cta-band .btn-primary{background:var(--paper);color:var(--ink-900);}
+  .cta-band .btn-primary:hover{background:#fff;}
 
   /* Footer */
   footer{padding:70px 0 30px;border-top:1px solid var(--line);margin-top:40px;}
   .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:48px;}
-  .footer-brand p{color:var(--ink-500);font-size:.88rem;max-width:32ch;}
-  .footer-col h4{font-family:'Space Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-700);margin-bottom:14px;}
+  .footer-brand p{color:var(--ink-500);font-size:.88rem;max-width:32ch;text-transform:none;}
+  .footer-col h3{font-family:'Space Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-700);margin-bottom:14px;}
   .footer-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
   .footer-col a{text-decoration:none;font-size:.9rem;color:var(--ink-700);}
-  .footer-col a:hover{color:var(--brand-500);}
+  .footer-col a:hover{color:var(--ink-900);}
   .footer-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.78rem;color:var(--ink-500);}
   .footer-bottom .credits{max-width:60ch;}
 
   /* Toast */
   #toast{
     position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);
-    background:var(--card);color:var(--ink-900);padding:14px 22px;border-radius:999px;border:1px solid var(--line-strong);font-size:.88rem;font-weight:700;font-family:'Manrope',sans-serif;
-    box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;z-index:1000;
+    background:var(--ink-900);color:var(--paper);padding:14px 22px;border-radius:var(--radius-sm);font-size:.88rem;font-weight:700;font-family:'Manrope',sans-serif;
+    opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;z-index:1000;
   }
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-  /* Roaming robot mascot */
+  /* Roaming mascots — kept, recolored flat, hidden over the hero on mobile */
   .roam-bot{
-    position:fixed;right:26px;bottom:26px;z-index:600;width:64px;height:64px;padding:0;border:none;
-    background:none;cursor:pointer;transition:left .7s cubic-bezier(.22,1.12,.4,1), top .7s cubic-bezier(.22,1.12,.4,1);
-    filter:drop-shadow(0 6px 18px rgba(139,92,246,.55));
+    position:fixed;right:26px;bottom:26px;z-index:600;width:60px;height:60px;padding:0;border:none;
+    background:none;cursor:pointer;transition:left .7s cubic-bezier(.22,1.12,.4,1), top .7s cubic-bezier(.22,1.12,.4,1), opacity .3s ease;
   }
   .roam-bot svg{width:100%;height:100%;display:block;}
   .roam-bot.is-hopping{animation:bot-hop .6s ease;}
@@ -425,84 +408,60 @@
   }
   .roam-bubble{
     position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) scale(.85);
-    background:var(--card);color:var(--ink-900);padding:8px 13px;border-radius:999px;border:1px solid var(--line-strong);
+    background:var(--ink-900);color:#fff;padding:8px 13px;border-radius:var(--radius-sm);
     font-family:'Manrope',sans-serif;font-size:.78rem;font-weight:700;white-space:nowrap;
     opacity:0;pointer-events:none;transition:opacity .2s ease, transform .2s ease;
   }
   .roam-bubble::after{
     content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);
-    border:6px solid transparent;border-top-color:var(--card);
+    border:6px solid transparent;border-top-color:var(--ink-900);
   }
   .roam-bubble.show{opacity:1;transform:translateX(-50%) scale(1);}
 
-  /* Roaming dog & cat mascots — same hop mechanics as the robot, smaller and unlabeled */
   .roam-critter{
-    position:fixed;z-index:590;width:52px;height:52px;padding:0;border:none;background:none;cursor:pointer;
-    transition:left .7s cubic-bezier(.22,1.12,.4,1), top .7s cubic-bezier(.22,1.12,.4,1);
-    filter:drop-shadow(0 6px 14px rgba(139,92,246,.5));
+    position:fixed;z-index:590;width:48px;height:48px;padding:0;border:none;background:none;cursor:pointer;
+    transition:left .7s cubic-bezier(.22,1.12,.4,1), top .7s cubic-bezier(.22,1.12,.4,1), opacity .3s ease;
   }
   .roam-critter svg{width:100%;height:100%;display:block;}
   .roam-critter.is-hopping{animation:bot-hop .6s ease;}
   #roamDog{left:26px;bottom:26px;}
-  #roamCat{right:26px;bottom:104px;}
-
-  /* Pet-themed decorative background */
-  body{position:relative;}
-  body::before{
-    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-    background-image:
-      radial-gradient(1.5px 1.5px at 20% 30%, rgba(245,242,255,.5), transparent),
-      radial-gradient(1.5px 1.5px at 70% 60%, rgba(245,242,255,.4), transparent),
-      radial-gradient(1px 1px at 40% 80%, rgba(245,242,255,.35), transparent),
-      radial-gradient(1px 1px at 85% 20%, rgba(245,242,255,.4), transparent),
-      radial-gradient(1.5px 1.5px at 55% 45%, rgba(245,242,255,.3), transparent),
-      radial-gradient(1px 1px at 10% 65%, rgba(245,242,255,.35), transparent),
-      radial-gradient(1px 1px at 92% 85%, rgba(245,242,255,.3), transparent),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg transform='translate(110,110) rotate(18) translate(-128,-128) scale(0.42)' fill='%23B49CDB' fill-opacity='0.05'%3E%3Cpath d='M136,60a28,28,0,1,1,28,28A28.03146,28.03146,0,0,1,136,60ZM72,108a28,28,0,1,0-28,28A28.03146,28.03146,0,0,0,72,108ZM92,88A28,28,0,1,0,64,60,28.03146,28.03146,0,0,0,92,88Zm95.0918,60.84473a35.3317,35.3317,0,0,1-16.8418-21.124,43.99839,43.99839,0,0,0-84.5-.00439,35.2806,35.2806,0,0,1-16.7998,21.105,40.00718,40.00718,0,0,0,34.57226,72.05176,64.08634,64.08634,0,0,1,48.86524-.03711,40.0067,40.0067,0,0,0,34.7041-71.99121ZM212,80a28,28,0,1,0,28,28A28.03146,28.03146,0,0,0,212,80Z'/%3E%3C/g%3E%3C/svg%3E");
-    background-size:auto, auto, auto, auto, auto, auto, auto, 220px 220px;
-    background-repeat:no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat;
-  }
-  main, footer{position:relative;z-index:1;}
-  .critter-deco{position:absolute;pointer-events:none;z-index:0;opacity:.1;filter:blur(.5px);}
-  .critter-deco svg{width:100%;height:100%;display:block;}
-  #why{position:relative;overflow:hidden;}
-  #why .wrap{position:relative;z-index:1;}
-  #why .critter-deco{left:-56px;bottom:-40px;width:280px;height:280px;}
-  .testimonials{position:relative;overflow:hidden;}
-  .testimonials .wrap{position:relative;z-index:1;}
-  .testimonials .critter-deco{right:-50px;top:-30px;width:260px;height:260px;}
+  #roamCat{right:26px;bottom:96px;}
+  .roam-hidden{opacity:0;pointer-events:none;}
 
   @media (max-width: 980px){
+    .hero{padding:40px 0 0;}
     .hero .wrap{grid-template-columns:1fr;}
-    .hero-figure img,.hero-figure video{height:380px;}
-    .feature-grid{grid-template-columns:repeat(2,1fr);}
+    .hero-copy{padding:24px 24px 40px;}
+    .hero h1{font-size:3.6rem;}
+    .hero-figure{min-height:340px;border-left:none;border-top:1px solid var(--line);}
+    .feature-grid{grid-template-columns:1fr;}
     .service-grid{grid-template-columns:1fr;}
     .robot-section .wrap{grid-template-columns:1fr;}
     .steps{grid-template-columns:repeat(2,1fr);}
     .app-section .wrap{grid-template-columns:1fr;}
     .testimonial-grid{grid-template-columns:1fr;}
     .footer-grid{grid-template-columns:1fr 1fr;}
-    .stats .wrap{grid-template-columns:repeat(2,1fr);}
-    .wheel-layout{grid-template-columns:1fr;justify-items:center;text-align:center;}
-    .plan-tabs{justify-content:center;}
+    .stats .wrap{grid-template-columns:repeat(2,1fr);row-gap:10px;}
+    .stats .wrap>div:nth-child(3){border-left:none;padding-left:0;}
+    .section-head h2{font-size:2.2rem;}
   }
   @media (max-width: 720px){
-    .nav-links,.nav-actions .btn-outline{display:none;}
+    .nav-links{display:none;}
     .nav-toggle{display:block;}
     header.nav-open .nav-links{
       display:flex;position:absolute;top:100%;left:0;right:0;background:var(--paper);
       flex-direction:column;padding:20px 24px;border-bottom:1px solid var(--line-strong);gap:18px;
     }
-    .hero h1{font-size:2.2rem;}
+    .hero h1{font-size:2.7rem;}
     section{padding:64px 0;}
     .cta-band{flex-direction:column;text-align:center;margin:0 16px;padding:40px 28px;}
     .footer-grid{grid-template-columns:1fr;}
-    .wheel-stage{width:220px;height:220px;}
-    .wheel-label{font-size:1.7rem;}
-    .roam-bot{width:52px;height:52px;right:16px;bottom:16px;}
-    .roam-critter{width:40px;height:40px;}
+    .wheel-stage{width:180px;height:180px;}
+    .wheel-label svg{width:18px;height:18px;}
+    .roam-bot{width:48px;height:48px;right:16px;bottom:16px;}
+    .roam-critter{width:36px;height:36px;}
     #roamDog{left:14px;bottom:16px;}
-    #roamCat{right:14px;bottom:76px;}
+    #roamCat{right:14px;bottom:70px;}
   }
 </style>
 </head>
@@ -512,25 +471,23 @@
   <div class="nav">
     <a href="#top" class="logo">
       <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="24" fill="#8B5CF6"/>
-        <circle cx="24" cy="22" r="9" fill="#FFD24F"/>
-        <circle cx="18" cy="14" r="3.4" fill="#FFD24F"/>
-        <circle cx="30" cy="14" r="3.4" fill="#FFD24F"/>
-        <circle cx="21" cy="21" r="1.6" fill="#0A0818"/>
-        <circle cx="27" cy="21" r="1.6" fill="#0A0818"/>
-        <path d="M21 25.5c1 1 5 1 6 0" stroke="#0A0818" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="24" cy="24" r="24" fill="#0B0B0A"/>
+        <circle cx="24" cy="22" r="9" fill="#E7E6E5"/>
+        <circle cx="18" cy="14" r="3.4" fill="#E7E6E5"/>
+        <circle cx="30" cy="14" r="3.4" fill="#E7E6E5"/>
+        <circle cx="21" cy="21" r="1.6" fill="#0B0B0A"/>
+        <circle cx="27" cy="21" r="1.6" fill="#0B0B0A"/>
+        <path d="M21 25.5c1 1 5 1 6 0" stroke="#0B0B0A" stroke-width="1.6" stroke-linecap="round"/>
       </svg>
       <span class="logo-word">Nuzzle</span>
     </a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
-      <li><a href="#nuzzlepal">Meet NuzzlePal</a></li>
-      <li><a href="#how">How it works</a></li>
       <li><a href="#plans">Plans</a></li>
+      <li><a href="compare.html">Compare</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="#plans" class="btn btn-outline btn-sm">Get started</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -544,7 +501,6 @@
   <section class="hero">
     <div class="wrap">
       <div class="hero-copy">
-        <span class="eyebrow">AI-powered remote pet care</span>
         <h1>Away from home.<br>Never away from them.</h1>
         <p class="lead">Nuzzle pairs a live HD camera with NuzzlePal — our AI companion robot — so you can watch, talk to, and play with your cat or dog from anywhere. Between check-ins, the AI keeps them company.</p>
         <div class="hero-ctas">
@@ -558,7 +514,7 @@
         </video>
         <div class="hero-badge"><span class="dot"></span>LIVE · NUZZLEPAL CAM</div>
         <div class="hero-card">
-          <div class="avatar">🐾</div>
+          <div class="avatar"><svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="15.5" r="4" fill="currentColor"/><circle cx="6.5" cy="9" r="2.1" fill="currentColor"/><circle cx="11" cy="6.3" r="2.1" fill="currentColor"/><circle cx="15.8" cy="6.6" r="2.1" fill="currentColor"/><circle cx="18.3" cy="10.8" r="2" fill="currentColor"/></svg></div>
           <div>
             <strong>Milo is exploring the kitchen</strong>
             <span>NuzzlePal · following at floor level</span>
@@ -580,65 +536,38 @@
 
   <!-- WHY NUZZLE -->
   <section id="why">
-    <div class="critter-deco" aria-hidden="true">
-      <svg fill="#B49CDB" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 217.08 217.08">
-        <g><g>
-          <path d="M119.52,147.708c-4.003,0-12.158,21.664-12.158,46.803c0,22.569,7.324,22.569,12.158,22.569
-            c4.846,0,12.167,0,12.167-22.569C131.687,169.372,123.527,147.708,119.52,147.708z"/>
-          <path d="M62.807,147.708c-4.001,0-12.15,21.664-12.15,46.803c0,22.569,7.317,22.569,12.15,22.569c4.845,0,12.163,0,12.163-22.569
-            C74.969,169.372,66.82,147.708,62.807,147.708z"/>
-          <path d="M182.145,132.339c-9.062-4.416-17.385,20.807-34.191,36.66c0.553-3.795,0.905-7.826,0.905-12.206
-            c0-28.693-12.695-58.311-31.236-73.475c-7.317,9.568-16.472,15.936-26.449,15.936c-9.979,0-19.139-6.376-26.443-15.928
-            C46.198,98.511,33.495,128.1,33.495,156.793c0,17.957,4.979,30.957,13.229,39.926c-0.016-0.773-0.104-1.395-0.104-2.208
-            c0-22.662,7.271-50.858,16.196-50.858c8.958,0,16.206,28.196,16.206,50.858c0,7.83-0.904,13.297-2.426,17.279
-            c4.67,0.806,9.529,1.242,14.562,1.242c5.056,0,9.875-0.521,14.547-1.334c-1.475-3.983-2.396-9.413-2.396-17.188
-            c0-22.662,7.269-50.858,16.204-50.858c8.953,0,16.19,28.196,16.19,50.858c0,4.172-0.305,7.538-0.773,10.535
-            c2.063-0.521,4.448-1.282,7.354-2.316C173.023,191.753,188.6,135.465,182.145,132.339z"/>
-          <path d="M38.624,70.404c3.985,1.074,10.211-7.96,15.689-19.22C59.741,73.851,74.168,95.21,91.166,95.21
-            c17.003,0,31.428-21.368,36.846-44.026c5.49,11.267,11.701,20.294,15.689,19.22c6.944-1.859,4.468-33.544-0.325-51.467
-            c-4.789-17.925-10.118-15.284-17.048-13.433c-1.435,0.385-2.785,0.729-4.055,1.154C115.108,0.058,103.841,0,91.149,0
-            C78.454,0,67.197,0.058,60.028,6.658c-1.252-0.433-2.607-0.777-4.047-1.154c-6.927-1.851-12.255-4.492-17.054,13.433
-            C34.138,36.853,31.697,68.535,38.624,70.404z M103.316,32.743c2.899,0,5.236,3.114,5.236,6.921c0,3.821-2.336,6.929-5.236,6.929
-            c-2.889,0-5.236-3.108-5.236-6.929C98.08,35.84,100.427,32.743,103.316,32.743z M103.316,76.794
-            c0,4.735-5.424,10.646-12.15,10.646c-6.712,0-12.155-5.919-12.155-10.646c0-4.741,5.428-5.559,12.155-5.559
-            C97.892,71.236,103.316,72.062,103.316,76.794z M78.995,32.743c2.897,0,5.251,3.114,5.251,6.921c0,3.821-2.354,6.929-5.251,6.929
-            c-2.879,0-5.222-3.108-5.222-6.929C73.773,35.84,76.116,32.743,78.995,32.743z"/>
-        </g></g>
-      </svg>
-    </div>
     <div class="wrap">
       <div class="section-head center">
-        <span class="eyebrow">Why Nuzzle</span>
         <h2>One device. Total peace of mind.</h2>
         <p>Nuzzle isn't just a camera — it's a companion that watches, listens, and responds while you're out.</p>
       </div>
       <div class="feature-grid">
         <div class="feature-card">
-          <div class="icon">
+          <div class="feature-head">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 8a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8Z" stroke="currentColor" stroke-width="1.7"/><path d="m15 10 5-3v10l-5-3" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            <h3>Live HD monitoring</h3>
           </div>
-          <h3>Live HD monitoring</h3>
           <p>1080p pan-tilt-zoom video with night vision, plus motion and sound alerts sent straight to your phone.</p>
         </div>
         <div class="feature-card">
-          <div class="icon">
+          <div class="feature-head">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3a4 4 0 0 0-4 4v4a4 4 0 0 0 8 0V7a4 4 0 0 0-4-4Z" stroke="currentColor" stroke-width="1.7"/><path d="M6 11a6 6 0 0 0 12 0M12 19v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <h3>Talk &amp; play</h3>
           </div>
-          <h3>Talk &amp; play</h3>
           <p>Two-way audio and video so you can call out to your pet, plus a laser-play mode for cats and a treat launcher for dogs.</p>
         </div>
         <div class="feature-card">
-          <div class="icon">
+          <div class="feature-head">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/></svg>
+            <h3>NuzzlePal, the AI</h3>
           </div>
-          <h3>NuzzlePal, the AI</h3>
           <p>Between your visits, NuzzlePal keeps pets engaged — responding to barks and meows and running short play sessions on its own.</p>
         </div>
         <div class="feature-card">
-          <div class="icon">
+          <div class="feature-head">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 8a6 6 0 0 1 12 0c0 4 1.5 5.5 2 6.5H4c.5-1 2-2.5 2-6.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 18a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <h3>Alerts &amp; daily recaps</h3>
           </div>
-          <h3>Alerts &amp; daily recaps</h3>
           <p>A nudge if barking spikes or the food bowl's untouched, plus an end-of-day highlight reel of naps, zoomies, and treats.</p>
         </div>
       </div>
@@ -649,7 +578,6 @@
   <section id="services" class="services">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Services by species</span>
         <h2>Built around how your pet actually behaves.</h2>
         <p>NuzzlePal's hardware and AI routines are tuned per species — not a one-size-fits-all camera on a shelf.</p>
       </div>
@@ -664,25 +592,28 @@
         <div class="device-photo-wrap">
           <img src="images/nuzzlepal-device.jpg" alt="NuzzlePal: a small, pet-sized two-wheeled companion robot with a round camera-lens head on a tilting neck, similar in scale and style to a home robot vacuum or delivery bot">
           <svg class="device-overlay" id="deviceSvg" viewBox="0 0 640 815" xmlns="http://www.w3.org/2000/svg">
-            <circle id="ringLight" cx="300" cy="165" r="98" fill="none" stroke="#FF4FD8" stroke-width="9" opacity=".95"/>
+            <circle id="ringLight" cx="300" cy="165" r="98" fill="none" stroke="#B23E6B" stroke-width="9" opacity=".95"/>
+            <line x1="398" y1="150" x2="412" y2="140" stroke="#0B0B0A" stroke-width="1.5"/>
+            <text class="spec-label" x="418" y="144">CAM-01 · 130°</text>
             <!-- Cat mode: laser callout -->
             <g id="accCat">
-              <circle cx="452" cy="110" r="15" fill="#FF4FD8" stroke="#fff" stroke-width="3"/>
-              <line x1="452" y1="110" x2="600" y2="34" stroke="#FF4FD8" stroke-width="4" stroke-dasharray="6 8"/>
-              <circle cx="600" cy="34" r="8" fill="#FF4FD8" stroke="#fff" stroke-width="2"/>
+              <circle cx="452" cy="110" r="15" fill="#B23E6B" stroke="#fff" stroke-width="3"/>
+              <line x1="452" y1="110" x2="600" y2="34" stroke="#B23E6B" stroke-width="4" stroke-dasharray="6 8"/>
+              <circle cx="600" cy="34" r="8" fill="#B23E6B" stroke="#fff" stroke-width="2"/>
+              <text class="spec-label" x="616" y="45" transform="rotate(90 616 45)">LASER-01 · CAT MODE</text>
             </g>
-            <!-- Dog mode: treat-launcher callout -->
+            <!-- Dog mode: treat-launcher callout, mounted flush against the body's right curve -->
             <g id="accDog">
-              <rect x="424" y="432" width="62" height="40" rx="6" fill="#4F8CFF" stroke="#fff" stroke-width="3"/>
-              <circle cx="504" cy="410" r="9" fill="#FFD24F" stroke="#fff" stroke-width="2"/>
-              <circle cx="528" cy="378" r="7.5" fill="#FFD24F" stroke="#fff" stroke-width="2"/>
-              <circle cx="548" cy="342" r="6.5" fill="#FFD24F" stroke="#fff" stroke-width="2"/>
+              <rect x="400" y="418" width="56" height="34" rx="6" fill="#2E5AA8" stroke="#fff" stroke-width="3"/>
+              <circle cx="458" cy="403" r="8" fill="#A87C2E" stroke="#fff" stroke-width="2"/>
+              <circle cx="478" cy="378" r="7" fill="#A87C2E" stroke="#fff" stroke-width="2"/>
+              <circle cx="495" cy="349" r="6" fill="#A87C2E" stroke="#fff" stroke-width="2"/>
+              <text class="spec-label" x="508" y="356" transform="rotate(90 508 356)">LAUNCH-01 · DOG MODE</text>
             </g>
           </svg>
         </div>
       </div>
       <div class="robot-copy">
-        <span class="eyebrow">Meet NuzzlePal</span>
         <h2>Your pet's favorite robot, made for one job.</h2>
         <div class="mode-toggle" id="modeToggle">
           <button data-mode="cat" class="is-active">Cat mode</button>
@@ -723,7 +654,6 @@
   <section id="how">
     <div class="wrap">
       <div class="section-head center">
-        <span class="eyebrow">How it works</span>
         <h2>Set up in about ten minutes.</h2>
       </div>
       <div class="steps">
@@ -762,7 +692,6 @@
         </div>
       </div>
       <div class="app-copy">
-        <span class="eyebrow">The Nuzzle app</span>
         <h2>Check in for ten seconds, or ten minutes.</h2>
         <p class="lead" style="max-width:44ch;color:var(--ink-700);font-size:1.02rem;">Glance at a live feed between meetings, or settle in for a full video call with your pet. NuzzlePal fills the gaps in between with its own AI-driven play sessions, and logs everything into a simple daily recap.</p>
         <div class="lifestyle-photo">
@@ -776,31 +705,35 @@
   <section id="plans">
     <div class="wrap">
       <div class="section-head center">
-        <span class="eyebrow">Plans</span>
-        <h2>Spin to find your pet's plan.</h2>
-        <p>Give it a spin, or just tap a tab — every plan includes a NuzzlePal unit, the app, and unlimited live viewing.</p>
+        <h2>Choose your plan.</h2>
+        <p>Every plan includes a NuzzlePal unit, the app, and unlimited live viewing; pick Cats, Dogs, or join the Future Pets waitlist.</p>
       </div>
-      <div class="wheel-layout">
-        <div class="wheel-stage">
-          <div class="wheel-pointer" aria-hidden="true"></div>
-          <div class="wheel-frame">
-            <div class="wheel" id="wheel" role="img" aria-label="Spinning wheel with Cats, Dogs, Future Pets, and Bonus sections">
-              <span class="wheel-label" style="--ang:45deg">🐱</span>
-              <span class="wheel-label" style="--ang:135deg">🐶</span>
-              <span class="wheel-label" style="--ang:225deg">🐰</span>
-              <span class="wheel-label" style="--ang:315deg">🎁</span>
-            </div>
-          </div>
-          <button class="wheel-hub" id="spinBtn" type="button">SPIN</button>
+      <div class="plan-detail">
+        <div class="plan-tabs" id="planTabs">
+          <button type="button" data-pet="cat" class="is-active"><svg viewBox="0 0 24 24" width="15" height="15" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 5l2 4M18 5l-2 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="13" r="6.3" stroke="currentColor" stroke-width="1.7"/><circle cx="9.6" cy="12.4" r="1" fill="currentColor"/><circle cx="14.4" cy="12.4" r="1" fill="currentColor"/></svg> Cats</button>
+          <button type="button" data-pet="dog"><svg viewBox="0 0 24 24" width="15" height="15" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5.5 7c-1.5 1-2 3-1 5.5M18.5 7c1.5 1 2 3 1 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="13" r="6.3" stroke="currentColor" stroke-width="1.7"/><circle cx="9.6" cy="12.4" r="1" fill="currentColor"/><circle cx="14.4" cy="12.4" r="1" fill="currentColor"/><path d="M11 15.8h2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg> Dogs</button>
+          <button type="button" data-pet="future"><svg viewBox="0 0 24 24" width="15" height="15" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 9c-1-3-.5-6 .8-7M15 9c1-3 .5-6-.8-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="14" r="5.6" stroke="currentColor" stroke-width="1.7"/><circle cx="10" cy="13.3" r=".9" fill="currentColor"/><circle cx="14" cy="13.3" r=".9" fill="currentColor"/></svg> Future Pets</button>
         </div>
-        <div class="plan-detail">
-          <div class="plan-tabs" id="planTabs">
-            <button type="button" data-pet="cat" class="is-active">🐱 Cats</button>
-            <button type="button" data-pet="dog">🐶 Dogs</button>
-            <button type="button" data-pet="future">🐰 Future Pets</button>
-            <button type="button" data-pet="bonus">🎁 Bonus</button>
+        <div class="plan-panel" id="planPanel"></div>
+      </div>
+      <div class="wheel-note">
+        <div class="section-head">
+          <h3>Feeling lucky?</h3>
+          <p>Give the wheel a spin for a shot at a one-time discount code, just a bit of fun on the side, not how you pick a plan.</p>
+        </div>
+        <div class="wheel-layout">
+          <div class="wheel-stage">
+            <div class="wheel-pointer" aria-hidden="true"></div>
+            <div class="wheel-frame">
+              <div class="wheel" id="wheel" role="img" aria-label="Spinning wheel with Cats, Dogs, Future Pets, and Bonus sections">
+                <span class="wheel-label" style="--ang:45deg"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 5l2 4M18 5l-2 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="13" r="6.3" stroke="currentColor" stroke-width="1.7"/><circle cx="9.6" cy="12.4" r="1" fill="currentColor"/><circle cx="14.4" cy="12.4" r="1" fill="currentColor"/></svg></span>
+                <span class="wheel-label" style="--ang:135deg"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5.5 7c-1.5 1-2 3-1 5.5M18.5 7c1.5 1 2 3 1 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="13" r="6.3" stroke="currentColor" stroke-width="1.7"/><circle cx="9.6" cy="12.4" r="1" fill="currentColor"/><circle cx="14.4" cy="12.4" r="1" fill="currentColor"/><path d="M11 15.8h2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+                <span class="wheel-label" style="--ang:225deg"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 9c-1-3-.5-6 .8-7M15 9c1-3 .5-6-.8-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="14" r="5.6" stroke="currentColor" stroke-width="1.7"/><circle cx="10" cy="13.3" r=".9" fill="currentColor"/><circle cx="14" cy="13.3" r=".9" fill="currentColor"/></svg></span>
+                <span class="wheel-label" style="--ang:315deg"><svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4.5" y="10" width="15" height="9.5" rx="1" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 13.5h15M12 10v9.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 10c-1.8 0-3-1-3-2.3S9.8 5.5 11 5.5c1 0 1.6.9 1.9 1.7M12 10c1.8 0 3-1 3-2.3S13.2 5.5 12 5.5c-1 0-1.6.9-1.9 1.7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+              </div>
+            </div>
+            <button class="wheel-hub" id="spinBtn" type="button">SPIN</button>
           </div>
-          <div class="plan-panel" id="planPanel"></div>
         </div>
       </div>
     </div>
@@ -808,32 +741,8 @@
 
   <!-- TESTIMONIALS -->
   <section class="testimonials">
-    <div class="critter-deco" aria-hidden="true">
-      <svg fill="#B49CDB" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 413.928 413.928">
-        <g><g>
-          <path d="M244.873,161.937c6.655,0,12.045,5.392,12.045,12.044c0,6.65-5.39,12.04-12.045,12.04c-6.649,0-12.044-5.389-12.044-12.04
-            C232.829,167.328,238.223,161.937,244.873,161.937z"/>
-          <path d="M371.029,339.641c-8.379-15.763-17.871-33.634-17.871-61.678c0-46.918,26.024-63.424,27.084-64.072
-            c3.85-2.278,5.115-7.246,2.837-11.096c-2.283-3.857-7.256-5.121-11.101-2.843c-1.429,0.85-35.021,21.39-35.021,78.011
-            c0,32.083,10.958,52.708,19.76,69.282c6.312,11.865,11.29,21.246,11.29,31.968c0,7.683-1.672,13.23-4.83,16.062
-            c-3.217,2.879-7.42,2.452-7.499,2.452c-0.385-0.058-0.78-0.084-1.171-0.084h-29.815c3.47-5.432,5.516-11.855,5.516-18.769V13.703
-            c0-3.636-2.426-6.827-5.933-7.805c-3.496-0.986-7.225,0.503-9.107,3.615l-39.562,65.485c-12.139-0.231-47.809-0.509-154.588-0.509
-            c-22.673,0-33.895,0.016-39.564,0.056L45.009,4.371c-1.724-3.317-5.508-5.028-9.109-4.137c-3.631,0.886-6.184,4.137-6.184,7.868
-            v370.762c0,19.28,15.681,34.969,34.966,34.969H188.46h106.784h58.82c0.532,0.047,1.286,0.095,2.225,0.095
-            c3.961,0,11.085-0.881,17.36-6.297c7.003-6.054,10.558-15.614,10.558-28.429C384.208,364.452,377.811,352.397,371.029,339.641z
-            M115.041,202.22c-15.572,0-28.242-12.667-28.242-28.239c0-15.575,12.675-28.244,28.242-28.244
-            c15.57,0,28.242,12.669,28.242,28.244C143.283,189.553,130.616,202.22,115.041,202.22z M194.134,234.763h-5.982l-0.654,11.253
-            c-0.248,4.304-3.818,7.631-8.079,7.631c-0.156,0-0.316-0.005-0.475-0.011c-4.464-0.264-7.878-4.097-7.612-8.554l0.599-10.314
-            h-6.146c-4.47,0-8.101-3.623-8.101-8.1c0-4.478,3.631-8.101,8.101-8.101h28.35c4.472,0,8.1,3.623,8.1,8.101
-            C202.234,231.145,198.606,234.763,194.134,234.763z M244.873,202.22c-15.572,0-28.244-12.667-28.244-28.239
-            c0-15.575,12.677-28.244,28.244-28.244c15.578,0,28.255,12.669,28.255,28.244C273.127,189.553,260.451,202.22,244.873,202.22z"/>
-          <circle cx="115.041" cy="173.978" r="12.042"/>
-        </g></g>
-      </svg>
-    </div>
     <div class="wrap">
       <div class="section-head center">
-        <span class="eyebrow">From Nuzzle homes</span>
         <h2>Owners (and their pets) weigh in.</h2>
       </div>
       <div class="testimonial-grid" id="testimonialGrid"></div>
@@ -844,7 +753,6 @@
   <section id="faq">
     <div class="wrap">
       <div class="section-head center">
-        <span class="eyebrow">Questions</span>
         <h2>Good to know before you order.</h2>
       </div>
       <div class="faq-list" id="faqList"></div>
@@ -870,29 +778,30 @@
       <div class="footer-brand">
         <a href="#top" class="logo" style="margin-bottom:14px;display:inline-flex;">
           <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="24" cy="24" r="24" fill="#8B5CF6"/>
-            <circle cx="24" cy="22" r="9" fill="#FFD24F"/>
-            <circle cx="18" cy="14" r="3.4" fill="#FFD24F"/>
-            <circle cx="30" cy="14" r="3.4" fill="#FFD24F"/>
-            <circle cx="21" cy="21" r="1.6" fill="#0A0818"/>
-            <circle cx="27" cy="21" r="1.6" fill="#0A0818"/>
-            <path d="M21 25.5c1 1 5 1 6 0" stroke="#0A0818" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="24" cy="24" r="24" fill="#0B0B0A"/>
+            <circle cx="24" cy="22" r="9" fill="#E7E6E5"/>
+            <circle cx="18" cy="14" r="3.4" fill="#E7E6E5"/>
+            <circle cx="30" cy="14" r="3.4" fill="#E7E6E5"/>
+            <circle cx="21" cy="21" r="1.6" fill="#0B0B0A"/>
+            <circle cx="27" cy="21" r="1.6" fill="#0B0B0A"/>
+            <path d="M21 25.5c1 1 5 1 6 0" stroke="#0B0B0A" stroke-width="1.6" stroke-linecap="round"/>
           </svg>
           <span class="logo-word">Nuzzle</span>
         </a>
         <p>AI-powered remote pet care. Live monitoring and interactive play for cats and dogs today — more companions on the way.</p>
       </div>
       <div class="footer-col">
-        <h4>Explore</h4>
+        <h3>Explore</h3>
         <ul>
           <li><a href="#services">Services</a></li>
           <li><a href="#nuzzlepal">Meet NuzzlePal</a></li>
           <li><a href="#how">How it works</a></li>
           <li><a href="#plans">Plans</a></li>
+          <li><a href="compare.html">Compare plans</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Species</h4>
+        <h3>Species</h3>
         <ul>
           <li><a href="#services">Cats</a></li>
           <li><a href="#services">Dogs</a></li>
@@ -900,7 +809,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h3>Company</h3>
         <ul>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#faq">Privacy &amp; footage</a></li>
@@ -910,7 +819,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Nuzzle. A fictional demo brand built for a coding project.</span>
-      <span class="credits">Photos &amp; video via Pexels (free license): dog by Marcelo Chagas, cat by Vũ Nguyễn, dog portrait by Helena Lopes, rabbit by cottonbro studio, lifestyle photo by Andrea Piacquadio, hero "live cam" video by Erik Mclean. NuzzlePal illustration is an original graphic, generated for this project.</span>
+      <span class="credits">Photos &amp; video via Pexels (free license): dog by Marcelo Chagas, cat by Vũ Nguyễn, dog portrait by Helena Lopes, rabbit by cottonbro studio, lifestyle photo by Andrea Piacquadio, hero "live cam" video by Erik Mclean, NuzzlePal device photo by Kindel Media.</span>
     </div>
   </div>
 </footer>
@@ -920,52 +829,52 @@
 <button type="button" class="roam-bot" id="roamBot" aria-label="NuzzlePal mini — tap to send it scurrying somewhere new on the page">
   <span class="roam-bubble" id="roamBubble"></span>
   <svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="40" cy="83" rx="23" ry="5" fill="rgba(0,0,0,.3)"/>
-    <line x1="40" y1="4" x2="40" y2="11" stroke="#FF4FD8" stroke-width="3" stroke-linecap="round"/>
-    <circle cx="40" cy="4" r="4" fill="#FF4FD8" stroke="#150F30" stroke-width="2"/>
-    <rect x="13" y="8" width="54" height="58" rx="16" fill="#FFFFFF" stroke="#150F30" stroke-width="4"/>
-    <circle cx="40" cy="35" r="17" fill="#150F30"/>
-    <circle cx="40" cy="35" r="7.5" fill="#7FD8FF" stroke="#150F30" stroke-width="2"/>
+    <ellipse cx="40" cy="83" rx="23" ry="5" fill="rgba(0,0,0,.12)"/>
+    <line x1="40" y1="4" x2="40" y2="11" stroke="#0B0B0A" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="40" cy="4" r="4" fill="#0B0B0A"/>
+    <rect x="13" y="8" width="54" height="58" rx="12" fill="#E7E6E5" stroke="#0B0B0A" stroke-width="3"/>
+    <circle cx="40" cy="35" r="17" fill="#0B0B0A"/>
+    <circle cx="40" cy="35" r="7.5" fill="#A9B4C2"/>
     <circle cx="43.5" cy="31" r="2.2" fill="#fff" opacity=".9"/>
-    <rect x="29" y="55" width="22" height="6" rx="0" fill="#150F30"/>
-    <ellipse cx="23" cy="73" rx="9" ry="11" fill="#150F30"/>
-    <ellipse cx="57" cy="73" rx="9" ry="11" fill="#150F30"/>
+    <rect x="29" y="55" width="22" height="6" rx="0" fill="#0B0B0A"/>
+    <ellipse cx="23" cy="73" rx="9" ry="11" fill="#0B0B0A"/>
+    <ellipse cx="57" cy="73" rx="9" ry="11" fill="#0B0B0A"/>
   </svg>
 </button>
 
 <button type="button" class="roam-critter" id="roamDog" aria-label="Nuzzle mini dog — tap to send it scurrying; NuzzlePal will come find it">
   <!-- Face-only icon, modeled on standard flat dog-emoji references: big floppy ears, light muzzle patch, dark nose -->
   <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="10" cy="40" rx="13" ry="23" fill="#4F8CFF" stroke="#150F30" stroke-width="3.5" transform="rotate(-18 10 40)"/>
-    <ellipse cx="70" cy="40" rx="13" ry="23" fill="#4F8CFF" stroke="#150F30" stroke-width="3.5" transform="rotate(18 70 40)"/>
-    <circle cx="40" cy="44" r="28" fill="#4F8CFF" stroke="#150F30" stroke-width="4.5"/>
-    <ellipse cx="40" cy="56" rx="17" ry="13" fill="#FFFFFF" stroke="#150F30" stroke-width="3"/>
-    <circle cx="29" cy="39" r="4.5" fill="#150F30"/>
-    <circle cx="51" cy="39" r="4.5" fill="#150F30"/>
-    <ellipse cx="40" cy="50" rx="5.5" ry="4.5" fill="#150F30"/>
-    <path d="M40 54 Q34 60 29 57" stroke="#150F30" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <path d="M40 54 Q46 60 51 57" stroke="#150F30" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <path d="M40 58 q2 8 -5 10" stroke="#FF4FD8" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="10" cy="40" rx="13" ry="23" fill="#2E5AA8" stroke="#0B0B0A" stroke-width="3" transform="rotate(-18 10 40)"/>
+    <ellipse cx="70" cy="40" rx="13" ry="23" fill="#2E5AA8" stroke="#0B0B0A" stroke-width="3" transform="rotate(18 70 40)"/>
+    <circle cx="40" cy="44" r="28" fill="#2E5AA8" stroke="#0B0B0A" stroke-width="3.5"/>
+    <ellipse cx="40" cy="56" rx="17" ry="13" fill="#E7E6E5" stroke="#0B0B0A" stroke-width="2.5"/>
+    <circle cx="29" cy="39" r="4.5" fill="#0B0B0A"/>
+    <circle cx="51" cy="39" r="4.5" fill="#0B0B0A"/>
+    <ellipse cx="40" cy="50" rx="5.5" ry="4.5" fill="#0B0B0A"/>
+    <path d="M40 54 Q34 60 29 57" stroke="#0B0B0A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M40 54 Q46 60 51 57" stroke="#0B0B0A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M40 58 q2 8 -5 10" stroke="#B23E6B" stroke-width="5" fill="none" stroke-linecap="round"/>
   </svg>
 </button>
 
 <button type="button" class="roam-critter" id="roamCat" aria-label="Nuzzle mini cat — tap to send it scurrying; NuzzlePal will come find it">
   <!-- Face-only icon, modeled on standard flat cat-emoji references: pointed ears, whiskers, no muzzle patch -->
   <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14 10 L28 34 L4 34 Z" fill="#FF4FD8" stroke="#150F30" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M66 10 L52 34 L76 34 Z" fill="#FF4FD8" stroke="#150F30" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M17 16 L25 30 L11 32 Z" fill="#FFDCEE"/>
-    <path d="M63 16 L55 30 L69 32 Z" fill="#FFDCEE"/>
-    <circle cx="40" cy="44" r="28" fill="#FF4FD8" stroke="#150F30" stroke-width="4.5"/>
-    <ellipse cx="29" cy="41" rx="3.8" ry="5.2" fill="#150F30"/>
-    <ellipse cx="51" cy="41" rx="3.8" ry="5.2" fill="#150F30"/>
-    <path d="M37 50 L43 50 L40 54 Z" fill="#150F30"/>
-    <path d="M40 54 Q34 60 28 57" stroke="#150F30" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <path d="M40 54 Q46 60 52 57" stroke="#150F30" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-    <line x1="14" y1="48" x2="1" y2="45" stroke="#150F30" stroke-width="2" stroke-linecap="round"/>
-    <line x1="14" y1="54" x2="1" y2="55" stroke="#150F30" stroke-width="2" stroke-linecap="round"/>
-    <line x1="66" y1="48" x2="79" y2="45" stroke="#150F30" stroke-width="2" stroke-linecap="round"/>
-    <line x1="66" y1="54" x2="79" y2="55" stroke="#150F30" stroke-width="2" stroke-linecap="round"/>
+    <path d="M14 10 L28 34 L4 34 Z" fill="#B23E6B" stroke="#0B0B0A" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M66 10 L52 34 L76 34 Z" fill="#B23E6B" stroke="#0B0B0A" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M17 16 L25 30 L11 32 Z" fill="#EAD3DC"/>
+    <path d="M63 16 L55 30 L69 32 Z" fill="#EAD3DC"/>
+    <circle cx="40" cy="44" r="28" fill="#B23E6B" stroke="#0B0B0A" stroke-width="3.5"/>
+    <ellipse cx="29" cy="41" rx="3.8" ry="5.2" fill="#0B0B0A"/>
+    <ellipse cx="51" cy="41" rx="3.8" ry="5.2" fill="#0B0B0A"/>
+    <path d="M37 50 L43 50 L40 54 Z" fill="#0B0B0A"/>
+    <path d="M40 54 Q34 60 28 57" stroke="#0B0B0A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M40 54 Q46 60 52 57" stroke="#0B0B0A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <line x1="14" y1="48" x2="1" y2="45" stroke="#0B0B0A" stroke-width="2" stroke-linecap="round"/>
+    <line x1="14" y1="54" x2="1" y2="55" stroke="#0B0B0A" stroke-width="2" stroke-linecap="round"/>
+    <line x1="66" y1="48" x2="79" y2="45" stroke="#0B0B0A" stroke-width="2" stroke-linecap="round"/>
+    <line x1="66" y1="54" x2="79" y2="55" stroke="#0B0B0A" stroke-width="2" stroke-linecap="round"/>
   </svg>
 </button>
 
@@ -980,6 +889,7 @@
       pillLabel: 'Available now',
       img: 'images/cat-portrait.jpg',
       alt: 'A tabby cat looking directly at the camera',
+      photoCaption: 'CAT · PERCH-HEIGHT VIEW',
       desc: 'A quieter, perch-height companion tuned to how cats actually move through a home.',
       features: [
         'Laser-pointer play mode with adjustable speed',
@@ -995,6 +905,7 @@
       pillLabel: 'Available now',
       img: 'images/dog-portrait.jpg',
       alt: 'A curious dog with pointed ears looking at the camera',
+      photoCaption: 'DOG · FLOOR-LEVEL VIEW',
       desc: 'Wide floor coverage and a sturdier build for bigger rooms and bigger energy.',
       features: [
         'Bark-responsive AI that checks in automatically',
@@ -1010,6 +921,7 @@
       pillLabel: 'In development',
       img: 'images/rabbit-portrait.jpg',
       alt: 'A small white rabbit sitting alert on a blanket',
+      photoCaption: 'RABBIT · EARLY-ACCESS PREVIEW',
       desc: "We're teaching NuzzlePal new tricks for smaller companions — starting with rabbits and birds.",
       features: [
         'Hutch- and cage-safe camera mounts',
@@ -1025,7 +937,7 @@
 
   var PET_PLANS = {
     cat: {
-      emoji: '🐱',
+      icon: 'cat',
       name: 'Cat Plan',
       tagline: 'Perch-height monitoring with laser play built right in.',
       price: '$29',
@@ -1039,7 +951,7 @@
       cta: 'Choose Cat Plan'
     },
     dog: {
-      emoji: '🐶',
+      icon: 'dog',
       name: 'Dog Plan',
       tagline: 'Wider floor coverage and a treat launcher for big energy.',
       price: '$39',
@@ -1055,7 +967,7 @@
       cta: 'Choose Dog Plan'
     },
     future: {
-      emoji: '🐰',
+      icon: 'future',
       name: 'Future Pets Plan',
       tagline: 'Early access for rabbits, birds, and whatever we build next.',
       price: 'Free',
@@ -1072,9 +984,9 @@
   };
 
   var TESTIMONIALS = [
-    { quote: "I check in on Miso between meetings more than I check my email. The laser mode is her favorite part of the day.", name: 'Priya R.', pet: 'Owner of Miso, cat', emoji: '🐱' },
-    { quote: "Buster used to bark the whole time we were out. NuzzlePal noticed the pattern in week one and now he mostly naps.", name: 'Daniel K.', pet: 'Owner of Buster, dog', emoji: '🐶' },
-    { quote: "I work night shifts, so 'daytime companion' is exactly what my two cats needed. The daily recap is oddly addictive.", name: 'Adaeze O.', pet: 'Owner of Juno & Pepper, cats', emoji: '🐾' }
+    { quote: "I check in on Miso between meetings more than I check my email. The laser mode is her favorite part of the day.", name: 'Priya R.', pet: 'Owner of Miso, cat', icon: 'cat' },
+    { quote: "Buster used to bark the whole time we were out. NuzzlePal noticed the pattern in week one and now he mostly naps.", name: 'Daniel K.', pet: 'Owner of Buster, dog', icon: 'dog' },
+    { quote: "I work night shifts, so 'daytime companion' is exactly what my two cats needed. The daily recap is oddly addictive.", name: 'Adaeze O.', pet: 'Owner of Juno & Pepper, cats', icon: 'paw' }
   ];
 
   var FAQ = [
@@ -1090,12 +1002,22 @@
   var PET_MODES = {
     cat: {
       caption: '<strong>Cat mode:</strong> the laser lens activates for unpredictable, chase-friendly movement, and the dispenser switches to smaller, quieter portions.',
-      ring: '#FF4FD8'
+      ring: '#B23E6B'
     },
     dog: {
       caption: '<strong>Dog mode:</strong> the treat launcher arms for fetch-and-reward play, and the camera widens its patrol angle to cover more floor space.',
-      ring: '#4F8CFF'
+      ring: '#2E5AA8'
     }
+  };
+
+  // Drawn line icons, matching the feature-grid/spec-list stroke style — used in place
+  // of emoji anywhere a species or the bonus wedge needs a small inline glyph.
+  var ICONS = {
+    cat: '<svg viewBox="0 0 24 24" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 5l2 4M18 5l-2 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="13" r="6.3" stroke="currentColor" stroke-width="1.7"/><circle cx="9.6" cy="12.4" r="1" fill="currentColor"/><circle cx="14.4" cy="12.4" r="1" fill="currentColor"/></svg>',
+    dog: '<svg viewBox="0 0 24 24" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5.5 7c-1.5 1-2 3-1 5.5M18.5 7c1.5 1 2 3 1 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="13" r="6.3" stroke="currentColor" stroke-width="1.7"/><circle cx="9.6" cy="12.4" r="1" fill="currentColor"/><circle cx="14.4" cy="12.4" r="1" fill="currentColor"/><path d="M11 15.8h2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>',
+    future: '<svg viewBox="0 0 24 24" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 9c-1-3-.5-6 .8-7M15 9c1-3 .5-6-.8-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="14" r="5.6" stroke="currentColor" stroke-width="1.7"/><circle cx="10" cy="13.3" r=".9" fill="currentColor"/><circle cx="14" cy="13.3" r=".9" fill="currentColor"/></svg>',
+    bonus: '<svg viewBox="0 0 24 24" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="4.5" y="10" width="15" height="9.5" rx="1" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 13.5h15M12 10v9.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 10c-1.8 0-3-1-3-2.3S9.8 5.5 11 5.5c1 0 1.6.9 1.9 1.7M12 10c1.8 0 3-1 3-2.3S13.2 5.5 12 5.5c-1 0-1.6.9-1.9 1.7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>',
+    paw: '<svg viewBox="0 0 24 24" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="15.5" r="4" fill="currentColor"/><circle cx="6.5" cy="9" r="2.1" fill="currentColor"/><circle cx="11" cy="6.3" r="2.1" fill="currentColor"/><circle cx="15.8" cy="6.6" r="2.1" fill="currentColor"/><circle cx="18.3" cy="10.8" r="2" fill="currentColor"/></svg>'
   };
 
   function el(html){
@@ -1111,7 +1033,7 @@
       var featuresHtml = s.features.map(function(f){ return '<li>'+f+'</li>'; }).join('');
       var card = el(
         '<div class="service-card'+(s.waitlist ? ' future' : '')+'">' +
-          '<div class="service-photo"><img src="'+s.img+'" alt="'+s.alt+'"></div>' +
+          '<div class="service-photo"><img src="'+s.img+'" alt="'+s.alt+'"><span class="photo-chip">'+s.photoCaption+'</span></div>' +
           '<div class="service-body">' +
             '<span class="pill '+s.pill+'">'+s.pillLabel+'</span>' +
             '<h3>'+s.title+'</h3>' +
@@ -1137,13 +1059,13 @@
     panel.innerHTML =
       '<div class="plan-card'+(p.featured ? ' featured' : '')+'">' +
         (p.badge ? '<span class="badge">'+p.badge+'</span>' : '') +
-        '<h3>'+p.emoji+' '+p.name+'</h3>' +
+        '<h3>'+ICONS[p.icon]+' '+p.name+'</h3>' +
         '<p class="tagline">'+p.tagline+'</p>' +
         '<div class="price">'+p.price+'<span>'+p.period+'</span></div>' +
         '<ul>'+featuresHtml+'</ul>' +
         '<button type="button" class="btn '+(p.featured ? 'btn-primary' : 'btn-outline')+'">'+p.cta+'</button>' +
       '</div>' +
-      '<button type="button" class="bundle-note">🐾 Have more than one pet? Ask about the Multi-Pet Bundle</button>';
+      '<button type="button" class="bundle-note">'+ICONS.paw+' Have more than one pet? Ask about the Multi-Pet Bundle</button>';
     panel.querySelector('.btn').addEventListener('click', function(){
       showToast(petKey === 'future'
         ? "You're on the Future Pets waitlist — we'll email you when it's ready."
@@ -1183,13 +1105,13 @@
     panel.innerHTML =
       '<div class="plan-card voucher-card">' +
         '<span class="badge">Bonus</span>' +
-        '<h3>🎁 10% Off Voucher</h3>' +
+        '<h3>'+ICONS.bonus+' 10% Off Voucher</h3>' +
         '<p class="tagline">You landed on the bonus wedge — here\'s a one-time code good for 10% off any plan.</p>' +
         '<div class="voucher-code">' + v.code + '</div>' +
         '<p class="voucher-meta">Issued ' + formatDate(v.issued) + ' · Valid through <strong>' + formatDate(v.expires) + '</strong> (1 month from issue)</p>' +
         '<button type="button" class="btn btn-primary">Copy code</button>' +
       '</div>' +
-      '<button type="button" class="bundle-note">🐾 Have more than one pet? Ask about the Multi-Pet Bundle</button>';
+      '<button type="button" class="bundle-note">'+ICONS.paw+' Have more than one pet? Ask about the Multi-Pet Bundle</button>';
     panel.querySelector('.btn').addEventListener('click', function(){
       var code = v.code;
       if (navigator.clipboard && navigator.clipboard.writeText){
@@ -1238,10 +1160,14 @@
     var panel = document.getElementById('planPanel');
     panel.classList.add('is-swapping');
     clearTimeout(selectPet._t);
+    // Tab clicks (extraTurns=0) are a confident, deliberate pick — the panel updates
+    // near-instantly. Only wheel-driven selections (extraTurns>0) keep the full
+    // spin-and-reveal delay, since that suspense is the point of spinning.
+    var delay = extraTurns ? 1500 : 180;
     selectPet._t = setTimeout(function(){
       renderActivePanel(petKey);
       panel.classList.remove('is-swapping');
-    }, 1500);
+    }, delay);
   }
 
   function initWheel(){
@@ -1275,7 +1201,7 @@
 
     document.getElementById('planTabs').addEventListener('click', function(e){
       var btn = e.target.closest('button');
-      if (btn) selectPet(btn.dataset.pet, 1);
+      if (btn) selectPet(btn.dataset.pet, 0);
     });
   }
 
@@ -1289,9 +1215,13 @@
   function randomViewportSpot(el){
     var size = el.offsetWidth || 64;
     var margin = 16;
+    // On narrow screens, keep random hops clear of the hero's top ~42% so a
+    // mascot never lands over the LIVE badge or the headline it's meant to sell.
+    var topExclusion = window.innerWidth <= 720 ? window.innerHeight * 0.42 : margin;
     var maxX = Math.max(margin, window.innerWidth - size - margin);
     var maxY = Math.max(margin, window.innerHeight - size - margin);
-    return { x: margin + Math.random() * (maxX - margin), y: margin + Math.random() * (maxY - margin), size: size };
+    var minY = Math.max(margin, Math.min(topExclusion, maxY));
+    return { x: margin + Math.random() * (maxX - margin), y: minY + Math.random() * Math.max(0, maxY - minY), size: size };
   }
 
   function hopMascotTo(el, x, y){
@@ -1350,6 +1280,25 @@
     });
   }
 
+  // Keep the mascots off-screen for the hero's first moment on mobile, where their
+  // default fixed positions otherwise overlap the LIVE badge and headline — they
+  // fade back in once the visitor has scrolled past the hero.
+  function initMascotVisibility(){
+    var els = [document.getElementById('roamBot'), document.getElementById('roamDog'), document.getElementById('roamCat')];
+    var hero = document.querySelector('.hero');
+    function update(){
+      var isMobile = window.innerWidth <= 720;
+      var pastHero = !hero || window.scrollY > hero.offsetHeight - 80;
+      els.forEach(function(el){
+        if (!el) return;
+        el.classList.toggle('roam-hidden', isMobile && !pastHero);
+      });
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+  }
+
   function renderTestimonials(){
     var grid = document.getElementById('testimonialGrid');
     grid.innerHTML = '';
@@ -1358,7 +1307,7 @@
         '<div class="testimonial-card">' +
           '<p>“'+t.quote+'”</p>' +
           '<div class="testimonial-who">' +
-            '<div class="avatar">'+t.emoji+'</div>' +
+            '<div class="avatar">'+ICONS[t.icon]+'</div>' +
             '<div><strong>'+t.name+'</strong><span>'+t.pet+'</span></div>' +
           '</div>' +
         '</div>'
@@ -1483,6 +1432,7 @@
     initRoamBot();
     initRoamCritter('roamDog', 'dog');
     initRoamCritter('roamCat', 'cat');
+    initMascotVisibility();
 
     document.getElementById('modeToggle').addEventListener('click', function(e){
       var btn = e.target.closest('button');

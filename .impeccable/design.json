@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-23T15:33:43Z",
+  "title": "Design System: Nuzzle",
+  "extensions": {
+    "colorMeta": {
+      "ink-900": { "role": "primary", "displayName": "Ink Black", "canonical": "#0B0B0A", "tonalRamp": ["#000000", "#0B0B0A", "#1A1918", "#302E2B", "#4A4844", "#615F58", "#8C8981", "#CFCDC9"] },
+      "paper": { "role": "secondary", "displayName": "Warm Paper", "canonical": "#E7E6E5", "tonalRamp": ["#0B0B0A", "#4A4844", "#615F58", "#8C8981", "#B4B2AE", "#CFCDC9", "#DCDAD8", "#E7E6E5"] },
+      "cat-500": { "role": "tertiary", "displayName": "Muted Rose", "canonical": "#B23E6B", "tonalRamp": ["#3D1424", "#5C1F37", "#7C2A4A", "#9B355C", "#B23E6B", "#C46A8C", "#D696AD", "#E8C3CE"] },
+      "dog-500": { "role": "tertiary", "displayName": "Muted Denim", "canonical": "#2E5AA8", "tonalRamp": ["#0F1D38", "#173054", "#204270", "#28518C", "#2E5AA8", "#5B80BE", "#88A6D3", "#B5CBE9"] },
+      "future-500": { "role": "tertiary", "displayName": "Muted Sage", "canonical": "#3D7A5C", "tonalRamp": ["#152A1F", "#1F3F2F", "#295440", "#336850", "#3D7A5C", "#649680", "#8BB3A4", "#B2CFC7"] },
+      "bonus-500": { "role": "tertiary", "displayName": "Muted Ochre", "canonical": "#A87C2E", "tonalRamp": ["#3A2B10", "#584119", "#755622", "#916B2A", "#A87C2E", "#BE9B5E", "#D3BA8E", "#E9D9BF"] },
+      "card": { "role": "neutral", "displayName": "Card Grey", "canonical": "#DCDAD8", "tonalRamp": ["#0B0B0A", "#4A4844", "#615F58", "#8C8981", "#B4B2AE", "#CFCDC9", "#DCDAD8", "#E7E6E5"] },
+      "card-2": { "role": "neutral", "displayName": "Card Grey 2", "canonical": "#CFCDC9", "tonalRamp": ["#0B0B0A", "#4A4844", "#615F58", "#8C8981", "#ABA9A5", "#CFCDC9", "#DCDAD8", "#E7E6E5"] },
+      "navy-700": { "role": "neutral", "displayName": "Chip Black", "canonical": "#121110", "tonalRamp": ["#000000", "#121110", "#201F1D", "#353330", "#4A4844", "#615F58", "#8C8981", "#CFCDC9"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Every heading at every scale — hero h1 through card h3. Bebas Neue only." },
+      "body": { "displayName": "Body", "purpose": "Body copy, nav links, buttons. Manrope." },
+      "label": { "displayName": "Label / Mono", "purpose": "Timestamps, stats, photo chips, spec labels. Space Mono." }
+    },
+    "shadows": [
+      { "name": "shadow-md", "value": "0 1px 2px rgba(11,11,10,.05)", "purpose": "Sticky header, on scroll only." },
+      { "name": "shadow-lg", "value": "0 2px 4px rgba(11,11,10,.07)", "purpose": "Reserved minimal resting shadow." }
+    ],
+    "motion": [
+      { "name": "ease-btn", "value": "transform .12s ease, background .15s ease, color .15s ease, border-color .15s ease", "purpose": "Button hover/active state transitions." },
+      { "name": "ease-wheel", "value": "transform 1.7s cubic-bezier(.13,.79,.23,1)", "purpose": "Plans wheel spin animation." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "980px" },
+      { "name": "sm", "value": "720px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Flat solid near-black fill, white text, small radius. The site's only strong CTA treatment.",
+      "html": "<button class=\"ds-btn-primary\">Choose plan</button>",
+      "css": ".ds-btn-primary { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: .9rem; padding: 14px 26px; border-radius: 6px; border: 1px solid transparent; background: #0B0B0A; color: #E7E6E5; cursor: pointer; transition: transform .12s ease, background .15s ease; } .ds-btn-primary:hover { background: #000000; transform: translateY(-1px); } .ds-btn-primary:focus-visible { outline: 2px solid #0B0B0A; outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Transparent secondary button with a hairline border, fills to card grey on hover.",
+      "html": "<button class=\"ds-btn-outline\">See how it works</button>",
+      "css": ".ds-btn-outline { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: .9rem; padding: 14px 26px; border-radius: 6px; background: transparent; border: 1px solid rgba(11,11,10,.32); color: #0B0B0A; cursor: pointer; transition: background .15s ease, border-color .15s ease; } .ds-btn-outline:hover { background: #DCDAD8; border-color: #0B0B0A; } .ds-btn-outline:focus-visible { outline: 2px solid #0B0B0A; outline-offset: 2px; }"
+    },
+    {
+      "name": "Species Pill",
+      "kind": "chip",
+      "refersTo": "pill-cat",
+      "description": "Small Space Mono uppercase tag with a 14% muted species-color fill; used on service cards and testimonials.",
+      "html": "<span class=\"ds-pill\">Cats</span>",
+      "css": ".ds-pill { font-family: 'Space Mono', monospace; font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; display: inline-block; background: rgba(178,62,107,.14); color: #B23E6B; border: 1px solid rgba(178,62,107,.3); }"
+    },
+    {
+      "name": "Plan Tab (active)",
+      "kind": "nav",
+      "refersTo": "plan-tabs",
+      "description": "Species-picker tab: outline pill filling solid with the matching muted species color and white text when active. Lists exactly Cats, Dogs, Future Pets — no Bonus entry.",
+      "html": "<button type=\"button\" class=\"ds-plan-tab is-active\">Cats</button>",
+      "css": ".ds-plan-tab { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: .85rem; padding: 10px 20px; border-radius: 6px; border: 1px solid rgba(11,11,10,.32); background: #E7E6E5; color: #4A4844; cursor: pointer; transition: all .15s ease; display: inline-flex; align-items: center; gap: 7px; } .ds-plan-tab.is-active { background: #B23E6B; border-color: #B23E6B; color: #fff; } .ds-plan-tab:focus-visible { outline: 2px solid #0B0B0A; outline-offset: 2px; }"
+    },
+    {
+      "name": "Spec-Sheet Data Row",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "The canonical signature component: a quiet Space Mono stats strip with vertical hairline dividers and inline number+label pairs, replacing an earlier bordered big-number card grid.",
+      "html": "<div class=\"ds-stats\"><div><strong>11,400+</strong><span>homes with a NuzzlePal</span></div><div><strong>2</strong><span>species supported today</span></div></div>",
+      "css": ".ds-stats { display: flex; } .ds-stats > div { padding: 0 22px; border-left: 1px solid rgba(11,11,10,.14); display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; } .ds-stats > div:first-child { border-left: none; padding-left: 0; } .ds-stats strong { font-family: 'Space Mono', monospace; font-weight: 700; font-size: .92rem; color: #0B0B0A; } .ds-stats span { font-family: 'Space Mono', monospace; font-size: .8rem; color: #4A4844; }"
+    },
+    {
+      "name": "Plan Card Checklist Item",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Checklist tick drawn as a CSS-mask SVG (matching the site's line-icon system), replacing a prior Unicode checkmark glyph.",
+      "html": "<li class=\"ds-check\">Unlimited live viewing</li>",
+      "css": ".ds-check { font-size: .88rem; color: #4A4844; display: flex; gap: 8px; } .ds-check::before { content: ''; width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; background: #0B0B0A; mask: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12.5l5 5L20 6' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E\") center/contain no-repeat; }"
+    },
+    {
+      "name": "Card / Panel",
+      "kind": "card",
+      "refersTo": null,
+      "description": "Standalone flat card surface (plan cards, device stage): stepped card-grey fill, hairline border, no shadow.",
+      "html": "<div class=\"ds-card\">Card content</div>",
+      "css": ".ds-card { background: #DCDAD8; border-radius: 18px; border: 1px solid rgba(11,11,10,.32); padding: 32px 28px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Editorial Spec-Sheet",
+    "overview": "Nuzzle's fourth visual pass replaces three prior costumes of the same \"generic AI-SaaS\" genre (soft pastel, neo-brutalist, dark-cosmic \"Orbital AI\") with a print-editorial register: warm near-white paper, huge condensed all-caps poster type, and real pet/device photography doing the persuasive work instead of glow, gradient, blur, or glassmorphism. Surfaces are flat and stepped (paper -> card -> card-2), never lit from behind. Depth reads through tonal contrast and hairline dividers, not shadow or blur -- confirmed zero blur()/backdrop-filter anywhere in the shipped stylesheet.\n\nSpecies identity (cat/dog/future/bonus) survives only as small, muted, flat tag fills -- pills, tab active-states, wheel wedges -- never as page backgrounds, gradients, or glow. Buttons are small-radius solid near-black fills with white text; there is no pill-button silhouette, no gradient CTA, no colored glow shadow anywhere in the build.",
+    "keyCharacteristics": [
+      "Warm paper/ink neutral base with stepped card surfaces, no dark mode",
+      "Bebas Neue condensed display type at every heading scale, tight line-height:.96",
+      "Space Mono for timestamps, chips, and spec-sheet micro-labels",
+      "Zero blur, zero glass, zero starfield, zero colored glow shadow",
+      "Species colors confined to small flat tag/pill/active-state fills"
+    ],
+    "rules": [
+      { "name": "The Muted-Tag-Only Rule", "body": "Species colors (cat/dog/future/bonus) never fill a background, gradient, or large surface -- only small pills, active-tab states, and wheel wedges. This is a hard reversal of the prior dark-cosmic pass, which used the same hues as full neon glows.", "section": "colors" },
+      { "name": "The One-Display-Face Rule", "body": "Bebas Neue is the only heading face at every scale from hero h1 to card h3 -- no secondary display face, no system font substitution for headings.", "section": "typography" },
+      { "name": "The No-Glow Rule", "body": "No blurred, colored, or multi-layer shadow appears anywhere in the build -- a deliberate reversal of the prior dark-cosmic pass's violet glow-arc motif. Depth comes from flat tonal contrast only.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep species color confined to small pill/tag/active-state fills (14% muted background, full-strength text) -- never a page or card background.",
+      "Do draw every icon as a stroke-width:1.7 line icon (inline SVG or CSS-mask), matching the plan-card checklist tick, nav, and wheel-label icons.",
+      "Do use Bebas Neue for every heading at every scale, all-caps, line-height:.96.",
+      "Do keep --ink-500 at #615F58 or darker -- the lighter #7A776F predecessor failed WCAG AA against --paper."
+    ],
+    "donts": [
+      "Don't add blur, backdrop-filter, glassmorphism, colored glow shadows, or a starfield -- all confirmed absent from the shipped build and explicitly reversed from the prior dark-cosmic \"Orbital AI\" pass.",
+      "Don't use a hard offset (non-blurred, high-contrast) drop shadow as a neo-brutalist device -- this is not a neo-brutalist world; shadows in this build are near-imperceptible resting shadows only, not a structural or decorative device.",
+      "Don't add a Bonus entry to #planTabs -- Bonus is a wheel-only novelty (WHEEL_ORDER includes it, PET_PLANS deliberately does not); the plan-picker tabs list exactly Cats, Dogs, Future Pets.",
+      "Don't use a Unicode glyph for icons anywhere -- the shipped build replaced its one remaining checkmark glyph with a CSS-mask SVG specifically to match the rest of the line-icon system; don't reintroduce a glyph shortcut for a future icon need."
+    ]
+  }
+}
